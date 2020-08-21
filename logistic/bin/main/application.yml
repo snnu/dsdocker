@@ -1,0 +1,25 @@
+encrypt-type: # 0:standard, 1:guomi
+  encrypt-type: 0
+
+group-channel-connections-config:
+  caCert: ca.crt
+  sslCert: sdk.crt
+  sslKey: sdk.key
+  all-channel-connections:
+    - group-id: 1 #group ID
+      connections-str:
+        - 172.18.0.3:20200 
+        - 172.18.0.2:20200
+        - 172.18.0.4:20200
+        - 172.18.0.5:20200
+
+channel-service:
+  group-id: 1 # The specified group to which the SDK connects
+  agency-name: logistic # agency name
+
+
+
+accounts:
+  pem-file: 0x1db86fe8945aac3bb27469a34e3906738fa7cc3a.pem
+  p12-file: 0xd6f49ae4bdb0e340b74b70f43ba529e85254657e.p12
+  password: 123456
