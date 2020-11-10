@@ -13,7 +13,7 @@ public class Web3jApiTest extends BaseTest {
 
     @Autowired Web3j web3j;
 
-    @Test
+    //@Test
     public void getBlockNumber() throws IOException {
         BigInteger blockNumber = web3j
         .getBlockNumber()

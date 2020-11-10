@@ -1,0 +1,6 @@
+FROM shiki92/my_ubuntu:1.0
+LABEL maintainer=shiki92
+RUN mkdir fisco
+WORKDIR /fisco
+COPY agencyD node
+ENTRYPOINT [ "/bin/bash", "/node/node/start_all.sh"]

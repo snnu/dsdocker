@@ -1,0 +1,12 @@
+version: '3'
+services: 
+  platform:
+    image: shiki92/platform:1.1
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/platform:/root/fisco/platform"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.2
+networks: 
+  fisco_net:
+    external: true  

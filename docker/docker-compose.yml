@@ -1,0 +1,22 @@
+version: '3'
+services: 
+  platform_jar:
+    image: shiki92/platform_jar:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/platform:/fisco/platform"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.10
+  platform_node:
+    image: shiki92/platform_node:latest
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.5
+  platform_mysql:
+    image: mysql:5.7
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.15
+networks: 
+  fisco_net:
+    external: true  

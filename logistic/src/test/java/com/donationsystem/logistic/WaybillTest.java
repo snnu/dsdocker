@@ -24,7 +24,7 @@ public class WaybillTest extends BaseTest {
     @Autowired 
     private Credentials credentials;
 
-    @Test
+    //@Test
     public void deployAndCallWayBill() throws Exception {
         // deploy contract
         final WayBill waybill =

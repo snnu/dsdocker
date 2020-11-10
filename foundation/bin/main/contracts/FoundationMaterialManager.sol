@@ -14,7 +14,11 @@ contract FoundationMaterialManager {
         _;
     }
     
-    function getVarietyAmount(uint _variety) public view returns(address[] memory){
+    function GetVarietyAmount(uint _variety) public view returns(uint){
+        return varietyAmount[_variety].length;
+    }
+
+    function GetVarietyAddress(uint _variety) public view returns(address[] memory){
         return varietyAmount[_variety];
     }
     
