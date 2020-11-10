@@ -1,0 +1,7 @@
+FROM shiki92/my_ubuntu:1.0
+LABEL maintainer=shiki92
+RUN mkdir fisco
+WORKDIR /fisco
+COPY agencyA node
+COPY start.sh start.sh
+ENTRYPOINT [ "bash", "/fisco/start.sh"]

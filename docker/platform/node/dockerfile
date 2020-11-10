@@ -3,4 +3,5 @@ LABEL maintainer=shiki92
 RUN mkdir fisco
 WORKDIR /fisco
 COPY agencyD node
-ENTRYPOINT [ "/bin/bash", "/node/node/start_all.sh"]
+COPY start.sh start.sh
+ENTRYPOINT [ "/bin/bash", "/fisco/start.sh"]

@@ -1,22 +1,47 @@
 version: '3'
 services: 
-  platform_jar:
-    image: shiki92/platform_jar:latest
+  # platform_jar:
+  #   image: shiki92/platform_jar:latest
+  #   volumes: 
+  #     - "/home/gongyueyang/BlockChain/DonationSystem/platform:/app/platform"
+  #   networks: 
+  #     fisco_net:
+  #       ipv4_address: 172.100.0.9
+  # platform_node:
+  #   image: shiki92/platform_node:latest
+  #   networks: 
+  #     fisco_net:
+  #       ipv4_address: 172.100.0.5
+  # platform_mysql:
+  #   image: mysql:8.0
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 654321
+  #   volumes: 
+  #     - "/home/gongyueyang/BlockChain/DonationSystem/platform/backend/mysqldata:/var/lib/mysql"
+  #   networks: 
+  #     fisco_net:
+  #       ipv4_address: 172.100.0.14
+  foundation_jar:
+    image: shiki92/foundation_jar:latest
     volumes: 
-      - "/home/gongyueyang/BlockChain/DonationSystem/platform:/fisco/platform"
+      - "/home/gongyueyang/BlockChain/DonationSystem/foundation:/app/foundation"
     networks: 
       fisco_net:
-        ipv4_address: 172.100.0.10
-  platform_node:
-    image: shiki92/platform_node:latest
+        ipv4_address: 172.100.0.6
+  foundation_node:
+    image: shiki92/foundation_node:latest
     networks: 
       fisco_net:
-        ipv4_address: 172.100.0.5
-  platform_mysql:
-    image: mysql:5.7
+        ipv4_address: 172.100.0.2
+  foundation_mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 654321
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/foundation/mysqldata:/var/lib/mysql"
     networks: 
       fisco_net:
-        ipv4_address: 172.100.0.15
+        ipv4_address: 172.100.0.11
 networks: 
   fisco_net:
     external: true  

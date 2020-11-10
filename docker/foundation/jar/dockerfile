@@ -1,0 +1,7 @@
+FROM openjdk:11
+LABEL maintainer=shiki92
+WORKDIR /app
+COPY foundation foundation
+COPY start.sh start.sh
+RUN cd foundation && ./gradlew build -x test
+ENTRYPOINT [ "bash" ,"/app/start.sh"]
