@@ -3,5 +3,5 @@ LABEL maintainer=shiki92
 WORKDIR /app
 COPY platform platform
 COPY start.sh start.sh
-RUN cd platform/backend && ./gradlew && ./gradlew build -x test
+RUN cd platform/backend && ./gradlew build -x test
 ENTRYPOINT [ "bash" ,"/app/start.sh"]

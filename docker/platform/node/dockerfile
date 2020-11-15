@@ -1,7 +1,8 @@
-FROM shiki92/my_ubuntu:1.0
+FROM openjdk:11
 LABEL maintainer=shiki92
-RUN mkdir fisco
+RUN mkdir fisco 
 WORKDIR /fisco
-COPY agencyD node
+COPY node node
+COPY console console
 COPY start.sh start.sh
-ENTRYPOINT [ "/bin/bash", "/fisco/start.sh"]
+ENTRYPOINT [ "bash", "/fisco/start.sh"]

@@ -1,26 +1,41 @@
 version: '3'
 services: 
-  # platform_jar:
-  #   image: shiki92/platform_jar:latest
-  #   volumes: 
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/platform:/app/platform"
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.9
-  # platform_node:
-  #   image: shiki92/platform_node:latest
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.5
-  # platform_mysql:
-  #   image: mysql:8.0
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: 654321
-  #   volumes: 
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/platform/backend/mysqldata:/var/lib/mysql"
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.14
+  foundation_node:
+    image: shiki92/foundation_node:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/foundation/console/accounts:/fisco/console/accounts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/foundation/console/contracts:/fisco/console/contracts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/foundation/node:/fisco/node/node"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.2
+  logistic_node:
+    image: shiki92/logistic_node:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/logistic/console/accounts:/fisco/console/accounts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/logistic/console/contracts:/fisco/console/contracts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/logistic/node:/fisco/node/node"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.3
+  hospital_node:
+    image: shiki92/hospital_node:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/hospital/console/accounts:/fisco/console/accounts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/hospital/console/contracts:/fisco/console/contracts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/hospital/node:/fisco/node/node"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.4
+  platform_node:
+    image: shiki92/platform_node:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/platform/backend/console/accounts:/fisco/console/accounts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/platform/backend/console/contracts:/fisco/console/contracts"
+      - "/home/gongyueyang/BlockChain/DonationSystem/platform/backend/node:/fisco/node/node"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.5
   foundation_jar:
     image: shiki92/foundation_jar:latest
     volumes: 
@@ -28,11 +43,13 @@ services:
     networks: 
       fisco_net:
         ipv4_address: 172.100.0.6
-  foundation_node:
-    image: shiki92/foundation_node:latest
-    networks: 
-      fisco_net:
-        ipv4_address: 172.100.0.2
+  # platform_jar:
+  #   image: shiki92/platform_jar:latest
+  #   volumes: 
+  #     - "/home/gongyueyang/BlockChain/DonationSystem/platform:/app/platform"
+  #   networks: 
+  #     fisco_net:
+  #       ipv4_address: 172.100.0.9
   foundation_mysql:
     image: mysql:8.0
     environment:
@@ -42,6 +59,16 @@ services:
     networks: 
       fisco_net:
         ipv4_address: 172.100.0.11
+  # platform_mysql:
+  #   image: mysql:8.0
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 654321
+  #   volumes: 
+  #     - "/home/gongyueyang/BlockChain/DonationSystem/platform/backend/mysqldata:/var/lib/mysql"
+  #   networks: 
+  #     fisco_net:
+  #       ipv4_address: 172.100.0.14
+  
 networks: 
   fisco_net:
     external: true  

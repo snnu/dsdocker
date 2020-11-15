@@ -1,59 +1,35 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.0.RELEASE'
+	id 'org.springframework.boot' version '2.3.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-  id 'com.github.sherter.google-java-format' version '0.8'
 }
-
-apply plugin: 'io.spring.dependency-management'
-
-description = 'Logistic'
 
 group = 'com.donationsystem'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
 
-googleJavaFormat {
-  options style: 'AOSP'
-  source = sourceSets*.allJava
-  include '**/*.java'
-  exclude '**/temp/*.java'
-  exclude '**/solidity/*.java'
-}
-
-verifyGoogleJavaFormat {
-  source = sourceSets*.allJava
-  include '**/*.java'
-  exclude '**/temp/*.java'
-  exclude '**/solidity/*.java'
-}
-
-// check.dependsOn.remove(test)
-// check.dependsOn.remove(verifyGoogleJavaFormat)
-
 repositories {
-  maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
-  maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
-  maven { url "https://dl.bintray.com/ethereum/maven/" }
-  maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+	maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+ 	maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+ 	maven { url "https://dl.bintray.com/ethereum/maven/" }
+  	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 	maven { url "https://repo.spring.io/libs-snapshot" }
 	maven { url "https://repo.spring.io/libs-milestone" }
-  mavenCentral()
-  mavenLocal()
+  	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
-  implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.boot:spring-boot-starter-logging'
-  //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	//implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-  implementation 'org.springframework.boot:spring-boot-starter-actuator'
-  implementation 'mysql:mysql-connector-java:8.0.20'
-  implementation 'org.codehaus.groovy:groovy-all:2.5.6'
-  implementation 'org.fisco-bcos:web3sdk:2.5.0'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.fisco-bcos:web3sdk:2.5.1'
+	implementation 'org.codehaus.groovy:groovy-all:2.5.6'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 configurations {

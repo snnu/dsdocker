@@ -1,0 +1,25 @@
+encrypt-type: # 0:standard, 1:guomi
+  encrypt-type: 0
+
+group-channel-connections-config:
+  caCert: ca.crt
+  sslCert: sdk.crt
+  sslKey: sdk.key
+  all-channel-connections:
+    - group-id: 1 #group ID
+      connections-str:
+        - 172.18.0.2:20200 
+        - 172.18.0.3:20200
+        - 172.18.0.4:20200
+        - 172.18.0.5:20200
+
+channel-service:
+  group-id: 1 # The specified group to which the SDK connects
+  agency-name: hospital # agency name
+
+
+
+accounts:
+  pem-file: 0x1356943c6b6cfd3ff42aec3a6cb863135108e804.pem
+  p12-file: 0xc213ad2f1ff1d1e93f0e84cd71ba7aa29b8ec819.p12
+  password: 123456
