@@ -29,7 +29,7 @@ appender("FILE_INFO", RollingFileAppender) {
         onMismatch = ACCEPT
     }
     rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "logs/spring-boot-starter/info.created_on_%d{yyyy-MM-dd}.part_%i.log"
+        fileNamePattern = "logs/logistic/info.created_on_%d{yyyy-MM-dd}.part_%i.log"
         maxHistory = 90
         timeBasedFileNamingAndTriggeringPolicy(SizeAndTimeBasedFNATP) {
             maxFileSize = "20MB"
@@ -45,7 +45,7 @@ appender("FILE_ERROR", RollingFileAppender) {
         level = ERROR
     }
     rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "logs/spring-boot-starter/error.created_on_%d{yyyy-MM-dd}.part_%i.log"
+        fileNamePattern = "logs/logistic/error.created_on_%d{yyyy-MM-dd}.part_%i.log"
         maxHistory = 90
         timeBasedFileNamingAndTriggeringPolicy(SizeAndTimeBasedFNATP) {
             maxFileSize = "20MB"
@@ -56,8 +56,26 @@ appender("FILE_ERROR", RollingFileAppender) {
         charset = Charset.forName("UTF-8")
     }
 }
+// appender("FILE_DEBUG", TimeBasedRollingPolicy) {
+//     filter(LevelFilter) {
+//         level = DEBUG
+//     }
+//     rollingPolicy(TimeBasedRollingPolicy) {
+//         fileNamePattern = "logs/logistic/debug.created_on_%d{yyyy-MM-dd}.part_%i.log"
+//         maxHistory = 90
+//         timeBasedFileNamingAndTriggeringPolicy(SizeAndTimeBasedFNATP) {
+//             maxFileSize = "20MB"
+//         }
+//     }
+//     encoder(PatternLayoutEncoder) {
+//         pattern = "%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n"
+//         charset = Charset.forName("UTF-8")
+//     }
+// }
+
 root(INFO, [
     "CONSOLE",
     "FILE_INFO",
-    "FILE_ERROR"
+    "FILE_ERROR"//,
+    // "FILE_DEBUG"
 ])

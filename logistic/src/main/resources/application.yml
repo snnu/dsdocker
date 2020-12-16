@@ -1,3 +1,109 @@
+# server:
+#   tomcat: 
+#     uri-encoding: UTF-8
+#     threads:
+#       max: 1000
+#       min-spare: 30
+#   port: 8080
+# spring:
+#   application:
+#     name: logistic
+#   h2:
+#     console:
+#       enabled: true
+#   jpa:
+#     open-in-view: true
+#     database: h2
+#     show-sql: true
+#     hibernate:
+#         ddl-auto: update
+#     properties:
+#         hibernate:
+#             dialect: org.hibernate.dialect.H2Dialect      
+#   datasource:
+#     platform: h2
+#     url: jdbc:h2:./db/h2
+#     driver-class-name: org.h2.Driver
+#     username: sa
+#     password: 
+      
+# logging:
+#   level:
+#     root: INFO
+#     '[org.springframework.web]': WARN
+#     '[com.donationsystem]': DEBUG
+#     '[org.fisco.bcos]': WARN
+#   file:
+#     name: ./logs/logistic.log
+
+# encrypt-type: # 0:standard, 1:guomi
+#   encrypt-type: 0
+
+# group-channel-connections-config:
+#   caCert: ca.crt
+#   sslCert: sdk.crt
+#   sslKey: sdk.key
+#   all-channel-connections:
+#     - group-id: 1 #group ID
+#       connections-str:
+#         - 172.18.0.3:20200 
+#         - 172.18.0.2:20200
+#         - 172.18.0.4:20200
+#         - 172.18.0.5:20200
+
+
+# channel-service:
+#   group-id: 1 # The specified group to which the SDK connects
+#   agency-name: logistic # agency name
+
+
+
+# accounts:
+#   pem-file: 0x486feb8857ddf1c5e8dad7b5613417c23a896cd2.pem
+#   p12-file: 
+#   password: 
+
+# manager:
+#   location-manager-address: "0x9fedae5d1efb5e3ab7f374bf9edd3606d08216d4"
+
+server:
+  tomcat: 
+    uri-encoding: UTF-8
+    threads:
+      max: 1000
+      min-spare: 30
+  port: 8082
+spring:
+  application:
+    name: logistic
+  h2:
+    console:
+      enabled: true
+  jpa:
+    open-in-view: true
+    database: h2
+    show-sql: true
+    hibernate:
+        ddl-auto: update
+    properties:
+        hibernate:
+            dialect: org.hibernate.dialect.H2Dialect      
+  datasource:
+    platform: h2
+    url: jdbc:h2:./db/h2
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+      
+logging:
+  level:
+    root: INFO
+    '[org.springframework.web]': WARN
+    '[com.donationsystem]': DEBUG
+    '[org.fisco.bcos]': WARN
+  file:
+    name: ./logs/logistic.log
+
 encrypt-type: # 0:standard, 1:guomi
   encrypt-type: 0
 
@@ -8,10 +114,10 @@ group-channel-connections-config:
   all-channel-connections:
     - group-id: 1 #group ID
       connections-str:
-        - 172.18.0.3:20200 
-        - 172.18.0.2:20200
-        - 172.18.0.4:20200
-        - 172.18.0.5:20200
+        - 127.0.0.1:20201
+        - 127.0.0.1:20202
+        - 127.0.0.1:20203
+        - 127.0.0.1:20204
 
 channel-service:
   group-id: 1 # The specified group to which the SDK connects
@@ -20,29 +126,9 @@ channel-service:
 
 
 accounts:
-  pem-file: 0x1db86fe8945aac3bb27469a34e3906738fa7cc3a.pem
-  p12-file: 0xd6f49ae4bdb0e340b74b70f43ba529e85254657e.p12
-  password: 123456
+  pem-file: 0x486feb8857ddf1c5e8dad7b5613417c23a896cd2.pem
+  p12-file: 
+  password: 
 
-# server:
-#   tomcat:
-#     uri-encoding: UTF-8
-#     threads:
-#       max: 1000
-#       min-spare: 30
-#   port: 8080
-# spring:
-#   datasource:
-#     type: com.alibaba.druid.pool.DruidDataSource
-#     url: jdbc:mysql://localhost:3306/demo?characterEncoding=UTF-8
-#     driver-class-name: com.mysql.cj.jdbc.Driver
-#     username: root
-#     password: 654321
-
-#   jpa:
-#     database: mysql
-#     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-#     properties:
-#       hibernate:
-#         ddl:
-#           auto: create-drop
+manager:
+  location-manager-address: "0x9fedae5d1efb5e3ab7f374bf9edd3606d08216d4"

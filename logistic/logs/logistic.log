@@ -1,0 +1,164 @@
+2020-12-16 10:13:49.185  INFO 4706 --- [main] com.donationsystem.logistic.Application  : Starting Application on SK-Desktop with PID 4706 (/home/gongyueyang/BlockChain/DonationSystem/logistic/bin/main started by root in /home/gongyueyang/BlockChain/DonationSystem/logistic)
+2020-12-16 10:13:49.194 DEBUG 4706 --- [main] com.donationsystem.logistic.Application  : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2020-12-16 10:13:49.195  INFO 4706 --- [main] com.donationsystem.logistic.Application  : No active profile set, falling back to default profiles: default
+2020-12-16 10:13:50.055  INFO 4706 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-16 10:13:50.098  INFO 4706 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38ms. Found 1 JPA repository interfaces.
+2020-12-16 10:13:50.528  INFO 4706 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2020-12-16 10:13:50.535  INFO 4706 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-16 10:13:50.536  INFO 4706 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-12-16 10:13:50.645  INFO 4706 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-16 10:13:50.646  INFO 4706 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1213 ms
+2020-12-16 10:13:50.778  INFO 4706 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-16 10:13:50.923  INFO 4706 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-16 10:13:50.930  INFO 4706 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:./db/h2'
+2020-12-16 10:13:51.133  INFO 4706 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-16 10:13:51.177  INFO 4706 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-16 10:13:51.373  INFO 4706 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2020-12-16 10:13:51.460  INFO 4706 --- [main] c.d.l.autoconfigure.ServiceConfig        : agencyName : logistic
+2020-12-16 10:13:51.532  INFO 4706 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-16 10:13:51.655  INFO 4706 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-12-16 10:13:52.135  INFO 4706 --- [main] c.d.l.autoconfigure.AccountConfig        : pem accounts : 0x486feb8857ddf1c5e8dad7b5613417c23a896cd2.pem
+2020-12-16 10:13:52.238  INFO 4706 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-16 10:13:52.244  INFO 4706 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 10:13:52.705  INFO 4706 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initializing===
+2020-12-16 10:13:52.705  INFO 4706 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initialized===
+2020-12-16 10:13:53.099  WARN 4706 --- [main] .b.a.g.t.GroovyTemplateAutoConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2020-12-16 10:13:53.331  INFO 4706 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-12-16 10:13:53.381  INFO 4706 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2020-12-16 10:13:53.383  INFO 4706 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-16 10:13:53.384  INFO 4706 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-16 10:13:53.397  INFO 4706 --- [main] com.donationsystem.logistic.Application  : Started Application in 4.54 seconds (JVM running for 4.817)
+2020-12-16 10:14:17.534  INFO 4706 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-16 10:14:17.559 DEBUG 4706 --- [http-nio-8082-exec-1] c.d.logistic.service.AddressService      : nodeaccount:0x486feb8857ddf1c5e8dad7b5613417c23a896cd2
+2020-12-16 10:14:17.577 DEBUG 4706 --- [http-nio-8082-exec-1] c.d.logistic.service.AddressService      : registryNodeAccount res:false
+2020-12-16 10:14:18.232 DEBUG 4706 --- [http-nio-8082-exec-1] c.d.logistic.util.RegistryTemplate       : allowRegistryWaybillManager: true
+2020-12-16 10:14:18.238 ERROR 4706 --- [http-nio-8082-exec-1] c.d.l.c.AccountServiceController         : The execution of the contract rolled back, Only the authenticated user is allowed.
+2020-12-16 10:18:42.320 DEBUG 4706 --- [http-nio-8082-exec-4] c.d.logistic.service.AddressService      : nodeaccount:0x486feb8857ddf1c5e8dad7b5613417c23a896cd2
+2020-12-16 10:18:42.329 DEBUG 4706 --- [http-nio-8082-exec-4] c.d.logistic.service.AddressService      : registryNodeAccount res:true
+2020-12-16 10:18:42.379 ERROR 4706 --- [http-nio-8082-exec-4] c.d.logistic.service.AddressService      : can only set address itself
+2020-12-16 10:22:52.335 DEBUG 4706 --- [http-nio-8082-exec-7] c.d.logistic.service.AddressService      : nodeaccount:0x486feb8857ddf1c5e8dad7b5613417c23a896cd2
+2020-12-16 10:22:52.341 DEBUG 4706 --- [http-nio-8082-exec-7] c.d.logistic.service.AddressService      : registryNodeAccount res:true
+2020-12-16 10:22:52.611 ERROR 4706 --- [http-nio-8082-exec-7] c.d.logistic.service.AddressService      : can only set address itself
+2020-12-16 10:23:31.480  INFO 4706 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 10:23:31.482  INFO 4706 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-16 10:23:31.482  INFO 4706 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-16 10:23:31.488  INFO 4706 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-12-16 10:23:38.320  INFO 9748 --- [main] com.donationsystem.logistic.Application  : Starting Application on SK-Desktop with PID 9748 (/home/gongyueyang/BlockChain/DonationSystem/logistic/bin/main started by root in /home/gongyueyang/BlockChain/DonationSystem/logistic)
+2020-12-16 10:23:38.323 DEBUG 9748 --- [main] com.donationsystem.logistic.Application  : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2020-12-16 10:23:38.323  INFO 9748 --- [main] com.donationsystem.logistic.Application  : No active profile set, falling back to default profiles: default
+2020-12-16 10:23:39.154  INFO 9748 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-16 10:23:39.198  INFO 9748 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39ms. Found 1 JPA repository interfaces.
+2020-12-16 10:23:39.732  INFO 9748 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2020-12-16 10:23:39.743  INFO 9748 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-16 10:23:39.743  INFO 9748 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-12-16 10:23:39.863  INFO 9748 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-16 10:23:39.864  INFO 9748 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1298 ms
+2020-12-16 10:23:40.008  INFO 9748 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-16 10:23:40.174  INFO 9748 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-16 10:23:40.182  INFO 9748 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:./db/h2'
+2020-12-16 10:23:40.401  INFO 9748 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-16 10:23:40.460  INFO 9748 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-16 10:23:40.667  INFO 9748 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2020-12-16 10:23:40.763  INFO 9748 --- [main] c.d.l.autoconfigure.ServiceConfig        : agencyName : logistic
+2020-12-16 10:23:40.832  INFO 9748 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-16 10:23:40.998  INFO 9748 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-12-16 10:23:41.535  INFO 9748 --- [main] c.d.l.autoconfigure.AccountConfig        : pem accounts : 0x486feb8857ddf1c5e8dad7b5613417c23a896cd2.pem
+2020-12-16 10:23:41.751  INFO 9748 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-16 10:23:41.776  INFO 9748 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 10:23:42.296  INFO 9748 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initializing===
+2020-12-16 10:23:42.297  INFO 9748 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initialized===
+2020-12-16 10:23:42.829  WARN 9748 --- [main] .b.a.g.t.GroovyTemplateAutoConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2020-12-16 10:23:43.122  INFO 9748 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-12-16 10:23:43.193  INFO 9748 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2020-12-16 10:23:43.195  INFO 9748 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-16 10:23:43.197  INFO 9748 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-16 10:23:43.220  INFO 9748 --- [main] com.donationsystem.logistic.Application  : Started Application in 5.263 seconds (JVM running for 5.558)
+2020-12-16 10:23:46.825  INFO 9748 --- [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-16 10:23:46.855 DEBUG 9748 --- [http-nio-8082-exec-2] c.d.logistic.service.AddressService      : nodeaccount:0x486feb8857ddf1c5e8dad7b5613417c23a896cd2
+2020-12-16 10:23:46.874 DEBUG 9748 --- [http-nio-8082-exec-2] c.d.logistic.service.AddressService      : registryNodeAccount res:true
+2020-12-16 10:50:23.837  INFO 9748 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 10:50:23.839  INFO 9748 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-16 10:50:23.840  INFO 9748 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-16 10:50:23.847  INFO 9748 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-12-16 15:05:25.524  INFO 20741 --- [main] com.donationsystem.logistic.Application  : Starting Application on SK-Desktop with PID 20741 (/home/gongyueyang/BlockChain/DonationSystem/logistic/bin/main started by root in /home/gongyueyang/BlockChain/DonationSystem/logistic)
+2020-12-16 15:05:25.528 DEBUG 20741 --- [main] com.donationsystem.logistic.Application  : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2020-12-16 15:05:25.529  INFO 20741 --- [main] com.donationsystem.logistic.Application  : No active profile set, falling back to default profiles: default
+2020-12-16 15:05:26.521  INFO 20741 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-16 15:05:26.585  INFO 20741 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56ms. Found 1 JPA repository interfaces.
+2020-12-16 15:05:27.171  INFO 20741 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2020-12-16 15:05:27.181  INFO 20741 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-16 15:05:27.182  INFO 20741 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-12-16 15:05:27.288  INFO 20741 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-16 15:05:27.288  INFO 20741 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1477 ms
+2020-12-16 15:05:27.443  INFO 20741 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-16 15:05:27.598  INFO 20741 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-16 15:05:27.604  INFO 20741 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:./db/h2'
+2020-12-16 15:05:27.813  INFO 20741 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-16 15:05:27.873  INFO 20741 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-16 15:05:28.061  INFO 20741 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2020-12-16 15:05:28.151  INFO 20741 --- [main] c.d.l.autoconfigure.ServiceConfig        : agencyName : logistic
+2020-12-16 15:05:28.241  INFO 20741 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-16 15:05:28.361  INFO 20741 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-12-16 15:05:28.904  INFO 20741 --- [main] c.d.l.autoconfigure.AccountConfig        : pem accounts : 0x486feb8857ddf1c5e8dad7b5613417c23a896cd2.pem
+2020-12-16 15:05:29.049  INFO 20741 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-16 15:05:29.055  INFO 20741 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 15:05:29.616  INFO 20741 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initializing===
+2020-12-16 15:05:29.617  INFO 20741 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initialized===
+2020-12-16 15:05:30.085  WARN 20741 --- [main] .b.a.g.t.GroovyTemplateAutoConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2020-12-16 15:05:30.343  INFO 20741 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-12-16 15:05:30.401  INFO 20741 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2020-12-16 15:05:30.403  INFO 20741 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-16 15:05:30.404  INFO 20741 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-16 15:05:30.426  INFO 20741 --- [main] com.donationsystem.logistic.Application  : Started Application in 5.361 seconds (JVM running for 5.709)
+2020-12-16 15:37:46.099  INFO 20741 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-16 15:46:19.330 DEBUG 20741 --- [http-nio-8082-exec-4] c.d.logistic.util.RegistryTemplate       : allowRegistryWaybillManager: true
+2020-12-16 15:46:19.832 ERROR 20741 --- [http-nio-8082-exec-4] c.d.logistic.service.AddressService      : can only set address itself
+2020-12-16 15:47:04.354  INFO 20741 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 15:47:04.356  INFO 20741 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-16 15:47:04.356  INFO 20741 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-16 15:47:04.364  INFO 20741 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-12-16 15:47:10.634  INFO 12773 --- [main] com.donationsystem.logistic.Application  : Starting Application on SK-Desktop with PID 12773 (/home/gongyueyang/BlockChain/DonationSystem/logistic/bin/main started by root in /home/gongyueyang/BlockChain/DonationSystem/logistic)
+2020-12-16 15:47:10.636 DEBUG 12773 --- [main] com.donationsystem.logistic.Application  : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2020-12-16 15:47:10.637  INFO 12773 --- [main] com.donationsystem.logistic.Application  : No active profile set, falling back to default profiles: default
+2020-12-16 15:47:11.612  INFO 12773 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-16 15:47:11.668  INFO 12773 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50ms. Found 1 JPA repository interfaces.
+2020-12-16 15:47:12.196  INFO 12773 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2020-12-16 15:47:12.204  INFO 12773 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-16 15:47:12.204  INFO 12773 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-12-16 15:47:12.352  INFO 12773 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-16 15:47:12.353  INFO 12773 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1444 ms
+2020-12-16 15:47:12.513  INFO 12773 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-16 15:47:12.690  INFO 12773 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-16 15:47:12.697  INFO 12773 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:./db/h2'
+2020-12-16 15:47:12.929  INFO 12773 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-16 15:47:12.991  INFO 12773 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-16 15:47:13.195  INFO 12773 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2020-12-16 15:47:13.278  INFO 12773 --- [main] c.d.l.autoconfigure.ServiceConfig        : agencyName : logistic
+2020-12-16 15:47:13.367  INFO 12773 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-16 15:47:13.498  INFO 12773 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-12-16 15:47:13.980  INFO 12773 --- [main] c.d.l.autoconfigure.AccountConfig        : pem accounts : 0x486feb8857ddf1c5e8dad7b5613417c23a896cd2.pem
+2020-12-16 15:47:14.151  INFO 12773 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-16 15:47:14.160  INFO 12773 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 15:47:14.690 DEBUG 12773 --- [main] c.d.logistic.service.AddressService      : nodeaccount:0x486feb8857ddf1c5e8dad7b5613417c23a896cd2
+2020-12-16 15:47:14.704 DEBUG 12773 --- [main] c.d.logistic.service.AddressService      : registryNodeAccount res:true
+2020-12-16 15:47:14.779 DEBUG 12773 --- [main] c.d.logistic.util.RegistryTemplate       : allowRegistryWaybillManager: true
+2020-12-16 15:47:15.291  INFO 12773 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initializing===
+2020-12-16 15:47:15.291  INFO 12773 --- [main] c.d.logistic.service.DBInitializer       : ===DB Initialized===
+2020-12-16 15:47:15.667  WARN 12773 --- [main] .b.a.g.t.GroovyTemplateAutoConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2020-12-16 15:47:15.913  INFO 12773 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-12-16 15:47:15.957  INFO 12773 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2020-12-16 15:47:15.959  INFO 12773 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-16 15:47:15.960  INFO 12773 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-16 15:47:15.977  INFO 12773 --- [main] com.donationsystem.logistic.Application  : Started Application in 5.745 seconds (JVM running for 6.053)
+2020-12-16 15:47:18.481  INFO 12773 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-16 15:47:18.803 DEBUG 12773 --- [http-nio-8082-exec-1] c.d.logistic.util.RegistryTemplate       : allowRegistryWaybillManager: true
+2020-12-16 16:00:17.118 DEBUG 12773 --- [http-nio-8082-exec-6] c.d.logistic.service.WaybillService      : number: 20201216033746
+2020-12-16 16:00:17.119 DEBUG 12773 --- [http-nio-8082-exec-6] c.d.logistic.service.WaybillService      : address: 0x1c5fdb744a1430cfa1e89a2745148a10a18928e9
+2020-12-16 16:23:53.964 ERROR 12773 --- [nioEventLoopGroup-2-5] o.f.b.c.handler.ChannelConnections       :  reconnect to 127.0.0.1:20201, error: Connection refused: /127.0.0.1:20201
+2020-12-16 16:23:53.964 ERROR 12773 --- [nioEventLoopGroup-2-6] o.f.b.c.handler.ChannelConnections       :  reconnect to 127.0.0.1:20202, error: Connection refused: /127.0.0.1:20202
+2020-12-16 16:23:53.965 ERROR 12773 --- [nioEventLoopGroup-2-8] o.f.b.c.handler.ChannelConnections       :  reconnect to 127.0.0.1:20204, error: Connection refused: /127.0.0.1:20204
+2020-12-16 16:23:53.965 ERROR 12773 --- [nioEventLoopGroup-2-7] o.f.b.c.handler.ChannelConnections       :  reconnect to 127.0.0.1:20203, error: Connection refused: /127.0.0.1:20203
+2020-12-16 16:24:01.611  INFO 12773 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-16 16:24:01.613  INFO 12773 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-16 16:24:01.614  INFO 12773 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-16 16:24:01.622  INFO 12773 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

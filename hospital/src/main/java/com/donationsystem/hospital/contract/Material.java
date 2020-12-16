@@ -9,6 +9,7 @@ import org.fisco.bcos.web3j.abi.FunctionEncoder;
 import org.fisco.bcos.web3j.abi.FunctionReturnDecoder;
 import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.abi.datatypes.Address;
+import org.fisco.bcos.web3j.abi.datatypes.Bool;
 import org.fisco.bcos.web3j.abi.datatypes.Function;
 import org.fisco.bcos.web3j.abi.datatypes.Type;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Uint256;
@@ -33,27 +34,35 @@ import org.fisco.bcos.web3j.tx.txdecode.TransactionDecoder;
  */
 @SuppressWarnings("unchecked")
 public class Material extends Contract {
-    public static final String[] BINARY_ARRAY = {"608060405234801561001057600080fd5b50604051604080610549833981018060405281019080805190602001909291908051906020019092919050505033600360006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550816000819055508060018190555050506104ac8061009d6000396000f300608060405260043610610078576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806308bb6aa31461007d57806354a6385a146100d457806380a1bbda14610117578063a347fa7614610142578063b7e231bd14610185578063e5552f4c146101dc575b600080fd5b34801561008957600080fd5b50610092610207565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156100e057600080fd5b50610115600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610231565b005b34801561012357600080fd5b5061012c61033a565b6040518082815260200191505060405180910390f35b34801561014e57600080fd5b50610183600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610344565b005b34801561019157600080fd5b5061019a61044d565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156101e857600080fd5b506101f1610477565b6040518082815260200191505060405180910390f35b6000600260019054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156102f6576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600c8152602001807f4f6e6c79204d616e61676572000000000000000000000000000000000000000081525060200191505060405180910390fd5b80600360006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b6000600154905090565b600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610409576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600c8152602001807f4f6e6c79204d616e61676572000000000000000000000000000000000000000081525060200191505060405180910390fd5b80600260016101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b6000600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b600080549050905600a165627a7a7230582065b345e3b33aa8c36bd3b06378b1e680094ff9f8d4da21096143f9bb3087292a0029"};
+    public static final String[] BINARY_ARRAY = {"608060405234801561001057600080fd5b50604051604080610a4c8339810180604052810190808051906020019092919080519060200190929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060018060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555081600281905550806003819055506000600460006101000a81548160ff021916908315150217905550505061091d8061012f6000396000f3006080604052600436106100a4576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806313af4035146100a95780632356c9331461012c578063554d0ecf1461016f57806379fd18b0146101c6578063893d20e8146101dd5780639abeb94014610234578063a9ed9cb814610263578063c1e80286146102a6578063d321fe29146102d1578063ff9913e8146102fc575b600080fd5b3480156100b557600080fd5b506100ea600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061033f565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561013857600080fd5b5061016d600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061044d565b005b34801561017b57600080fd5b50610184610555565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156101d257600080fd5b506101db61057f565b005b3480156101e957600080fd5b506101f2610660565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561024057600080fd5b50610249610689565b604051808215151515815260200191505060405180910390f35b34801561026f57600080fd5b506102a4600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506106a0565b005b3480156102b257600080fd5b506102bb6107bf565b6040518082815260200191505060405180910390f35b3480156102dd57600080fd5b506102e66107c9565b6040518082815260200191505060405180910390f35b34801561030857600080fd5b5061033d600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506107d3565b005b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610405576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550339050919050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610511576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b80600460016101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b6000600460019054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610643576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b6001600460006101000a81548160ff021916908315150217905550565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600460009054906101000a900460ff16905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610764576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b6000600254905090565b6000600354905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610897576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b60018060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908315150217905550505600a165627a7a72305820c8e87e84fc00b08814afe82819ad981a4326ba3c3cb8e4175cbd2d1a674aa97c0029"};
 
     public static final String BINARY = String.join("", BINARY_ARRAY);
 
-    public static final String[] ABI_ARRAY = {"[{\"constant\":true,\"inputs\":[],\"name\":\"GetCurHolder\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_manager\",\"type\":\"address\"}],\"name\":\"SetManager\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetAmount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_curHolder\",\"type\":\"address\"}],\"name\":\"SetCurHolder\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetManager\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetVariety\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"},{\"name\":\"_amount\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"};
+    public static final String[] ABI_ARRAY = {"[{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_curHolder\",\"type\":\"address\"}],\"name\":\"setCurHolder\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCurHolder\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"setUsed\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getUsed\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"disallow\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getVariety\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getAmount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"allow\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"},{\"name\":\"_amount\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"};
 
     public static final String ABI = String.join("", ABI_ARRAY);
 
     public static final TransactionDecoder transactionDecoder = new TransactionDecoder(ABI, BINARY);
 
-    public static final String FUNC_GETCURHOLDER = "GetCurHolder";
+    public static final String FUNC_SETOWNER = "setOwner";
 
-    public static final String FUNC_SETMANAGER = "SetManager";
+    public static final String FUNC_SETCURHOLDER = "setCurHolder";
 
-    public static final String FUNC_GETAMOUNT = "GetAmount";
+    public static final String FUNC_GETCURHOLDER = "getCurHolder";
 
-    public static final String FUNC_SETCURHOLDER = "SetCurHolder";
+    public static final String FUNC_SETUSED = "setUsed";
 
-    public static final String FUNC_GETMANAGER = "GetManager";
+    public static final String FUNC_GETOWNER = "getOwner";
 
-    public static final String FUNC_GETVARIETY = "GetVariety";
+    public static final String FUNC_GETUSED = "getUsed";
+
+    public static final String FUNC_DISALLOW = "disallow";
+
+    public static final String FUNC_GETVARIETY = "getVariety";
+
+    public static final String FUNC_GETAMOUNT = "getAmount";
+
+    public static final String FUNC_ALLOW = "allow";
 
     @Deprecated
     protected Material(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
@@ -77,40 +86,33 @@ public class Material extends Contract {
         return transactionDecoder;
     }
 
-    public RemoteCall<String> GetCurHolder() {
-        final Function function = new Function(FUNC_GETCURHOLDER, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
-        return executeRemoteCallSingleValueReturn(function, String.class);
-    }
-
-    public RemoteCall<TransactionReceipt> SetManager(String _manager) {
+    public RemoteCall<TransactionReceipt> setOwner(String usr) {
         final Function function = new Function(
-                FUNC_SETMANAGER, 
-                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(_manager)), 
+                FUNC_SETOWNER, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
                 Collections.<TypeReference<?>>emptyList());
         return executeRemoteCallTransaction(function);
     }
 
-    public void SetManager(String _manager, TransactionSucCallback callback) {
+    public void setOwner(String usr, TransactionSucCallback callback) {
         final Function function = new Function(
-                FUNC_SETMANAGER, 
-                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(_manager)), 
+                FUNC_SETOWNER, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
                 Collections.<TypeReference<?>>emptyList());
         asyncExecuteTransaction(function, callback);
     }
 
-    public String SetManagerSeq(String _manager) {
+    public String setOwnerSeq(String usr) {
         final Function function = new Function(
-                FUNC_SETMANAGER, 
-                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(_manager)), 
+                FUNC_SETOWNER, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
                 Collections.<TypeReference<?>>emptyList());
         return createTransactionSeq(function);
     }
 
-    public Tuple1<String> getSetManagerInput(TransactionReceipt transactionReceipt) {
+    public Tuple1<String> getSetOwnerInput(TransactionReceipt transactionReceipt) {
         String data = transactionReceipt.getInput().substring(10);
-        final Function function = new Function(FUNC_SETMANAGER, 
+        final Function function = new Function(FUNC_SETOWNER, 
                 Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
         List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
@@ -120,14 +122,19 @@ public class Material extends Contract {
                 );
     }
 
-    public RemoteCall<BigInteger> GetAmount() {
-        final Function function = new Function(FUNC_GETAMOUNT, 
+    public Tuple1<String> getSetOwnerOutput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getOutput();
+        final Function function = new Function(FUNC_SETOWNER, 
                 Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
-        return executeRemoteCallSingleValueReturn(function, BigInteger.class);
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
     }
 
-    public RemoteCall<TransactionReceipt> SetCurHolder(String _curHolder) {
+    public RemoteCall<TransactionReceipt> setCurHolder(String _curHolder) {
         final Function function = new Function(
                 FUNC_SETCURHOLDER, 
                 Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(_curHolder)), 
@@ -135,7 +142,7 @@ public class Material extends Contract {
         return executeRemoteCallTransaction(function);
     }
 
-    public void SetCurHolder(String _curHolder, TransactionSucCallback callback) {
+    public void setCurHolder(String _curHolder, TransactionSucCallback callback) {
         final Function function = new Function(
                 FUNC_SETCURHOLDER, 
                 Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(_curHolder)), 
@@ -143,7 +150,7 @@ public class Material extends Contract {
         asyncExecuteTransaction(function, callback);
     }
 
-    public String SetCurHolderSeq(String _curHolder) {
+    public String setCurHolderSeq(String _curHolder) {
         final Function function = new Function(
                 FUNC_SETCURHOLDER, 
                 Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(_curHolder)), 
@@ -163,18 +170,135 @@ public class Material extends Contract {
                 );
     }
 
-    public RemoteCall<String> GetManager() {
-        final Function function = new Function(FUNC_GETMANAGER, 
+    public RemoteCall<String> getCurHolder() {
+        final Function function = new Function(FUNC_GETCURHOLDER, 
                 Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
 
-    public RemoteCall<BigInteger> GetVariety() {
+    public RemoteCall<TransactionReceipt> setUsed() {
+        final Function function = new Function(
+                FUNC_SETUSED, 
+                Arrays.<Type>asList(), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
+    }
+
+    public void setUsed(TransactionSucCallback callback) {
+        final Function function = new Function(
+                FUNC_SETUSED, 
+                Arrays.<Type>asList(), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String setUsedSeq() {
+        final Function function = new Function(
+                FUNC_SETUSED, 
+                Arrays.<Type>asList(), 
+                Collections.<TypeReference<?>>emptyList());
+        return createTransactionSeq(function);
+    }
+
+    public RemoteCall<String> getOwner() {
+        final Function function = new Function(FUNC_GETOWNER, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        return executeRemoteCallSingleValueReturn(function, String.class);
+    }
+
+    public RemoteCall<Boolean> getUsed() {
+        final Function function = new Function(FUNC_GETUSED, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+        return executeRemoteCallSingleValueReturn(function, Boolean.class);
+    }
+
+    public RemoteCall<TransactionReceipt> disallow(String usr) {
+        final Function function = new Function(
+                FUNC_DISALLOW, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
+    }
+
+    public void disallow(String usr, TransactionSucCallback callback) {
+        final Function function = new Function(
+                FUNC_DISALLOW, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String disallowSeq(String usr) {
+        final Function function = new Function(
+                FUNC_DISALLOW, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Collections.<TypeReference<?>>emptyList());
+        return createTransactionSeq(function);
+    }
+
+    public Tuple1<String> getDisallowInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_DISALLOW, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
+    }
+
+    public RemoteCall<BigInteger> getVariety() {
         final Function function = new Function(FUNC_GETVARIETY, 
                 Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
+    }
+
+    public RemoteCall<BigInteger> getAmount() {
+        final Function function = new Function(FUNC_GETAMOUNT, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        return executeRemoteCallSingleValueReturn(function, BigInteger.class);
+    }
+
+    public RemoteCall<TransactionReceipt> allow(String usr) {
+        final Function function = new Function(
+                FUNC_ALLOW, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
+    }
+
+    public void allow(String usr, TransactionSucCallback callback) {
+        final Function function = new Function(
+                FUNC_ALLOW, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String allowSeq(String usr) {
+        final Function function = new Function(
+                FUNC_ALLOW, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Collections.<TypeReference<?>>emptyList());
+        return createTransactionSeq(function);
+    }
+
+    public Tuple1<String> getAllowInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_ALLOW, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
     }
 
     @Deprecated

@@ -1,3 +1,42 @@
+server:
+  tomcat: 
+    uri-encoding: UTF-8
+    threads:
+      max: 1000
+      min-spare: 30
+  port: 8083
+spring:
+  application:
+    name: hospital
+  jpa:
+        open-in-view: true
+        database: mysql
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect
+  database:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+      platform: mysql
+      # url: jdbc:mysql://hospital_mysql:3306/demo?characterEncoding=utf8
+      url: jdbc:mysql://localhost:3309/demo?characterEncoding=utf8
+      username: root
+      password: 654321
+      test-while-idle: true
+      validation-query: SELECT 1
+  
+      
+logging:
+  level:
+    root: INFO
+    '[org.springframework.web]': INFO
+    '[com.donationsystem]': DEBUG
+  file:
+    name: ./logs/hospital.log
+
 encrypt-type: # 0:standard, 1:guomi
   encrypt-type: 0
 
@@ -8,10 +47,14 @@ group-channel-connections-config:
   all-channel-connections:
     - group-id: 1 #group ID
       connections-str:
-        - 172.18.0.2:20200 
-        - 172.18.0.3:20200
-        - 172.18.0.4:20200
-        - 172.18.0.5:20200
+        # - 172.100.0.2:20200 
+        # - 172.100.0.3:20200
+        # - 172.100.0.4:20200
+        # - 172.100.0.5:20200
+        - 127.0.0.1:20201
+        - 127.0.0.1:20202
+        - 127.0.0.1:20203
+        - 127.0.0.1:20204
 
 channel-service:
   group-id: 1 # The specified group to which the SDK connects
@@ -20,6 +63,7 @@ channel-service:
 
 
 accounts:
-  pem-file: 0x1356943c6b6cfd3ff42aec3a6cb863135108e804.pem
-  p12-file: 0xc213ad2f1ff1d1e93f0e84cd71ba7aa29b8ec819.p12
-  password: 123456
+  pem-file: 0xe4040677ef4147667afe9b2fa4818048dd044c0d.pem
+  p12-file: 
+  password: 
+

@@ -1,7 +1,7 @@
 FROM openjdk:11
 LABEL maintainer=shiki92
 WORKDIR /app
-COPY foundation foundation
+COPY hospital hospital
 COPY start.sh start.sh
-RUN cd foundation && ./gradlew
+RUN cd /tmp/ && curl -k -LO "https://files.cnblogs.com/files/zgngg/jce_policy-8.zip" && unzip jce_policy-8.zip && rm jce_policy-8.zip && cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/local/openjdk-11/lib/security && cd /app/hospital && ./gradlew
 ENTRYPOINT [ "bash" ,"/app/start.sh"]

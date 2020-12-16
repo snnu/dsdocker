@@ -1,3 +1,41 @@
+server:
+  tomcat: 
+    uri-encoding: UTF-8
+    threads:
+      max: 1000
+      min-spare: 30
+  port: 8080
+spring:
+  application:
+    name: logistic
+  jpa:
+    open-in-view: true
+    database: mysql
+    show-sql: true
+    hibernate:
+        ddl-auto: create-drop
+    properties:
+        hibernate:
+            dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    platform: mysql
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    # url: jdbc:mysql://logistic_mysql:3306/demo?characterEncoding=utf8
+    url: jdbc:mysql://localhost:3308/demo?characterEncoding=utf8
+    username: root
+    password: 654321
+    type: com.alibaba.druid.pool.DruidDataSource
+  
+      
+logging:
+  level:
+    root: INFO
+    '[org.springframework.web]': INFO
+    '[com.donationsystem]': DEBUG
+    '[org.fisco.bcos]': WARN
+  file:
+    name: ./logs/logistic.log
+
 encrypt-type: # 0:standard, 1:guomi
   encrypt-type: 0
 
@@ -8,10 +46,14 @@ group-channel-connections-config:
   all-channel-connections:
     - group-id: 1 #group ID
       connections-str:
-        - 172.18.0.3:20200 
-        - 172.18.0.2:20200
-        - 172.18.0.4:20200
-        - 172.18.0.5:20200
+        # - 172.18.0.3:20200 
+        # - 172.18.0.2:20200
+        # - 172.18.0.4:20200
+        # - 172.18.0.5:20200
+        - 127.0.0.1:20201
+        - 127.0.0.1:20202
+        - 127.0.0.1:20203
+        - 127.0.0.1:20204
 
 channel-service:
   group-id: 1 # The specified group to which the SDK connects
@@ -21,28 +63,5 @@ channel-service:
 
 accounts:
   pem-file: 0x1db86fe8945aac3bb27469a34e3906738fa7cc3a.pem
-  p12-file: 0xd6f49ae4bdb0e340b74b70f43ba529e85254657e.p12
-  password: 123456
-
-# server:
-#   tomcat:
-#     uri-encoding: UTF-8
-#     threads:
-#       max: 1000
-#       min-spare: 30
-#   port: 8080
-# spring:
-#   datasource:
-#     type: com.alibaba.druid.pool.DruidDataSource
-#     url: jdbc:mysql://localhost:3306/demo?characterEncoding=UTF-8
-#     driver-class-name: com.mysql.cj.jdbc.Driver
-#     username: root
-#     password: 654321
-
-#   jpa:
-#     database: mysql
-#     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-#     properties:
-#       hibernate:
-#         ddl:
-#           auto: create-drop
+  p12-file: 
+  password: 

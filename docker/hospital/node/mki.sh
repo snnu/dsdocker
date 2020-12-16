@@ -1,5 +1,5 @@
 #!/bin/bash
-version=2
+version=5
 if [ $version != 0 ]
 then
     docker rmi -f shiki92/hospital_node:latest shiki92/hospital_node:$version
