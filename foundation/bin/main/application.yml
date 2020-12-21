@@ -1,76 +1,11 @@
-# server:
-#   tomcat: 
-#     uri-encoding: UTF-8
-#     threads:
-#       max: 1000
-#       min-spare: 30
-#   port: 8081
-# spring:
-#   application:
-#     name: foundation
-#   jpa:
-#     open-in-view: true
-#     database: h2
-#     show-sql: true
-#     hibernate:
-#         ddl-auto: update
-#     properties:
-#         hibernate:
-#             dialect: org.hibernate.dialect.H2Dialect      
-#   datasource:
-#       platform: h2
-#       url: jdbc:h2:./h2
-#       driver-class-name: org.h2.Driver
-#       username: sa
-#       password: 
-  
-      
-# logging:
-#   level:
-#     root: INFO
-#     '[org.springframework.web]': INFO
-#     '[com.donationsystem]': DEBUG
-#   file:
-#     name: ./logs/foundation.log
-
-# encrypt-type: # 0:standard, 1:guomi
-#   encrypt-type: 0
-
-# group-channel-connections-config:
-#   caCert: ca.crt
-#   sslCert: sdk.crt
-#   sslKey: sdk.key
-#   all-channel-connections:
-#     - group-id: 1 #group ID
-#       connections-str:
-#         - 172.100.0.2:20200 
-#         - 172.100.0.3:20200
-#         - 172.100.0.4:20200
-#         - 172.100.0.5:20200
-
-# channel-service:
-#   group-id: 1 # The specified group to which the SDK connects
-#   agency-name: foundation # agency name
-
-
-
-# accounts:
-#   pem-file: 0x5b6cb599a9ede50f6270936133b0d3f9caacf09d.pem
-#   p12-file: 
-#   password: 
-
-# manager:
-#   location-manager-address: "0x9fedae5d1efb5e3ab7f374bf9edd3606d08216d4"
-
 server:
   tomcat: 
     uri-encoding: UTF-8
     threads:
       max: 1000
       min-spare: 30
-  port: 8081
+  port: 8080
 spring:
-  groovy.template.check-template-location: false
   application:
     name: foundation
   jpa:
@@ -108,14 +43,16 @@ group-channel-connections-config:
   all-channel-connections:
     - group-id: 1 #group ID
       connections-str:
-        - 127.0.0.1:20201
-        - 127.0.0.1:20202
-        - 127.0.0.1:20203
-        - 127.0.0.1:20204
+        - 172.100.0.2:20200 
+        - 172.100.0.3:20200
+        - 172.100.0.4:20200
+        - 172.100.0.5:20200
 
 channel-service:
   group-id: 1 # The specified group to which the SDK connects
   agency-name: foundation # agency name
+
+
 
 accounts:
   pem-file: 0x5b6cb599a9ede50f6270936133b0d3f9caacf09d.pem
@@ -124,3 +61,66 @@ accounts:
 
 manager:
   location-manager-address: "0x9fedae5d1efb5e3ab7f374bf9edd3606d08216d4"
+
+# server:
+#   tomcat: 
+#     uri-encoding: UTF-8
+#     threads:
+#       max: 1000
+#       min-spare: 30
+#   port: 8081
+# spring:
+#   groovy.template.check-template-location: false
+#   application:
+#     name: foundation
+#   jpa:
+#     open-in-view: true
+#     database: h2
+#     show-sql: true
+#     hibernate:
+#         ddl-auto: update
+#     properties:
+#         hibernate:
+#             dialect: org.hibernate.dialect.H2Dialect      
+#   datasource:
+#       platform: h2
+#       url: jdbc:h2:./db/h2
+#       driver-class-name: org.h2.Driver
+#       username: sa
+#       password: 
+  
+      
+# logging:
+#   level:
+#     root: INFO
+#     '[org.springframework.web]': INFO
+#     '[com.donationsystem]': DEBUG
+#   file:
+#     name: ./logs/foundation.log
+
+# encrypt-type: # 0:standard, 1:guomi
+#   encrypt-type: 0
+
+# group-channel-connections-config:
+#   caCert: ca.crt
+#   sslCert: sdk.crt
+#   sslKey: sdk.key
+#   all-channel-connections:
+#     - group-id: 1 #group ID
+#       connections-str:
+#         - 127.0.0.1:20201
+#         - 127.0.0.1:20202
+#         - 127.0.0.1:20203
+#         - 127.0.0.1:20204
+
+# channel-service:
+#   group-id: 1 # The specified group to which the SDK connects
+#   agency-name: foundation # agency name
+
+# accounts:
+#   pem-file: 0x5b6cb599a9ede50f6270936133b0d3f9caacf09d.pem
+#   p12-file: 
+#   password: 
+
+# manager:
+#   location-manager-address: "0x9fedae5d1efb5e3ab7f374bf9edd3606d08216d4"

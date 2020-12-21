@@ -9,7 +9,7 @@ plugins {
 import com.bmuschko.gradle.docker.tasks.image.*
 
 group = 'com.donationsystem'
-version = 1
+version = 13
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
 
@@ -76,7 +76,7 @@ task removeDockerImage(type: DockerRemoveImage) {
 
 task createDockerfile(type: Dockerfile) {
 	dependsOn mkdirDockerDir
-	from("openjdk:11")
+	from("shiki92/ds_base:latest")
 	label(["maintainer": "shiki92"])
 	workingDir("/app")
 	copyFile("${rootProject.name}-${version}.jar", "app.jar")

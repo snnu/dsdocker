@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.donationsystem.logistic.constants.GasConstants;
+import com.donationsystem.logistic.contract.LocationManager;
 import com.donationsystem.logistic.contract.Waybill;
 import com.donationsystem.logistic.contract.WaybillManager;
 import com.donationsystem.logistic.util.WaybillRestTemplate;
@@ -28,6 +29,9 @@ public class WaybillService {
     private WaybillManager waybillManager;
 
     @Autowired
+    private LocationManager locationManager;
+
+    @Autowired
     private Web3j web3j;
 
     @Autowired
@@ -39,15 +43,16 @@ public class WaybillService {
     @Autowired
     private WaybillRestTemplate waybillRestTemplate;
 
-    public String deployWayBillByMaterial(String _reciver, List<BigInteger> varieties,
+    public String deployWayBillByMaterial(String reciverName, List<BigInteger> varieties,
             List<BigInteger> amounts) throws Exception {
         TransactionReceipt res;
         String number = simpleDateFormat.format(new Date());
+        String reciverAddress = locationManager.getAddress(reciverName).send();
+        logger.debug("reciverAddress: " + reciverAddress);
         Waybill wayBill = Waybill.deploy(web3j, credentials,
-                new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT), _reciver, number).send();
+                new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT), reciverAddress, number).send();
         res = wayBill.setMaterial(varieties, amounts).send();
         if (res.isStatusOK()) {
-            waybillManager.setWallbillAddress(number, wayBill.getContractAddress());
             res = waybillManager.setWallbillAddress(number, wayBill.getContractAddress()).send();
         }
         if (res.isStatusOK()) {
@@ -56,14 +61,16 @@ public class WaybillService {
         throw new Exception("deploy error");
     }
 
-    public String deployWayBillByAddress(String _reciver, List<BigInteger> varieties,
-            List<BigInteger> amounts) throws Exception {
+    public String deployWayBillByAddress(String reciverName, List<BigInteger> varieties,
+            List<BigInteger> amounts, String foundationName) throws Exception {
         TransactionReceipt res;
         String number = simpleDateFormat.format(new Date());
+        String reciverAddress = locationManager.getAddress(reciverName).send();
         Waybill wayBill = Waybill.deploy(web3j, credentials,
-                new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT), _reciver, number).send();
+                new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT), reciverAddress, number).send();
         waybillManager.setWallbillAddress(number, wayBill.getContractAddress());
-        List<String> materialAdresses = waybillRestTemplate.requestMaterial(varieties, amounts, number);
+        // 该IP应该是由节点名查询得来，此处写死
+        List<String> materialAdresses = waybillRestTemplate.requestMaterial(varieties, amounts, number, "172.100.0.6");
         res = wayBill.setMaterialArr(materialAdresses).send();
         if (res.isStatusOK()) {
             res = waybillManager.setWallbillAddress(number, wayBill.getContractAddress()).send();
@@ -76,20 +83,5 @@ public class WaybillService {
 
     public String findWayBillAddress(String number) throws Exception {
         return waybillManager.getWallbillAddress(number).send();
-    }
-
-    public Boolean setOwnerToRequester(String number, String address) throws Exception {
-        logger.debug("number: " + number);
-        logger.debug("address: " + address);
-        String waybillAddress = waybillManager.getWallbillAddress(number).send();
-        Waybill wayBill = Waybill.load(waybillAddress, web3j, credentials,
-                new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
-        TransactionReceipt receipt = wayBill.setMaterialsOwner(address).send();
-        if (receipt.isStatusOK()) {
-            return true;
-        } else {
-            logger.debug("receipt.getMessage(): " + receipt.getMessage());
-            return false;
-        }
     }
 }

@@ -25,14 +25,14 @@ public class WaybillRestTemplate {
     
     private RestTemplate restTemplate = new RestTemplate();
 
-    public List<String> requestMaterial(List<BigInteger> varieties, List<BigInteger> amounts, String number)
+    public List<String> requestMaterial(List<BigInteger> varieties, List<BigInteger> amounts, String number, String foundationIP)
             throws Exception {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("varieties", varieties.stream().map(Object::toString).collect(Collectors.joining(",")));
         params.add("amounts", amounts.stream().map(Object::toString).collect(Collectors.joining(",")));
-        String address = waybillManager.getWallbillAddress(number).send();
-        params.add("address", address);
-        String url = "http://localhost:8081/v1/foundation/delivery";
+        params.add("waybillManagerName", "waybillManager");
+        params.add("number", number);
+        String url = String.format("http://%s:8080/v1/foundation/waybill/delivery", foundationIP) ;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);

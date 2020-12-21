@@ -24,29 +24,14 @@ public class FoundationRestTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(FoundationRestTemplate.class);
 
-    @Autowired
-    private FoundationMaterialManager foundationMaterialManager;
-
     private RestTemplate restTemplate = new RestTemplate();
 
-    public Boolean RequestOwnerChange(String number) {
+    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String hospitalMaterialManagerName, String logisticIP) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-        params.add("number", number);
-        params.add("address", foundationMaterialManager.getContractAddress());
-        String url = "http://localhost:8082/v1/logistic/waybill/changeOwner";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-        ResponseEntity<Boolean> restExchange = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Boolean.class);
-        return restExchange.getBody();
-    }
-
-    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String nodeName) {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-        params.add("nodeName", nodeName);
+        params.add("reciverName", hospitalMaterialManagerName);
         params.add("varieties", varieties.stream().map(Object::toString).collect(Collectors.joining(",")));
         params.add("amounts", amounts.stream().map(Object::toString).collect(Collectors.joining(",")));
-        String url = "http://localhost:8082/v1/logistic/waybill/deploy_by_address";
+        String url = String.format("http://%s:8080/v1/logistic/waybill/deployByAddress", logisticIP);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);

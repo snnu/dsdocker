@@ -27,50 +27,29 @@ public class WaybillServiceController {
     @Autowired
     private AddressService addressService;
 
-    @RequestMapping(value = "/deploy_by_material", method = RequestMethod.POST)
-    public String deployWayBillByMaterial(@RequestParam(value = "nodeName", required = true) String nodeName,
+    @RequestMapping(value = "/deployByMaterial", method = RequestMethod.POST)
+    public String deployWayBillByMaterial(@RequestParam(value = "reciverName", required = true) String reciverName,
             @RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
             @RequestParam(value = "amounts", required = true) List<BigInteger> amounts) {
-        String nodeId;
+        String reciverAddress;
         try {
-            nodeId = addressService.getNodeAccount(nodeName);
-        } catch (Exception e) {
-            return "There is no such node";
-        }
-        try {
-            return waybillService.deployWayBillByMaterial(nodeId, varieties, amounts);
+            return waybillService.deployWayBillByMaterial(reciverName, varieties, amounts);
         } catch (Exception e) {
             return e.getMessage();
         }
     }
 
-    @RequestMapping(value = "/deploy_by_address", method = RequestMethod.POST)
-    public String deployWayBillByAddress(@RequestParam(value = "nodeName", required = true) String nodeName,
+    @RequestMapping(value = "/deployByAddress", method = RequestMethod.POST)
+    public String deployWayBillByAddress(@RequestParam(value = "reciverName", required = true) String reciverName,
             @RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
-            @RequestParam(value = "amounts", required = true) List<BigInteger> amounts) {
+            @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
+            @RequestParam(value = "foundationName", required = true) String foundationName) {
         String nodeId;
         try {
-            nodeId = addressService.getNodeAccount(nodeName);
+            return waybillService.deployWayBillByAddress(foundationName, varieties, amounts, foundationName);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return e.getMessage();
         }
-        try {
-            return waybillService.deployWayBillByAddress(nodeId, varieties, amounts);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return e.getMessage();
-        }
-    }
-
-    @RequestMapping(value = "/changeOwner", method = RequestMethod.POST)
-    public Boolean setOwnerToRequester(@RequestParam(value = "number") String number,
-            @RequestParam(value = "address") String address) {
-        try {
-            return waybillService.setOwnerToRequester(number, address);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return false;
     }
 }

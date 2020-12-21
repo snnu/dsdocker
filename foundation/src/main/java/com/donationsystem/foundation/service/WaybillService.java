@@ -12,6 +12,7 @@ import com.donationsystem.foundation.util.FoundationRestTemplate;
 
 import org.fisco.bcos.web3j.crypto.Credentials;
 import org.fisco.bcos.web3j.protocol.Web3j;
+import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
 import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.fisco.bcos.web3j.tx.gas.StaticGasProvider;
 import org.slf4j.Logger;
@@ -39,41 +40,37 @@ public class WaybillService {
     @Autowired
     private FoundationRestTemplate foundationRestTemplate;
 
-    public Boolean reciveWayBill(String number, String name) throws Exception {
+    public Boolean reciveWayBill(String number, String waybillManagerName) throws Exception {
         logger.debug("number: " + number);
-        WaybillManager waybillManager = managerService.getWaybillManager(name);
+        WaybillManager waybillManager = managerService.getWaybillManager(waybillManagerName);
         String address = waybillManager.getWallbillAddress(number).send();
         if (address.equals("0x0000000000000000000000000000000000000000")) {
             logger.error("no such address");
             return false;
         }
-        Waybill wayBill = Waybill.load(address, web3j, credentials,
-                new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
-        if (!foundationRestTemplate.RequestOwnerChange(number)) {
-            throw new Exception("RequestOwnerChange Error");
+        TransactionReceipt receipt = foundationMaterialManager.setMaterials(address).send();
+        if(receipt.isStatusOK()) {
+            return true;
         }
-        TransactionReceipt res = wayBill.setReciverConfirm().send();
-        logger.debug("From: " + res.getFrom());
-        logger.debug("To: " + res.getTo());
-        if (res.isStatusOK()) {
-            List<String> materials = wayBill.getMaterialArr().send();
-            res = foundationMaterialManager.setMaterials(materials).send();
-            return res.isStatusOK();
-        } else {
-            logger.error(res.getMessage());
-            return false;
+        for(Log log: receipt.getLogs()) {
+            logger.error(log.getData());
         }
+        logger.error(receipt.getStatus());
+        logger.error(receipt.getMessage());
+        return false;
     }
 
-    public List<String> delivery(List<BigInteger> varieties, List<BigInteger> amounts, String waybill)
+    public List<String> delivery(List<BigInteger> varieties, List<BigInteger> amounts, String waybillManagerName, String number)
             throws Exception {
         List<String> res = new ArrayList<>();
         if (varieties.size() != amounts.size()) {
             return res;
         }
+        WaybillManager waybillManager = managerService.getWaybillManager(waybillManagerName);
+        String address = waybillManager.getWallbillAddress(number).send();
         for (int i = 0; i < varieties.size(); i++) {
             TransactionReceipt receip = foundationMaterialManager
-                    .getMaterials(varieties.get(i), amounts.get(i), waybill).send();
+                    .getMaterials(varieties.get(i), amounts.get(i), address).send();
             if (receip.isStatusOK()) {
                 res.addAll(foundationMaterialManager.getGetMaterialsOutput(receip).getValue1());
             } else {
@@ -83,8 +80,8 @@ public class WaybillService {
         return res;
     }
 
-    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String nodeName) {
-        return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, nodeName);
+    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String hospitalMaterialManagerName, String logisticName) {
+        // 该IP应该由查询得来，此处写死
+        return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerName, "172.100.0.7");
     }
-
 }

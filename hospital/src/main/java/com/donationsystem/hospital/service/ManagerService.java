@@ -1,5 +1,8 @@
 package com.donationsystem.hospital.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.donationsystem.hospital.constants.GasConstants;
 import com.donationsystem.hospital.contract.LocationManager;
 import com.donationsystem.hospital.contract.RequestManager;
@@ -22,15 +25,32 @@ public class ManagerService {
     @Autowired
     private Credentials credentials;
 
-    public RequestManager getRequestManager(String name) throws Exception {
-        String address = locationManager.getAddress(name).send();
+    private Map<String, RequestManager> requestManagerMap;
+
+    private Map<String, WaybillManager> waybillManagerMap;
+
+    public ManagerService() {
+        requestManagerMap = new HashMap<>();
+        waybillManagerMap = new HashMap<>();
+    }
+
+    public RequestManager getRequestManager(String requestManagerName) throws Exception {
+        if(requestManagerMap.containsKey(requestManagerName)) {
+            return requestManagerMap.get(requestManagerName);
+        }
+        String address = locationManager.getAddress(requestManagerName).send();
         RequestManager requestManager = RequestManager.load(address, web3j, credentials, new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
+        requestManagerMap.put(requestManagerName, requestManager);
         return requestManager;
     }
 
-    public WaybillManager getWaybillManager(String name) throws Exception {
-        String address = locationManager.getAddress(name).send();
+    public WaybillManager getWaybillManager(String waybillManagerName) throws Exception {
+        if(waybillManagerMap.containsKey(waybillManagerName)) {
+            return waybillManagerMap.get(waybillManagerName);
+        }
+        String address = locationManager.getAddress(waybillManagerName).send();
         WaybillManager waybillManager = WaybillManager.load(address, web3j, credentials,  new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
+        waybillManagerMap.put(waybillManagerName, waybillManager);
         return waybillManager;
     }
 }

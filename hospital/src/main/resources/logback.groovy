@@ -29,7 +29,7 @@ appender("FILE_INFO", RollingFileAppender) {
         onMismatch = ACCEPT
     }
     rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "logs/spring-boot-starter/info.created_on_%d{yyyy-MM-dd}.part_%i.log"
+        fileNamePattern = "logs/hospital/info.created_on_%d{yyyy-MM-dd}.part_%i.log"
         maxHistory = 90
         timeBasedFileNamingAndTriggeringPolicy(SizeAndTimeBasedFNATP) {
             maxFileSize = "20MB"
@@ -45,7 +45,7 @@ appender("FILE_ERROR", RollingFileAppender) {
         level = ERROR
     }
     rollingPolicy(TimeBasedRollingPolicy) {
-        fileNamePattern = "logs/spring-boot-starter/error.created_on_%d{yyyy-MM-dd}.part_%i.log"
+        fileNamePattern = "logs/hospital/error.created_on_%d{yyyy-MM-dd}.part_%i.log"
         maxHistory = 90
         timeBasedFileNamingAndTriggeringPolicy(SizeAndTimeBasedFNATP) {
             maxFileSize = "20MB"

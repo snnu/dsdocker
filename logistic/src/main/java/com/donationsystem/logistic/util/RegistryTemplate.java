@@ -19,15 +19,14 @@ public class RegistryTemplate {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public Boolean allowRegistryWaybillManager(String address) {
+    public Boolean allowRegistryWaybillManager(String address, String platformIP) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("address", address);
-        String url = "http://localhost:8084/v1/platform/allowRegistryAddress";
+        String url = String.format("http://%s:8080/v1/platform/address/allowRegistryAddress", platformIP);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);
         ResponseEntity<Boolean> responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Boolean.class);
-        logger.debug("allowRegistryWaybillManager: " + responseEntity.getBody());
         return responseEntity.getBody();
     }
 }

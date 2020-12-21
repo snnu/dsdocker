@@ -2,29 +2,55 @@ package com.donationsystem.foundation.controller;
 
 import com.donationsystem.foundation.service.AddressService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "v1/foundation/address")
 public class AddressServiceController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AddressServiceController.class);
+
     @Autowired
     private AddressService addressService;
 
-    @RequestMapping(value = "/nodeRegistry")
+    @RequestMapping(value = "/nodeRegistry", method = RequestMethod.POST)
     public Boolean registryNodeAccount() throws Exception {
         return addressService.registryNodeAccount();
     }
 
-    @RequestMapping(value = "/foundationMaterialManagerRegistry")
+    @RequestMapping(value = "/foundationMaterialManagerRegistry", method = RequestMethod.POST)
     public Boolean registryFoundationoMaterialManager() throws Exception {
         return addressService.registryFoundationMaterialManager();
     }
 
-    @RequestMapping(value = "/requestManager")
+    @RequestMapping(value = "/requestManagerRegistry", method = RequestMethod.POST)
     public Boolean regsictryRequestManager() throws Exception {
         return addressService.registryRequestManager();
+    }
+
+    @RequestMapping(value = "/allowHospital", method = RequestMethod.POST)
+    public Boolean allowHospital(@RequestParam(value = "address", required = true) String address) {
+        try {
+            return addressService.allowHospital(address);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/disallowHospital", method = RequestMethod.POST)
+    public Boolean disallowHospital(@RequestParam(value = "address", required = true) String address) {
+        try {
+            return addressService.disallowHospital(address);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
     }
 }

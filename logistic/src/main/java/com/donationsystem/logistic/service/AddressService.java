@@ -30,14 +30,6 @@ public class AddressService {
     @Autowired
     private RegistryTemplate registryTemplate;
 
-    public String getNodeAccount(String nodeName) throws Exception {
-        return locationManager.getAddress(nodeName).send();
-    }
-
-    public String getNodeName(String account) throws Exception {
-        return locationManager.getName(account).send();
-    }
-
     @PostConstruct
     public void init() throws Exception {
         registryNodeAccount();
@@ -49,14 +41,13 @@ public class AddressService {
         Boolean res = locationManager.showAllowed(credentials.getAddress()).send();
         logger.debug("registryNodeAccount res:" + res);
         if (!res) {
-            res = registryTemplate.allowRegistryWaybillManager(credentials.getAddress());
+            res = registryTemplate.allowRegistryWaybillManager(credentials.getAddress(), "172.100.0.9");
             if (!res) {
                 return false;
             }
         }
         if (!locationManager.getAddress("logistic").send().equals(credentials.getAddress())) {
-            TransactionReceipt receipt = locationManager.setAddress(credentials.getAddress(), "logistic")
-                    .send();
+            TransactionReceipt receipt = locationManager.setAddress(credentials.getAddress(), "logistic").send();
             if (receipt.isStatusOK()) {
                 return true;
             }
@@ -68,13 +59,13 @@ public class AddressService {
 
     public Boolean registryWaybillManager() throws Exception {
         Boolean res = locationManager.showAllowed(waybillManager.getContractAddress()).send();
-        if (res) {
-            res = registryTemplate.allowRegistryWaybillManager(waybillManager.getContractAddress());
+        if (!res) {
+            res = registryTemplate.allowRegistryWaybillManager(waybillManager.getContractAddress(), "172.100.0.9");
             if (!res) {
                 return false;
             }
         }
-        if (locationManager.getAddress("waybillManager").send().equals("0x0000000000000000000000000000000000000000")) {
+        if (!locationManager.getAddress("waybillManager").send().equals(waybillManager.getContractAddress())) {
             TransactionReceipt receipt = waybillManager.registry(locationManager.getContractAddress()).send();
             if (receipt.isStatusOK()) {
                 return true;

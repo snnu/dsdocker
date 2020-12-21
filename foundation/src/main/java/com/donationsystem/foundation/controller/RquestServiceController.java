@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class RquestServiceController {
     }
 
     @RequestMapping(value = "/setState", method = RequestMethod.POST)
-    public Boolean setState2Request(BigInteger state) {
+    public Boolean setState2Request(@RequestParam(value = "state", required = true) BigInteger state) {
         try {
             return requestService.setState(state);
         } catch (Exception e) {
@@ -57,7 +58,7 @@ public class RquestServiceController {
             RequestPOJO requestPOJO = requestService.getNextAgreedRequest();
             String reciver = locationManager.getAddress(requestPOJO.getReciver()).send();
             String waybillNumber = waybillService.RequestCreateWaybill(requestPOJO.getVarieties(),
-                    requestPOJO.getAmounts(), reciver);
+                    requestPOJO.getAmounts(), reciver, "172.100.0.7");
             requestService.setWaybillNumber(requestPOJO.getNum(), waybillNumber);
             return waybillNumber;
         } catch (Exception e) {

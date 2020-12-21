@@ -32,7 +32,8 @@ public class MaterialServiceController {
     }
 
     @RequestMapping(value = "/useMaterial", method = RequestMethod.GET)
-    public Boolean useMaterial(BigInteger variety, BigInteger amount) {
+    public Boolean useMaterial(@RequestParam(value = "variety", required = true) BigInteger variety, 
+    @RequestParam(value = "amount", required = true) BigInteger amount) {
         try {
             return materialService.useMaterial(variety, amount);
         } catch (Exception e) {

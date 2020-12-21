@@ -45,7 +45,7 @@ public class AddressService {
     public Boolean registryNodeAccount() throws Exception {
         Boolean res = locationManager.showAllowed(credentials.getAddress()).send();
         if (!res) {
-            res = registryTemplate.allowRegistryWaybillManager(credentials.getAddress());
+            res = registryTemplate.locationManagerAllowRegistry(credentials.getAddress(), "172.100.0.9");
             if (!res) {
                 return false;
             }
@@ -65,7 +65,7 @@ public class AddressService {
     public Boolean registryFoundationMaterialManager() throws Exception {
         Boolean res = locationManager.showAllowed(foundationMaterialManager.getContractAddress()).send();
         if(!res) {
-            res = registryTemplate.allowRegistryWaybillManager(foundationMaterialManager.getContractAddress());
+            res = registryTemplate.locationManagerAllowRegistry(foundationMaterialManager.getContractAddress(), "172.100.0.9");
             if(!res) {
                 return false;
             }
@@ -83,7 +83,7 @@ public class AddressService {
     public Boolean registryRequestManager() throws Exception {
         Boolean res = locationManager.showAllowed(requestManager.getContractAddress()).send();
         if(!res) {
-            res = registryTemplate.allowRegistryWaybillManager(requestManager.getContractAddress());
+            res = registryTemplate.locationManagerAllowRegistry(requestManager.getContractAddress(), "172.100.0.9");
             if(!res) {
                 return false;
             }
@@ -96,5 +96,21 @@ public class AddressService {
             return false;
         }
         return true;
+    }
+    
+    public Boolean allowHospital(String address) throws Exception {
+        TransactionReceipt receipt = requestManager.allow(address).send();
+        if(receipt.isStatusOK()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean disallowHospital(String address) throws Exception {
+        TransactionReceipt receipt = requestManager.disallow(address).send();
+        if(receipt.isStatusOK()) {
+            return true;
+        }
+        return false;
     }
 }

@@ -24,9 +24,10 @@ public class WaybillServiceController {
     private WaybillService waybillService;
 
     @RequestMapping(value = "/recive", method = RequestMethod.POST)
-    public boolean reciveWayBill(@RequestParam(value = "number", required = true) String number, @RequestParam(value = "name", required = true) String name) {
+    public boolean reciveWayBill(@RequestParam(value = "number", required = true) String number,
+            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) {
         try {
-            return waybillService.reciveWayBill(number, name);
+            return waybillService.reciveWayBill(number, waybillManagerName);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -37,19 +38,21 @@ public class WaybillServiceController {
     @RequestMapping(value = "/delivery", method = RequestMethod.POST)
     public List<String> delivery(@RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
             @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
-            @RequestParam(value = "address", required = true) String waybill) {
+            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName,
+            @RequestParam(value = "number", required = true) String number) {
         try {
-            return waybillService.delivery(varieties, amounts, waybill);
+            return waybillService.delivery(varieties, amounts, waybillManagerName, number);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
         return new ArrayList<String>();
     }
 
-    @RequestMapping(value = "/createWaybill", method = RequestMethod.POST)
+    @RequestMapping(value = "/requestCreateWaybill", method = RequestMethod.POST)
     public String requestCreateWaybill(@RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
             @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
-            @RequestParam(value = "nodeName", required = true) String nodeName) {
-        return waybillService.RequestCreateWaybill(varieties, amounts, nodeName);
+            @RequestParam(value = "hospitalMaterialManagerName", required = true) String hospitalMaterialManagerName,
+            @RequestParam(value = "logisticName", required = true) String logisticName) {
+        return waybillService.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerName, logisticName);
     }
 }

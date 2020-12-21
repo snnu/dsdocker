@@ -69,9 +69,10 @@ contract Waybill is Authentication {
         emit setReciverConfirmEvent();
     }
 
-    function setMaterialsOwner(address _manager) public onlyOwner {
+    function setMaterialsOwner() public onlyReciver {
         for(uint i = 0; i < materialArr.length; i++) {
-            Material(materialArr[i]).setOwner(_manager);
+            Material(materialArr[i]).setCurHolder(reciver);
+            Material(materialArr[i]).setOwner(reciver);
         }
     }
 }

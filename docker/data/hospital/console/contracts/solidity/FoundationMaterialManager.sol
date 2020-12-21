@@ -1,5 +1,6 @@
 pragma solidity >=0.4.24 < 0.5.2;
 import "./Material.sol";
+import "./Waybill.sol";
 import "./Authentication.sol";
 import './LocationManager.sol';
 
@@ -45,9 +46,11 @@ contract FoundationMaterialManager is Authentication {
     }
     
     //从 WayBill 中获取入库
-    function setMaterials(address[] memory  _materials) public {
+    function setMaterials(address waybill) public onlyOwner {
+        Waybill(waybill).setReciverConfirm();
+        Waybill(waybill).setMaterialsOwner();
+        address[] memory _materials = Waybill(waybill).getMaterialArr();
         for(uint i = 0; i < _materials.length; i++) {
-            Material(_materials[i]).setCurHolder(getOwner());
             varietyAmount[Material(_materials[i]).getVariety()].push(_materials[i]);
         }
     }
