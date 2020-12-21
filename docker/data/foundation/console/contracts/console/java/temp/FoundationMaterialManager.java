@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import org.fisco.bcos.channel.client.TransactionSucCallback;
+import org.fisco.bcos.web3j.abi.FunctionEncoder;
 import org.fisco.bcos.web3j.abi.FunctionReturnDecoder;
 import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.abi.datatypes.Address;
+import org.fisco.bcos.web3j.abi.datatypes.Bool;
 import org.fisco.bcos.web3j.abi.datatypes.DynamicArray;
 import org.fisco.bcos.web3j.abi.datatypes.Function;
 import org.fisco.bcos.web3j.abi.datatypes.Type;
@@ -35,15 +37,17 @@ import org.fisco.bcos.web3j.tx.txdecode.TransactionDecoder;
  */
 @SuppressWarnings("unchecked")
 public class FoundationMaterialManager extends Contract {
-    public static final String[] BINARY_ARRAY = {"608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060018060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff021916908315150217905550610ef0806100d86000396000f30060806040526004361061008e576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806312845b301461009357806313af40351461013f578063159c0648146101c2578063893d20e814610244578063a9ed9cb81461029b578063d3e5d2a9146102de578063d850c2631461031f578063ff9913e814610385575b600080fd5b34801561009f57600080fd5b506100e86004803603810190808035906020019092919080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103c8565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b8381101561012b578082015181840152602081019050610110565b505050509050019250505060405180910390f35b34801561014b57600080fd5b50610180600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061080a565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156101ce57600080fd5b506101ed60048036038101908080359060200190929190505050610918565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b83811015610230578082015181840152602081019050610215565b505050509050019250505060405180910390f35b34801561025057600080fd5b506102596109b9565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156102a757600080fd5b506102dc600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506109e2565b005b3480156102ea57600080fd5b5061030960048036038101908080359060200190929190505050610b01565b6040518082815260200191505060405180910390f35b34801561032b57600080fd5b5061038360048036038101908080359060200190820180359060200190808060200260200160405190810160405280939291908181526020018383602002808284378201915050505050509192919290505050610b21565b005b34801561039157600080fd5b506103c6600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610d55565b005b60608060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610491576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b846040519080825280602002602001820160405280156104c05781602001602082028038833980820191505090505b50915060026000878152602001908152602001600020805490508511151515610551576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600a8152602001807f616d6f756e74206f75740000000000000000000000000000000000000000000081525060200191505060405180910390fd5b600090505b848110156106ee57600260008781526020019081526020016000208181548110151561057e57fe5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1682828151811015156105b757fe5b9060200190602002019073ffffffffffffffffffffffffffffffffffffffff16908173ffffffffffffffffffffffffffffffffffffffff1681525050818181518110151561060157fe5b9060200190602002015173ffffffffffffffffffffffffffffffffffffffff166313af4035856040518263ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050602060405180830381600087803b1580156106a557600080fd5b505af11580156106b9573d6000803e3d6000fd5b505050506040513d60208110156106cf57600080fd5b8101908080519060200190929190505050508080600101915050610556565b600090505b846002600088815260200190815260200160002080549050038110156107d5576002600087815260200190815260200160002085820181548110151561073557fe5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16600260008881526020019081526020016000208281548110151561078057fe5b9060005260206000200160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555080806001019150506106f3565b8460026000888152602001908152602001600020818180549050039150816107fd9190610e73565b5081925050509392505050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415156108d0576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550339050919050565b6060600260008381526020019081526020016000208054806020026020016040519081016040528092919081815260200182805480156109ad57602002820191906000526020600020905b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019060010190808311610963575b50505050509050919050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610aa6576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b600060026000838152602001908152602001600020805490509050919050565b60008090505b8151811015610d51578181815181101515610b3e57fe5b9060200190602002015173ffffffffffffffffffffffffffffffffffffffff16632356c933610b6b6109b9565b6040518263ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050600060405180830381600087803b158015610be957600080fd5b505af1158015610bfd573d6000803e3d6000fd5b50505050600260008383815181101515610c1357fe5b9060200190602002015173ffffffffffffffffffffffffffffffffffffffff1663c1e802866040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b158015610c8057600080fd5b505af1158015610c94573d6000803e3d6000fd5b505050506040513d6020811015610caa57600080fd5b810190808051906020019092919050505081526020019081526020016000208282815181101515610cd757fe5b9060200190602002015190806001815401808255809150509060018203906000526020600020016000909192909190916101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550508080600101915050610b27565b5050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610e19576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b60018060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b815481835581811115610e9a57818360005260206000209182019101610e999190610e9f565b5b505050565b610ec191905b80821115610ebd576000816000905550600101610ea5565b5090565b905600a165627a7a7230582067185382a4e140e6f8ea146b1cba5e41aac5794a098f35d380f2b659cec44de30029"};
+    public static final String[] BINARY_ARRAY = {"60806040523480156200001157600080fd5b50604051620015ea380380620015ea83398101806040528101908080518201929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060018060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055508060039080519060200190620001069291906200010e565b5050620001bd565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106200015157805160ff191683800117855562000182565b8280016001018555821562000182579182015b828111156200018157825182559160200191906001019062000164565b5b50905062000191919062000195565b5090565b620001ba91905b80821115620001b65760008160009055506001016200019c565b5090565b90565b61141d80620001cd6000396000f3006080604052600436106100a4576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063038defd7146100a957806312845b30146100ec57806313af403514610198578063159c06481461021b578063886a0d281461029d578063893d20e8146103355780639f8263541461038c578063a9ed9cb8146103e7578063d3e5d2a91461042a578063ff9913e81461046b575b600080fd5b3480156100b557600080fd5b506100ea600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506104ae565b005b3480156100f857600080fd5b506101416004803603810190808035906020019092919080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506106b3565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b83811015610184578082015181840152602081019050610169565b505050509050019250505060405180910390f35b3480156101a457600080fd5b506101d9600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610af5565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561022757600080fd5b5061024660048036038101908080359060200190929190505050610c03565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b8381101561028957808201518184015260208101905061026e565b505050509050019250505060405180910390f35b3480156102a957600080fd5b506102de600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610ca4565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b83811015610321578082015181840152602081019050610306565b505050509050019250505060405180910390f35b34801561034157600080fd5b5061034a6110c4565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561039857600080fd5b506103cd600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506110ed565b604051808215151515815260200191505060405180910390f35b3480156103f357600080fd5b50610428600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050611143565b005b34801561043657600080fd5b5061045560048036038101908080359060200190929190505050611262565b6040518082815260200191505060405180910390f35b34801561047757600080fd5b506104ac600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050611282565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610572576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b8073ffffffffffffffffffffffffffffffffffffffff1663912000993060036040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001806020018281038252838181546001816001161561010002031660029004815260200191508054600181600116156101000203166002900480156106775780601f1061064c57610100808354040283529160200191610677565b820191906000526020600020905b81548152906001019060200180831161065a57829003601f168201915b50509350505050600060405180830381600087803b15801561069857600080fd5b505af11580156106ac573d6000803e3d6000fd5b5050505050565b60608060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561077c576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b846040519080825280602002602001820160405280156107ab5781602001602082028038833980820191505090505b5091506002600087815260200190815260200160002080549050851115151561083c576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252600a8152602001807f616d6f756e74206f75740000000000000000000000000000000000000000000081525060200191505060405180910390fd5b600090505b848110156109d957600260008781526020019081526020016000208181548110151561086957fe5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1682828151811015156108a257fe5b9060200190602002019073ffffffffffffffffffffffffffffffffffffffff16908173ffffffffffffffffffffffffffffffffffffffff168152505081818151811015156108ec57fe5b9060200190602002015173ffffffffffffffffffffffffffffffffffffffff166313af4035856040518263ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001915050602060405180830381600087803b15801561099057600080fd5b505af11580156109a4573d6000803e3d6000fd5b505050506040513d60208110156109ba57600080fd5b8101908080519060200190929190505050508080600101915050610841565b600090505b84600260008881526020019081526020016000208054905003811015610ac05760026000878152602001908152602001600020858201815481101515610a2057fe5b9060005260206000200160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff166002600088815260200190815260200160002082815481101515610a6b57fe5b9060005260206000200160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555080806001019150506109de565b846002600088815260200190815260200160002081818054905003915081610ae891906113a0565b5081925050509392505050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610bbb576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550339050919050565b606060026000838152602001908152602001600020805480602002602001604051908101604052809291908181526020018280548015610c9857602002820191906000526020600020905b8160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019060010190808311610c4e575b50505050509050919050565b60608060008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610d6d576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b8373ffffffffffffffffffffffffffffffffffffffff1663181d32936040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401600060405180830381600087803b158015610dd157600080fd5b505af1158015610de5573d6000803e3d6000fd5b505050508373ffffffffffffffffffffffffffffffffffffffff16636089a92c6040518163ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004","01600060405180830381600087803b158015610e4d57600080fd5b505af1158015610e61573d6000803e3d6000fd5b505050508373ffffffffffffffffffffffffffffffffffffffff1663f262af306040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401600060405180830381600087803b158015610ec957600080fd5b505af1158015610edd573d6000803e3d6000fd5b505050506040513d6000823e3d601f19601f820116820180604052506020811015610f0757600080fd5b810190808051640100000000811115610f1f57600080fd5b82810190506020810184811115610f3557600080fd5b8151856020820283011164010000000082111715610f5257600080fd5b50509291905050509150600090505b81518110156110ba57600260008383815181101515610f7c57fe5b9060200190602002015173ffffffffffffffffffffffffffffffffffffffff1663c1e802866040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b158015610fe957600080fd5b505af1158015610ffd573d6000803e3d6000fd5b505050506040513d602081101561101357600080fd5b81019080805190602001909291905050508152602001908152602001600020828281518110151561104057fe5b9060200190602002015190806001815401808255809150509060018203906000526020600020016000909192909190916101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550508080600101915050610f61565b8192505050919050565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff169050919050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515611207576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b600060026000838152602001908152602001600020805490509050919050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515611346576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260198152602001807f4f6e6c7920746865206f776e657220697320616c6c6f7765640000000000000081525060200191505060405180910390fd5b60018060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050565b8154818355818111156113c7578183600052602060002091820191016113c691906113cc565b5b505050565b6113ee91905b808211156113ea5760008160009055506001016113d2565b5090565b905600a165627a7a72305820dac3f7e8db474ac3ef6719a86d3ffdef224a15f0c3e88416812cf3498d0024b10029"};
 
     public static final String BINARY = String.join("", BINARY_ARRAY);
 
-    public static final String[] ABI_ARRAY = {"[{\"constant\":false,\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"},{\"name\":\"_amount\",\"type\":\"uint256\"},{\"name\":\"_waybill\",\"type\":\"address\"}],\"name\":\"getMaterials\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"}],\"name\":\"getVarietyAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"disallow\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"}],\"name\":\"getVarietyAmount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_materials\",\"type\":\"address[]\"}],\"name\":\"setMaterials\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"allow\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"};
+    public static final String[] ABI_ARRAY = {"[{\"constant\":false,\"inputs\":[{\"name\":\"locationManager\",\"type\":\"address\"}],\"name\":\"registry\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"},{\"name\":\"_amount\",\"type\":\"uint256\"},{\"name\":\"_waybill\",\"type\":\"address\"}],\"name\":\"getMaterials\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"}],\"name\":\"getVarietyAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"waybill\",\"type\":\"address\"}],\"name\":\"setMaterials\",\"outputs\":[{\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"showAllowed\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"disallow\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_variety\",\"type\":\"uint256\"}],\"name\":\"getVarietyAmount\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"usr\",\"type\":\"address\"}],\"name\":\"allow\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_name\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"};
 
     public static final String ABI = String.join("", ABI_ARRAY);
 
     public static final TransactionDecoder transactionDecoder = new TransactionDecoder(ABI, BINARY);
+
+    public static final String FUNC_REGISTRY = "registry";
 
     public static final String FUNC_GETMATERIALS = "getMaterials";
 
@@ -51,13 +55,15 @@ public class FoundationMaterialManager extends Contract {
 
     public static final String FUNC_GETVARIETYADDRESS = "getVarietyAddress";
 
+    public static final String FUNC_SETMATERIALS = "setMaterials";
+
     public static final String FUNC_GETOWNER = "getOwner";
+
+    public static final String FUNC_SHOWALLOWED = "showAllowed";
 
     public static final String FUNC_DISALLOW = "disallow";
 
     public static final String FUNC_GETVARIETYAMOUNT = "getVarietyAmount";
-
-    public static final String FUNC_SETMATERIALS = "setMaterials";
 
     public static final String FUNC_ALLOW = "allow";
 
@@ -81,6 +87,42 @@ public class FoundationMaterialManager extends Contract {
 
     public static TransactionDecoder getTransactionDecoder() {
         return transactionDecoder;
+    }
+
+    public RemoteCall<TransactionReceipt> registry(String locationManager) {
+        final Function function = new Function(
+                FUNC_REGISTRY, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(locationManager)), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
+    }
+
+    public void registry(String locationManager, TransactionSucCallback callback) {
+        final Function function = new Function(
+                FUNC_REGISTRY, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(locationManager)), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String registrySeq(String locationManager) {
+        final Function function = new Function(
+                FUNC_REGISTRY, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(locationManager)), 
+                Collections.<TypeReference<?>>emptyList());
+        return createTransactionSeq(function);
+    }
+
+    public Tuple1<String> getRegistryInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_REGISTRY, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
     }
 
     public RemoteCall<TransactionReceipt> getMaterials(BigInteger _variety, BigInteger _amount, String _waybill) {
@@ -202,11 +244,66 @@ public class FoundationMaterialManager extends Contract {
                 });
     }
 
+    public RemoteCall<TransactionReceipt> setMaterials(String waybill) {
+        final Function function = new Function(
+                FUNC_SETMATERIALS, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(waybill)), 
+                Collections.<TypeReference<?>>emptyList());
+        return executeRemoteCallTransaction(function);
+    }
+
+    public void setMaterials(String waybill, TransactionSucCallback callback) {
+        final Function function = new Function(
+                FUNC_SETMATERIALS, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(waybill)), 
+                Collections.<TypeReference<?>>emptyList());
+        asyncExecuteTransaction(function, callback);
+    }
+
+    public String setMaterialsSeq(String waybill) {
+        final Function function = new Function(
+                FUNC_SETMATERIALS, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(waybill)), 
+                Collections.<TypeReference<?>>emptyList());
+        return createTransactionSeq(function);
+    }
+
+    public Tuple1<String> getSetMaterialsInput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getInput().substring(10);
+        final Function function = new Function(FUNC_SETMATERIALS, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
+        return new Tuple1<String>(
+
+                (String) results.get(0).getValue()
+                );
+    }
+
+    public Tuple1<List<String>> getSetMaterialsOutput(TransactionReceipt transactionReceipt) {
+        String data = transactionReceipt.getOutput();
+        final Function function = new Function(FUNC_SETMATERIALS, 
+                Arrays.<Type>asList(), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Address>>() {}));
+        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
+        return new Tuple1<List<String>>(
+
+                convertToNative((List<Address>) results.get(0).getValue())
+                );
+    }
+
     public RemoteCall<String> getOwner() {
         final Function function = new Function(FUNC_GETOWNER, 
                 Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {}));
         return executeRemoteCallSingleValueReturn(function, String.class);
+    }
+
+    public RemoteCall<Boolean> showAllowed(String usr) {
+        final Function function = new Function(FUNC_SHOWALLOWED, 
+                Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Address(usr)), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Bool>() {}));
+        return executeRemoteCallSingleValueReturn(function, Boolean.class);
     }
 
     public RemoteCall<TransactionReceipt> disallow(String usr) {
@@ -250,45 +347,6 @@ public class FoundationMaterialManager extends Contract {
                 Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.generated.Uint256(_variety)), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
-    }
-
-    public RemoteCall<TransactionReceipt> setMaterials(List<String> _materials) {
-        final Function function = new Function(
-                FUNC_SETMATERIALS, 
-                Arrays.<Type>asList(_materials.isEmpty()?org.fisco.bcos.web3j.abi.datatypes.DynamicArray.empty("address[]"):new org.fisco.bcos.web3j.abi.datatypes.DynamicArray<org.fisco.bcos.web3j.abi.datatypes.Address>(
-                        org.fisco.bcos.web3j.abi.Utils.typeMap(_materials, org.fisco.bcos.web3j.abi.datatypes.Address.class))), 
-                Collections.<TypeReference<?>>emptyList());
-        return executeRemoteCallTransaction(function);
-    }
-
-    public void setMaterials(List<String> _materials, TransactionSucCallback callback) {
-        final Function function = new Function(
-                FUNC_SETMATERIALS, 
-                Arrays.<Type>asList(_materials.isEmpty()?org.fisco.bcos.web3j.abi.datatypes.DynamicArray.empty("address[]"):new org.fisco.bcos.web3j.abi.datatypes.DynamicArray<org.fisco.bcos.web3j.abi.datatypes.Address>(
-                        org.fisco.bcos.web3j.abi.Utils.typeMap(_materials, org.fisco.bcos.web3j.abi.datatypes.Address.class))), 
-                Collections.<TypeReference<?>>emptyList());
-        asyncExecuteTransaction(function, callback);
-    }
-
-    public String setMaterialsSeq(List<String> _materials) {
-        final Function function = new Function(
-                FUNC_SETMATERIALS, 
-                Arrays.<Type>asList(_materials.isEmpty()?org.fisco.bcos.web3j.abi.datatypes.DynamicArray.empty("address[]"):new org.fisco.bcos.web3j.abi.datatypes.DynamicArray<org.fisco.bcos.web3j.abi.datatypes.Address>(
-                        org.fisco.bcos.web3j.abi.Utils.typeMap(_materials, org.fisco.bcos.web3j.abi.datatypes.Address.class))), 
-                Collections.<TypeReference<?>>emptyList());
-        return createTransactionSeq(function);
-    }
-
-    public Tuple1<List<String>> getSetMaterialsInput(TransactionReceipt transactionReceipt) {
-        String data = transactionReceipt.getInput().substring(10);
-        final Function function = new Function(FUNC_SETMATERIALS, 
-                Arrays.<Type>asList(), 
-                Arrays.<TypeReference<?>>asList(new TypeReference<DynamicArray<Address>>() {}));
-        List<Type> results = FunctionReturnDecoder.decode(data, function.getOutputParameters());;
-        return new Tuple1<List<String>>(
-
-                convertToNative((List<Address>) results.get(0).getValue())
-                );
     }
 
     public RemoteCall<TransactionReceipt> allow(String usr) {
@@ -345,21 +403,25 @@ public class FoundationMaterialManager extends Contract {
         return new FoundationMaterialManager(contractAddress, web3j, transactionManager, contractGasProvider);
     }
 
-    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(FoundationMaterialManager.class, web3j, credentials, contractGasProvider, BINARY, "");
+    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, Credentials credentials, ContractGasProvider contractGasProvider, String _name) {
+        String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Utf8String(_name)));
+        return deployRemoteCall(FoundationMaterialManager.class, web3j, credentials, contractGasProvider, BINARY, encodedConstructor);
     }
 
-    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider) {
-        return deployRemoteCall(FoundationMaterialManager.class, web3j, transactionManager, contractGasProvider, BINARY, "");
-    }
-
-    @Deprecated
-    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(FoundationMaterialManager.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
+    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, TransactionManager transactionManager, ContractGasProvider contractGasProvider, String _name) {
+        String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Utf8String(_name)));
+        return deployRemoteCall(FoundationMaterialManager.class, web3j, transactionManager, contractGasProvider, BINARY, encodedConstructor);
     }
 
     @Deprecated
-    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit) {
-        return deployRemoteCall(FoundationMaterialManager.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, "");
+    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit, String _name) {
+        String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Utf8String(_name)));
+        return deployRemoteCall(FoundationMaterialManager.class, web3j, credentials, gasPrice, gasLimit, BINARY, encodedConstructor);
+    }
+
+    @Deprecated
+    public static RemoteCall<FoundationMaterialManager> deploy(Web3j web3j, TransactionManager transactionManager, BigInteger gasPrice, BigInteger gasLimit, String _name) {
+        String encodedConstructor = FunctionEncoder.encodeConstructor(Arrays.<Type>asList(new org.fisco.bcos.web3j.abi.datatypes.Utf8String(_name)));
+        return deployRemoteCall(FoundationMaterialManager.class, web3j, transactionManager, gasPrice, gasLimit, BINARY, encodedConstructor);
     }
 }

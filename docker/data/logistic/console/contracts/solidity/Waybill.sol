@@ -24,9 +24,11 @@ contract Waybill is Authentication {
         _;
     }
     
+    event setMaterialEvent();
     event setMaterialArrEvent();
     event resetMaterialEvent(uint i);
     event setReciverConfirmEvent();
+    event setMaterialsOwnerEvent();
 
     // 是没有登记在区块链上的物资，通过物资类别和数量为每一条创建对应物资合约
     function setMaterial(uint[] memory _varietyArr, uint[] memory _amountArr) public onlyOwner {
@@ -37,7 +39,7 @@ contract Waybill is Authentication {
                 Material(materialArr[materialArr.length - 1]).setCurHolder(getOwner());
             }
         }
-        emit setMaterialArrEvent();
+        emit setMaterialEvent();
     }
     
     // 在区块链上登记了的物资，直接传入物资合约地址
@@ -73,5 +75,6 @@ contract Waybill is Authentication {
         for(uint i = 0; i < materialArr.length; i++) {
             Material(materialArr[i]).setOwner(reciver);
         }
+        emit setMaterialsOwnerEvent();
     }
 }

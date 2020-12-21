@@ -23,9 +23,8 @@ contract Authentication {
         return owner;
     }
 
-    function setOwner(address usr) public onlyOwner returns(address){
+    function setOwner(address usr) public onlyOwner {
         owner = usr;
-        return msg.sender;
     }
 
     function allow(address usr) public onlyOwner {

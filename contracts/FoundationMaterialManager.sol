@@ -51,6 +51,7 @@ contract FoundationMaterialManager is Authentication {
         Waybill(waybill).setMaterialsOwner();
         address[] memory _materials = Waybill(waybill).getMaterialArr();
         for(uint i = 0; i < _materials.length; i++) {
+            Material(_materials[i]).setCurHolder(getOwner());
             varietyAmount[Material(_materials[i]).getVariety()].push(_materials[i]);
         }
     }

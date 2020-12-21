@@ -6,6 +6,7 @@ services:
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/foundation/console/accounts:/fisco/console/accounts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/foundation/console/contracts:/fisco/console/contracts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/foundation/node:/fisco/node/node"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/shell/foundation:/fisco/shell"
     ports: 
       - "20201:20200"
     networks: 
@@ -22,6 +23,7 @@ services:
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/logistic/console/accounts:/fisco/console/accounts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/logistic/console/contracts:/fisco/console/contracts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/logistic/node:/fisco/node/node"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/shell/logistic:/fisco/shell"
     ports: 
       - "20202:20200"
     networks: 
@@ -38,6 +40,7 @@ services:
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/hospital/console/accounts:/fisco/console/accounts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/hospital/console/contracts:/fisco/console/contracts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/hospital/node:/fisco/node/node"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/shell/hospital:/fisco/shell"
     ports: 
       - "20203:20200"
     networks: 
@@ -54,6 +57,7 @@ services:
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/console/accounts:/fisco/console/accounts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/console/contracts:/fisco/console/contracts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/node:/fisco/node/node"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/shell/platform:/fisco/shell"
     ports: 
       - "20204:20200"
     networks: 

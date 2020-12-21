@@ -48,20 +48,18 @@ public class WaybillService {
             logger.error("no such address");
             return false;
         }
+        logger.debug("waybillAddress: " + address);
         TransactionReceipt receipt = foundationMaterialManager.setMaterials(address).send();
-        if(receipt.isStatusOK()) {
+        if (receipt.isStatusOK()) {
             return true;
         }
-        for(Log log: receipt.getLogs()) {
-            logger.error(log.getData());
-        }
-        logger.error(receipt.getStatus());
-        logger.error(receipt.getMessage());
+        logger.error(String.format("receipt.getStatus(): %s  receipt.getMessage(): %s", receipt.getStatus(),
+                receipt.getMessage()));
         return false;
     }
 
-    public List<String> delivery(List<BigInteger> varieties, List<BigInteger> amounts, String waybillManagerName, String number)
-            throws Exception {
+    public List<String> delivery(List<BigInteger> varieties, List<BigInteger> amounts, String waybillManagerName,
+            String number) throws Exception {
         List<String> res = new ArrayList<>();
         if (varieties.size() != amounts.size()) {
             return res;
@@ -80,8 +78,10 @@ public class WaybillService {
         return res;
     }
 
-    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String hospitalMaterialManagerName, String logisticName) {
+    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts,
+            String hospitalMaterialManagerName, String logisticName) {
         // 该IP应该由查询得来，此处写死
-        return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerName, "172.100.0.7");
+        return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerName,
+                "172.100.0.7");
     }
 }
