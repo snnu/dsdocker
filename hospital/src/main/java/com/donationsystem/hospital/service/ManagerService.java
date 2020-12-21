@@ -39,6 +39,9 @@ public class ManagerService {
             return requestManagerMap.get(requestManagerName);
         }
         String address = locationManager.getAddress(requestManagerName).send();
+        if(address.equals("0x0000000000000000000000000000000000000000")) {
+            return null;
+        }
         RequestManager requestManager = RequestManager.load(address, web3j, credentials, new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
         requestManagerMap.put(requestManagerName, requestManager);
         return requestManager;
@@ -49,6 +52,9 @@ public class ManagerService {
             return waybillManagerMap.get(waybillManagerName);
         }
         String address = locationManager.getAddress(waybillManagerName).send();
+        if(address.equals("0x0000000000000000000000000000000000000000")) {
+            return null;
+        }
         WaybillManager waybillManager = WaybillManager.load(address, web3j, credentials,  new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
         waybillManagerMap.put(waybillManagerName, waybillManager);
         return waybillManager;

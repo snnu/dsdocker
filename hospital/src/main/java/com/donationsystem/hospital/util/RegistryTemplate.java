@@ -29,7 +29,7 @@ public class RegistryTemplate {
     public Boolean requestManagerAllowRegistry(String address, String foundationIP) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("address", address);
-        String url = String.format("http://%s:8080/v1/platform/address/allowHospital", foundationIP);
+        String url = String.format("http://%s:8080/v1/foundation/address/allowHospital", foundationIP);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);

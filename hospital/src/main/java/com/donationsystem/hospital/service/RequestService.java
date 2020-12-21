@@ -30,10 +30,13 @@ public class RequestService {
     public BigInteger requestMaterial(List<BigInteger> varieties, List<BigInteger> amounts, String requestManagerName)
             throws Exception {
         RequestManager requestManager = managerService.getRequestManager(requestManagerName);
+        if(requestManager == null) {
+            throw new Exception("no such a requestManager");
+        }
         if(!requestManager.showAllowed(credentials.getAddress()).send()) {
-            boolean res = registryTemplate.requestManagerAllowRegistry(credentials.getAddress(), requestManagerName);
+            boolean res = registryTemplate.requestManagerAllowRegistry(credentials.getAddress(), "172.100.0.6");
             if(!res) {
-                return new BigInteger("-2");
+                throw new Exception("request allow error");
             }
         }
         TransactionReceipt receipt = requestManager.CreateReq(varieties, amounts).send();
@@ -46,11 +49,17 @@ public class RequestService {
 
     public BigInteger getRequestStatus(BigInteger num, String requestManagerName) throws Exception {
         RequestManager requestManager = managerService.getRequestManager(requestManagerName);
+        if(requestManager == null) {
+            throw new Exception("no such a requestManager");
+        }
         return requestManager.getReqState(num).send();
     }
 
     public String getWaybillNum(BigInteger num, String requestManagerName) throws Exception {
         RequestManager requestManager = managerService.getRequestManager(requestManagerName);
+        if(requestManager == null) {
+            throw new Exception("no such a requestManager");
+        }
         return requestManager.getWayBillNum(num).send();
     }
 }

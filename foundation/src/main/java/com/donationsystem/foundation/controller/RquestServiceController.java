@@ -56,9 +56,8 @@ public class RquestServiceController {
     public String sendMaterial() {
         try {
             RequestPOJO requestPOJO = requestService.getNextAgreedRequest();
-            String reciver = locationManager.getAddress(requestPOJO.getReciver()).send();
             String waybillNumber = waybillService.RequestCreateWaybill(requestPOJO.getVarieties(),
-                    requestPOJO.getAmounts(), reciver, "172.100.0.7");
+                    requestPOJO.getAmounts(), requestPOJO.getReciver(), "172.100.0.7");
             requestService.setWaybillNumber(requestPOJO.getNum(), waybillNumber);
             return waybillNumber;
         } catch (Exception e) {
