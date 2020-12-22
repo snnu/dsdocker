@@ -28,6 +28,7 @@ contract RequestManager is Authentication {
         name = _name;
         num = 0;
         lastNum = 0;
+        agreedLastNum = 0;
     }
     
     event createReqEvent(address _a);
@@ -50,11 +51,12 @@ contract RequestManager is Authentication {
         return lastNum;
     }
 
+    // 获取某一请求的状态
     function getReqState(uint _num) public view returns(uint){
         return reqMap[_num].state;
     }
 
-    // 虽然会有不能按顺序处理已同意请求的情况，但这里不考虑，全部按线性流程走
+    // 向某一请求写入已发送的物流单号
     function setWayBillNum(uint _num, string memory _waybillNum) public onlyOwner {
         require(_num < lastNum, "there is no such reqeust");
         require(reqMap[_num].state == 1, "This waybill hasn't be handled or be refused");
@@ -65,10 +67,11 @@ contract RequestManager is Authentication {
         emit sendedEvent(_num);
     }
 
+    // 获取某一请求的物流单号
     function getWayBillNum(uint _num) public view returns(string memory) {
         require(_num < num, "there is no such reqeust");
-        require(reqMap[_num].state == 1, "This waybill hasn't be handled or be refused");
-        require(bytes(reqMap[_num].waybillNum).length != 0, "There is no waybill for this req");
+        require(_num < lastNum, "this request hasn't been handled");
+        require(reqMap[_num].state == 3, "there is no waybill for this req");
         return reqMap[_num].waybillNum;
     }
     
@@ -78,8 +81,9 @@ contract RequestManager is Authentication {
         return (reqMap[lastNum].varieties, reqMap[lastNum].amounts, reqMap[lastNum].reciver);
     }
 
+    // 获取下一个已被同意的请求的内容
     function getAgreedReq() public view onlyOwner returns(uint, uint[] memory, uint[] memory, address reciver) {
-        require(agreedLastNum < agreedReq.length, "there is no request needs to be handled");
+        require(agreedLastNum < agreedReq.length, "there is no agreed request needs to be handled");
         return (agreedReq[agreedLastNum], reqMap[agreedReq[agreedLastNum]].varieties, reqMap[agreedReq[agreedLastNum]].amounts, 
         reqMap[agreedReq[agreedLastNum]].reciver);
     }
@@ -106,6 +110,7 @@ contract RequestManager is Authentication {
         return true;
     }
 
+    // 注册自身 
     function registry(address locationManager) public onlyOwner {
         LocationManager(locationManager).setAddress(address(this), name);
     }

@@ -4,17 +4,11 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.donationsystem.foundation.constants.GasConstants;
 import com.donationsystem.foundation.contract.FoundationMaterialManager;
-import com.donationsystem.foundation.contract.Waybill;
 import com.donationsystem.foundation.contract.WaybillManager;
 import com.donationsystem.foundation.util.FoundationRestTemplate;
 
-import org.fisco.bcos.web3j.crypto.Credentials;
-import org.fisco.bcos.web3j.protocol.Web3j;
-import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
 import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.fisco.bcos.web3j.tx.gas.StaticGasProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +18,6 @@ import org.springframework.stereotype.Service;
 public class WaybillService {
 
     private static final Logger logger = LoggerFactory.getLogger(WaybillService.class);
-
-    @Autowired
-    private Web3j web3j;
-
-    @Autowired
-    private Credentials credentials;
 
     @Autowired
     private FoundationMaterialManager foundationMaterialManager;
