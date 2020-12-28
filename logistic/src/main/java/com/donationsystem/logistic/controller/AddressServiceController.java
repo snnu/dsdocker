@@ -27,8 +27,9 @@ public class AddressServiceController {
         try {
             return waybillService.findWayBillAddress(number);
         } catch (Exception e) {
-            return e.getMessage();
+            e.printStackTrace();
         }
+        return "";
     }
 
     @RequestMapping(value = "/nodeRegistry", method = RequestMethod.POST)
@@ -36,7 +37,7 @@ public class AddressServiceController {
         try {
             return addressService.registryNodeAccount();
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }
@@ -46,7 +47,7 @@ public class AddressServiceController {
         try {
             return addressService.registryWaybillManager();
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }

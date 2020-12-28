@@ -25,27 +25,20 @@ public class WaybillServiceController {
 
     @RequestMapping(value = "/recive", method = RequestMethod.POST)
     public boolean reciveWayBill(@RequestParam(value = "number", required = true) String number,
-            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) {
-        try {
-            return waybillService.reciveWayBill(number, waybillManagerName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        }
-        return false;
+            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) throws Exception {
+
+        return waybillService.reciveWayBill(number, waybillManagerName);
+
     }
 
     @RequestMapping(value = "/delivery", method = RequestMethod.POST)
     public List<String> delivery(@RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
             @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
             @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName,
-            @RequestParam(value = "number", required = true) String number) {
-        try {
-            return waybillService.delivery(varieties, amounts, waybillManagerName, number);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return new ArrayList<String>();
+            @RequestParam(value = "number", required = true) String number) throws Exception {
+
+        return waybillService.delivery(varieties, amounts, waybillManagerName, number);
+
     }
 
     @RequestMapping(value = "/requestCreateWaybill", method = RequestMethod.POST)

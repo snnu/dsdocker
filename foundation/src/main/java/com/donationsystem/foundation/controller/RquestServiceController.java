@@ -33,36 +33,23 @@ public class RquestServiceController {
 
     @RequestMapping(value = "/getNextRequest", method = RequestMethod.GET)
     @ResponseBody
-    public RequestPOJO getNextRequest() {
-        try {
-            return requestService.getNextRequest();
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return new RequestPOJO();
+    public RequestPOJO getNextRequest() throws Exception {
+        return requestService.getNextRequest();
     }
 
     @RequestMapping(value = "/setState", method = RequestMethod.POST)
-    public Boolean setState2Request(@RequestParam(value = "state", required = true) BigInteger state) {
-        try {
-            return requestService.setState(state);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return false;
+    public Boolean setState2Request(@RequestParam(value = "state", required = true) BigInteger state) throws Exception {
+        return requestService.setState(state);
     }
 
     @RequestMapping(value = "/sendMaterial", method = RequestMethod.POST)
-    public String sendMaterial() {
-        try {
-            RequestPOJO requestPOJO = requestService.getNextAgreedRequest();
-            String waybillNumber = waybillService.RequestCreateWaybill(requestPOJO.getVarieties(),
-                    requestPOJO.getAmounts(), requestPOJO.getReciver(), "172.100.0.7");
-            requestService.setWaybillNumber(requestPOJO.getNum(), waybillNumber);
-            return waybillNumber;
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return "";
+    public String sendMaterial(@RequestParam(value = "logisticName", required = true) String logisticName)
+            throws Exception {
+        RequestPOJO requestPOJO = requestService.getNextAgreedRequest();
+        logger.debug("request num: " + requestPOJO.getNum().toString());
+        String waybillNumber = waybillService.RequestCreateWaybill(requestPOJO.getVarieties(), requestPOJO.getAmounts(),
+                requestPOJO.getReciver(), "logistic");
+        requestService.setWaybillNumber(requestPOJO.getNum(), waybillNumber);
+        return waybillNumber;
     }
 }

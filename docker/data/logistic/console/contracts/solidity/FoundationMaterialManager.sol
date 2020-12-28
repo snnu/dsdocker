@@ -30,17 +30,11 @@ contract FoundationMaterialManager is Authentication {
         //拆分的问题怎么解决？当前只能按一单位压入
         for(i = 0; i < _amount; i++) {
             mid[i] = varietyAmount[_variety][i];
-            Material(mid[i]).setOwner(_waybill);
+            Material(varietyAmount[_variety][i]).setOwner(_waybill);
         }
         for(i = 0; i < varietyAmount[_variety].length - _amount; i++) {
             varietyAmount[_variety][i] =  varietyAmount[_variety][i + _amount];
         }
-        /*
-        for(i = 0; i < _amount; i++) {
-            mid.push(varietyAmount[_variety][varietyAmount.length - _amount + i]);
-            Material(mid[i]).SetManager(_manager);
-        }
-        */
         varietyAmount[_variety].length -= _amount;
         return mid;
     }

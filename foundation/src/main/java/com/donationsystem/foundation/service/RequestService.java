@@ -33,8 +33,13 @@ public class RequestService {
     public Boolean setState(BigInteger state) throws Exception {
         TransactionReceipt receipt = requestManager.handleReq(state).send();
         if(receipt.isStatusOK()) {
-            return true;
+            if(requestManager.getHandleReqOutput(receipt).getValue1()) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        logger.error(receipt.getMessage() + " " + receipt.getStatus());
         return false;
     }
 
@@ -48,18 +53,13 @@ public class RequestService {
         return requestPOJO;
     }
 
-    public Boolean handleRequest(BigInteger state) throws Exception {
-        TransactionReceipt receipt = requestManager.handleReq(state).send();
-        if(receipt.isStatusOK()) {
-            return true;
-        }
-        return false;
-    }
-
     public Boolean setWaybillNumber(BigInteger num, String waybillNum) throws Exception {
         TransactionReceipt receipt = requestManager.setWayBillNum(num, waybillNum).send();
         if(receipt.isStatusOK()) {
-            return true;
+            receipt = requestManager.setLockedMaterial(num).send();
+            if(receipt.isStatusOK()) {
+                return true;
+            }
         }
         return false;
     }

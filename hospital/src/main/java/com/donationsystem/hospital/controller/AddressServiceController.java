@@ -14,12 +14,22 @@ public class AddressServiceController {
     private AddressService addressService;
 
     @RequestMapping(value = "/nodeRegistry", method = RequestMethod.POST)
-    public Boolean registryNodeAccount() throws Exception {
-        return addressService.registryNodeAccount();
+    public Boolean registryNodeAccount() {
+        try {
+            return addressService.registryNodeAccount();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @RequestMapping(value = "/hospitalMaterialManagerRegistry", method = RequestMethod.POST)
-    public Boolean registryHospitalMaterialManager() throws Exception {
-        return addressService.registryHospitalMaterialManager();
+    public Boolean registryHospitalMaterialManager() {
+        try {
+            return addressService.registryHospitalMaterialManager();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

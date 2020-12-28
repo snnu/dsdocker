@@ -4,11 +4,17 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.donationsystem.foundation.constants.GasConstants;
 import com.donationsystem.foundation.contract.FoundationMaterialManager;
+import com.donationsystem.foundation.contract.LocationManager;
+import com.donationsystem.foundation.contract.Material;
 import com.donationsystem.foundation.contract.WaybillManager;
 import com.donationsystem.foundation.util.FoundationRestTemplate;
 
+import org.fisco.bcos.web3j.crypto.Credentials;
+import org.fisco.bcos.web3j.protocol.Web3j;
 import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.fisco.bcos.web3j.tx.gas.StaticGasProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +33,12 @@ public class WaybillService {
 
     @Autowired
     private FoundationRestTemplate foundationRestTemplate;
+
+    @Autowired
+    private Web3j web3j;
+
+    @Autowired
+    private Credentials credentials;
 
     public Boolean reciveWayBill(String number, String waybillManagerName) throws Exception {
         logger.debug("number: " + number);
@@ -55,12 +67,17 @@ public class WaybillService {
         WaybillManager waybillManager = managerService.getWaybillManager(waybillManagerName);
         String address = waybillManager.getWallbillAddress(number).send();
         for (int i = 0; i < varieties.size(); i++) {
-            TransactionReceipt receip = foundationMaterialManager
+            TransactionReceipt receipt = foundationMaterialManager
                     .getMaterials(varieties.get(i), amounts.get(i), address).send();
-            if (receip.isStatusOK()) {
-                res.addAll(foundationMaterialManager.getGetMaterialsOutput(receip).getValue1());
+            if (receipt.isStatusOK()) {
+                List<String> addresses = foundationMaterialManager.getGetMaterialsOutput(receipt).getValue1();
+                for(String s : addresses) {
+                    Material material = Material.load(s, web3j, credentials, new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
+                    logger.debug(material.getOwner().send());
+                }
+                res.addAll(addresses);
             } else {
-                throw new Exception(receip.getMessage());
+                throw new Exception(receipt.getMessage());
             }
         }
         return res;

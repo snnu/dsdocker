@@ -19,13 +19,13 @@ public class WaybillServiceController {
     @Autowired
     private WaybillService waybillService;
 
-    @RequestMapping(value = "/revice", method = RequestMethod.POST)
+    @RequestMapping(value = "/recive", method = RequestMethod.POST)
     public Boolean reciveMaterial(@RequestParam(value = "number", required = true) String number,
             @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) {
         try {
             return waybillService.reciveMaterial(number, waybillManagerName);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }

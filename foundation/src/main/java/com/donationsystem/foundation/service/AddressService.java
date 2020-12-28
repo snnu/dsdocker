@@ -56,7 +56,7 @@ public class AddressService {
             if (receipt.isStatusOK()) {
                 return true;
             }
-            logger.error(receipt.getMessage());
+            logger.error(receipt.getMessage() + " " + receipt.getStatus());
             return false;
         }
         return true;

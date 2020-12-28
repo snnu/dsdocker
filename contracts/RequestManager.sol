@@ -9,7 +9,7 @@ contract RequestManager is Authentication {
         uint[] varieties;
         uint[] amounts;
         address reciver;
-        //0 未处理 1 同意请求 2 拒绝请求 3 物资已发送
+        //0 未处理 1 同意请求 2 拒绝请求 3 物资已发送 //拼错了，将错就错吧，懒得改了
         uint state;
         string waybillNum;
     }
@@ -41,6 +41,7 @@ contract RequestManager is Authentication {
         reqMap[num].reciver = msg.sender;
         reqMap[num].varieties = _varieties;
         reqMap[num].amounts = _amounts;
+        reqMap[num].state = 0;
         emit createReqEvent(msg.sender);
         num++;
         return num - 1;
@@ -88,6 +89,17 @@ contract RequestManager is Authentication {
         reqMap[agreedReq[agreedLastNum]].reciver);
     }
 
+    function getLockedMaterial(uint _variety) public view onlyOwner returns(uint) {
+        return lockedMaterials[_variety];
+    }
+
+    function setLockedMaterial(uint _num) public onlyOwner {
+        uint i;
+        for(i = 0; i < reqMap[_num].varieties.length; i++) {
+            lockedMaterials[reqMap[_num].varieties[i]] -= reqMap[_num].amounts[i];
+        }
+    }
+
     //获取列表头的请求，即getReq所获得的内容。请求应该按照时间顺序处理
     function handleReq(uint state) public onlyOwner returns(bool){
         require(lastNum < num, "there is no request needs to be handled");
@@ -95,13 +107,18 @@ contract RequestManager is Authentication {
             emit handledReqEvent(lastNum);
             return false;
         }
-        for(uint i = 0; i < reqMap[lastNum].varieties.length; i++) {
+        uint i;
+        for(i = 0; i < reqMap[lastNum].varieties.length; i++) {
+            // materialManager 看不到被锁的物资的量。在应用层传入被 requestManager 锁定的量
             if(FoundationMaterialManager(materialManager).getVarietyAmount(reqMap[lastNum].varieties[i]) - lockedMaterials[reqMap[lastNum].varieties[i]] < reqMap[lastNum].amounts[i]) {
                 lastNum++;
                 reqMap[lastNum].state = 2;
                 emit handledReqEvent(lastNum);
                 return false;
             }
+        }
+        for(i = 0; i < reqMap[lastNum].varieties.length; i++) {
+            lockedMaterials[reqMap[lastNum].varieties[i]] += reqMap[lastNum].amounts[i];
         }
         reqMap[lastNum].state = 1;
         agreedReq.push(lastNum);

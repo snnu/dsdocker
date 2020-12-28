@@ -43,8 +43,8 @@ public class WaybillService {
     @Autowired
     private WaybillRestTemplate waybillRestTemplate;
 
-    public String deployWayBillByMaterial(String reciverName, List<BigInteger> varieties,
-            List<BigInteger> amounts) throws Exception {
+    public String deployWayBillByMaterial(String reciverName, List<BigInteger> varieties, List<BigInteger> amounts)
+            throws Exception {
         TransactionReceipt res;
         String number = simpleDateFormat.format(new Date());
         String reciverAddress = locationManager.getAddress(reciverName).send();
@@ -58,27 +58,29 @@ public class WaybillService {
         if (res.isStatusOK()) {
             return number;
         }
-        throw new Exception("deploy error");
+        logger.error(res.getMessage());
+        return "";
     }
 
-    public String deployWayBillByAddress(String reciverName, List<BigInteger> varieties,
-            List<BigInteger> amounts, String foundationName) throws Exception {
-        TransactionReceipt res;
+    public String deployWayBillByAddress(String reciverAddress, List<BigInteger> varieties, List<BigInteger> amounts,
+            String foundationName) throws Exception {
+        TransactionReceipt receipt;
         String number = simpleDateFormat.format(new Date());
-        String reciverAddress = locationManager.getAddress(reciverName).send();
         Waybill wayBill = Waybill.deploy(web3j, credentials,
                 new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT), reciverAddress, number).send();
-        waybillManager.setWallbillAddress(number, wayBill.getContractAddress());
-        // 该IP应该是由节点名查询得来，此处写死
-        List<String> materialAdresses = waybillRestTemplate.requestMaterial(varieties, amounts, number, "172.100.0.6");
-        res = wayBill.setMaterialArr(materialAdresses).send();
-        if (res.isStatusOK()) {
-            res = waybillManager.setWallbillAddress(number, wayBill.getContractAddress()).send();
+        receipt = waybillManager.setWallbillAddress(number, wayBill.getContractAddress()).send();
+        if (receipt.isStatusOK()) {
+            // 该IP应该是由节点名查询得来，此处写死
+            List<String> materialAdresses = waybillRestTemplate.requestMaterial(varieties, amounts, number,
+                    "172.100.0.6");
+            receipt = wayBill.setMaterialArr(materialAdresses).send();
+            if (receipt.isStatusOK()) {
+                return number;
+            }
+            logger.error(receipt.getMessage() + " " + receipt.getStatus());
         }
-        if (res.isStatusOK()) {
-            return number;
-        }
-        throw new Exception("deploy error, try it later");
+        logger.error(receipt.getMessage() + " " + receipt.getStatus());
+        return "";
     }
 
     public String findWayBillAddress(String number) throws Exception {

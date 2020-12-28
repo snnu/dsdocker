@@ -45,6 +45,7 @@ public class WaybillService {
         if(receipt.isStatusOK()) {
             return true;
         }
+        logger.error(receipt.getMessage() + " " + receipt.getStatus());
         return false;
     }
 }

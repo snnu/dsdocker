@@ -43,7 +43,7 @@ public class RequestService {
         if (receipt.isStatusOK()) {
             return requestManager.getCreateReqOutput(receipt).getValue1();
         }
-        logger.error(receipt.getMessage());
+        logger.error(receipt.getMessage() + " " + receipt.getStatus());
         return new BigInteger("-1");
     }
 

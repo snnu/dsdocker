@@ -35,21 +35,21 @@ public class WaybillServiceController {
         try {
             return waybillService.deployWayBillByMaterial(reciverName, varieties, amounts);
         } catch (Exception e) {
-            return e.getMessage();
+            e.printStackTrace();
         }
+        return "";
     }
 
     @RequestMapping(value = "/deployByAddress", method = RequestMethod.POST)
-    public String deployWayBillByAddress(@RequestParam(value = "reciverName", required = true) String reciverName,
+    public String deployWayBillByAddress(@RequestParam(value = "reciverAddress", required = true) String reciverAddress,
             @RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
             @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
             @RequestParam(value = "foundationName", required = true) String foundationName) {
-        String nodeId;
         try {
-            return waybillService.deployWayBillByAddress(foundationName, varieties, amounts, foundationName);
+            return waybillService.deployWayBillByAddress(reciverAddress, varieties, amounts, foundationName);
         } catch (Exception e) {
-            logger.error(e.getMessage());
-            return e.getMessage();
+            e.printStackTrace();
         }
+        return "";
     }
 }

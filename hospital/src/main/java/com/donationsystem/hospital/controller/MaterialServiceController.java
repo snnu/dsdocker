@@ -27,8 +27,13 @@ public class MaterialServiceController {
     @RequestMapping(value = "/getMaterialAmounts", method = RequestMethod.POST)
     @ResponseBody
     public List<MaterialPOJO> getMaterialAmounts(
-            @RequestParam(value = "varieties", required = true) List<BigInteger> varieties) throws Exception {
-        return materialService.getMaterialAmounts(varieties);
+            @RequestParam(value = "varieties", required = true) List<BigInteger> varieties) {
+        try {
+            return materialService.getMaterialAmounts(varieties);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping(value = "/useMaterial", method = RequestMethod.GET)
@@ -37,7 +42,7 @@ public class MaterialServiceController {
         try {
             return materialService.useMaterial(variety, amount);
         } catch (Exception e) {
-            logger.error(e.getLocalizedMessage());
+            e.printStackTrace();
             return false;
         }
     }

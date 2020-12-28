@@ -21,36 +21,36 @@ public class AddressServiceController {
 
     @RequestMapping(value = "/nodeRegistry", method = RequestMethod.POST)
     public Boolean registryNodeAccount() throws Exception {
+
         return addressService.registryNodeAccount();
+
     }
 
     @RequestMapping(value = "/foundationMaterialManagerRegistry", method = RequestMethod.POST)
     public Boolean registryFoundationoMaterialManager() throws Exception {
+
         return addressService.registryFoundationMaterialManager();
+
     }
 
     @RequestMapping(value = "/requestManagerRegistry", method = RequestMethod.POST)
     public Boolean regsictryRequestManager() throws Exception {
+
         return addressService.registryRequestManager();
+
     }
 
     @RequestMapping(value = "/allowHospital", method = RequestMethod.POST)
-    public Boolean allowHospital(@RequestParam(value = "address", required = true) String address) {
-        try {
-            return addressService.allowHospital(address);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return false;
-        }
+    public Boolean allowHospital(@RequestParam(value = "address", required = true) String address) throws Exception {
+
+        return addressService.allowHospital(address);
+
     }
 
     @RequestMapping(value = "/disallowHospital", method = RequestMethod.POST)
-    public Boolean disallowHospital(@RequestParam(value = "address", required = true) String address) {
-        try {
-            return addressService.disallowHospital(address);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return false;
-        }
+    public Boolean disallowHospital(@RequestParam(value = "address", required = true) String address) throws Exception {
+
+        return addressService.disallowHospital(address);
+
     }
 }

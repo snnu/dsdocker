@@ -29,7 +29,7 @@ public class RequestServiceController {
         try {
             return requestService.requestMaterial(varieties, amounts, requestManagerName);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
             return new BigInteger("-1");
         }
     }
@@ -40,7 +40,7 @@ public class RequestServiceController {
         try {
             return requestService.getRequestStatus(num, requestManagerName);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
             return new BigInteger("-1");
         }
     }
@@ -51,7 +51,7 @@ public class RequestServiceController {
         try {
             return requestService.getWaybillNum(num, requestManagerName);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
             return "";
         }
     }
