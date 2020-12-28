@@ -36,7 +36,7 @@ public class MaterialServiceController {
         return null;
     }
 
-    @RequestMapping(value = "/useMaterial", method = RequestMethod.GET)
+    @RequestMapping(value = "/useMaterial", method = RequestMethod.POST)
     public Boolean useMaterial(@RequestParam(value = "variety", required = true) BigInteger variety, 
     @RequestParam(value = "amount", required = true) BigInteger amount) {
         try {

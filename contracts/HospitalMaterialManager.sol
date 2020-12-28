@@ -2,7 +2,8 @@ pragma solidity >=0.4.24 < 0.5.2;
 import "./Material.sol";
 import "./Waybill.sol";
 import "./Authentication.sol";
-import './LocationManager.sol';
+import "./LocationManager.sol";
+import "./RequestManager.sol";
 
 contract HospitalMaterialManager is Authentication {
     mapping(uint => address[]) private varietyAmount;
@@ -21,6 +22,10 @@ contract HospitalMaterialManager is Authentication {
         return varietyAmount[_variety];
     }
     
+    function createReq(uint[] memory _varieties, uint[] memory _amounts, address requestManagerAddress) public onlyOwner returns(uint){
+        return RequestManager(requestManagerAddress).createReq(_varieties, _amounts);
+    }
+
     function setMaterials(address waybill) public onlyOwner {
         Waybill(waybill).setReciverConfirm();
         Waybill(waybill).setMaterialsOwner();

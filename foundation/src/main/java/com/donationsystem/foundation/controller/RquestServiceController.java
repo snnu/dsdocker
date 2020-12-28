@@ -48,7 +48,7 @@ public class RquestServiceController {
         RequestPOJO requestPOJO = requestService.getNextAgreedRequest();
         logger.debug("request num: " + requestPOJO.getNum().toString());
         String waybillNumber = waybillService.RequestCreateWaybill(requestPOJO.getVarieties(), requestPOJO.getAmounts(),
-                requestPOJO.getReciver(), "logistic");
+                requestPOJO.getReciver(), logisticName);
         requestService.setWaybillNumber(requestPOJO.getNum(), waybillNumber);
         return waybillNumber;
     }

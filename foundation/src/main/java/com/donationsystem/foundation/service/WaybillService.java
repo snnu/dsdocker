@@ -84,9 +84,9 @@ public class WaybillService {
     }
 
     public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts,
-            String hospitalMaterialManagerName, String logisticName) {
+            String hospitalMaterialManagerAddress, String logisticName) {
         // 该IP应该由查询得来，此处写死
-        return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerName,
+        return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerAddress,
                 "172.100.0.7");
     }
 }

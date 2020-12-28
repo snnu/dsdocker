@@ -35,8 +35,8 @@ contract RequestManager is Authentication {
     event handledReqEvent(uint num);
     event sendedEvent(uint num);
 
-    //判断应该交由处理时，不然有限的物资可能对应着多个请求。返回请求编号
-    function CreateReq(uint[] memory _varieties, uint[] memory _amounts) public onlyAuth returns(uint) {
+    // 判断应该交由处理时，不然有限的物资可能对应着多个请求。返回请求编号
+    function createReq(uint[] memory _varieties, uint[] memory _amounts) public onlyAuth returns(uint) {
         require(_varieties.length == _amounts.length, "Length not equal");
         reqMap[num].reciver = msg.sender;
         reqMap[num].varieties = _varieties;
@@ -83,7 +83,6 @@ contract RequestManager is Authentication {
     }
 
     // 获取下一个已被同意的请求的内容
-    // 如果物流创建不顺畅，并不会回滚 agreedLastNum
     function getAgreedReq() public view onlyOwner returns(uint, uint[] memory, uint[] memory, address reciver) {
         require(agreedLastNum < agreedReq.length, "there is no agreed request needs to be handled");
         return (agreedReq[agreedLastNum], reqMap[agreedReq[agreedLastNum]].varieties, reqMap[agreedReq[agreedLastNum]].amounts, 

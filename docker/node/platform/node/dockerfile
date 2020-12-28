@@ -1,8 +1,0 @@
-FROM openjdk:11
-LABEL maintainer=shiki92
-RUN mkdir fisco && cd /tmp/ && curl -k -LO "https://files.cnblogs.com/files/zgngg/jce_policy-8.zip" && unzip jce_policy-8.zip && rm jce_policy-8.zip && cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /usr/local/openjdk-11/lib/security
-WORKDIR /fisco
-COPY node node
-COPY console console
-COPY start.sh start.sh
-ENTRYPOINT [ "bash", "/fisco/start.sh"]

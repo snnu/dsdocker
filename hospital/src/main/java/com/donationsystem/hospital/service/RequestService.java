@@ -3,6 +3,7 @@ package com.donationsystem.hospital.service;
 import java.math.BigInteger;
 import java.util.List;
 
+import com.donationsystem.hospital.contract.HospitalMaterialManager;
 import com.donationsystem.hospital.contract.RequestManager;
 import com.donationsystem.hospital.util.RegistryTemplate;
 
@@ -27,21 +28,24 @@ public class RequestService {
     @Autowired
     private RegistryTemplate registryTemplate;
 
+    @Autowired
+    private HospitalMaterialManager hospitalMaterialManager;
+
     public BigInteger requestMaterial(List<BigInteger> varieties, List<BigInteger> amounts, String requestManagerName)
             throws Exception {
         RequestManager requestManager = managerService.getRequestManager(requestManagerName);
         if(requestManager == null) {
             throw new Exception("no such a requestManager");
         }
-        if(!requestManager.showAllowed(credentials.getAddress()).send()) {
-            boolean res = registryTemplate.requestManagerAllowRegistry(credentials.getAddress(), "172.100.0.6");
+        if(!requestManager.showAllowed(hospitalMaterialManager.getContractAddress()).send()) {
+            boolean res = registryTemplate.requestManagerAllowRegistry(hospitalMaterialManager.getContractAddress(), "172.100.0.6");
             if(!res) {
                 throw new Exception("request allow error");
             }
         }
-        TransactionReceipt receipt = requestManager.CreateReq(varieties, amounts).send();
+        TransactionReceipt receipt = hospitalMaterialManager.createReq(varieties, amounts, requestManager.getContractAddress()).send();
         if (receipt.isStatusOK()) {
-            return requestManager.getCreateReqOutput(receipt).getValue1();
+            return hospitalMaterialManager.getCreateReqOutput(receipt).getValue1();
         }
         logger.error(receipt.getMessage() + " " + receipt.getStatus());
         return new BigInteger("-1");

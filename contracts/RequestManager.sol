@@ -35,8 +35,8 @@ contract RequestManager is Authentication {
     event handledReqEvent(uint num);
     event sendedEvent(uint num);
 
-    //判断应该交由处理时，不然有限的物资可能对应着多个请求。返回请求编号
-    function CreateReq(uint[] memory _varieties, uint[] memory _amounts) public onlyAuth returns(uint) {
+    // 判断应该交由处理时，不然有限的物资可能对应着多个请求。返回请求编号
+    function createReq(uint[] memory _varieties, uint[] memory _amounts) public onlyAuth returns(uint) {
         require(_varieties.length == _amounts.length, "Length not equal");
         reqMap[num].reciver = msg.sender;
         reqMap[num].varieties = _varieties;
