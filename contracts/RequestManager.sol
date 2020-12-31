@@ -77,9 +77,9 @@ contract RequestManager is Authentication {
     }
     
     //因为不支持多重数组所以只能一个一个请求处理
-    function getReq() public view onlyOwner returns(uint[] memory, uint[] memory, address reciver) {
+    function getReq() public view onlyOwner returns(uint, uint[] memory, uint[] memory, address reciver) {
         require(lastNum < num, "there is no request needs to be handled");
-        return (reqMap[lastNum].varieties, reqMap[lastNum].amounts, reqMap[lastNum].reciver);
+        return (lastNum, reqMap[lastNum].varieties, reqMap[lastNum].amounts, reqMap[lastNum].reciver);
     }
 
     // 获取下一个已被同意的请求的内容

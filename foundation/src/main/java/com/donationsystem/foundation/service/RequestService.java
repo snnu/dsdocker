@@ -7,7 +7,6 @@ import com.donationsystem.foundation.contract.RequestManager;
 import com.donationsystem.foundation.model.RequestPOJO;
 
 import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.fisco.bcos.web3j.tuples.generated.Tuple3;
 import org.fisco.bcos.web3j.tuples.generated.Tuple4;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +22,11 @@ public class RequestService {
 
     public RequestPOJO getNextRequest() throws Exception {
         RequestPOJO requestPOJO = new RequestPOJO();
-        Tuple3<List<BigInteger>, List<BigInteger>, String> res = requestManager.getReq().send();
-        requestPOJO.setVarieties(res.getValue1());
-        requestPOJO.setAmounts(res.getValue2());
-        requestPOJO.setReciver(res.getValue3());
+        Tuple4<BigInteger, List<BigInteger>, List<BigInteger>, String> res = requestManager.getReq().send();
+        requestPOJO.setNum(res.getValue1());
+        requestPOJO.setVarieties(res.getValue2());
+        requestPOJO.setAmounts(res.getValue3());
+        requestPOJO.setReciver(res.getValue4());
         return requestPOJO;
     }
 
