@@ -14,7 +14,7 @@ import java.util.List;
 import com.donationsystem.hospital.service.RequestService;
 
 @RestController
-@RequestMapping(value = "v1/hopital/request")
+@RequestMapping(value = "v1/hospital/request")
 public class RequestServiceController {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestServiceController.class);
