@@ -12,13 +12,13 @@
 
 变量名|必填|类型|示例值|描述
 :--|:--|:--|:--|:--
-recivername|Y|String|foundationMaterialManager|节点物资管理合约的注册名
+reciverName|Y|String|foundationMaterialManager|节点物资管理合约的注册名
 varieties|Y|[]|[1,2]|各条物资对应的种类
 amounts|Y|[]|[3,4]|各条物资对应给的数量
 
 #### /deployByAddress
 
-**说明：** 通过已经存在的物资合约创建物流合约，由foundation发起物流时调用
+**说明：** 通过已经存在的物资合约创建物流合约，由foundation发起物流时调用，不通过前端直接调用
 
 **RequestMethod：** POST
 
@@ -26,7 +26,7 @@ amounts|Y|[]|[3,4]|各条物资对应给的数量
 
 变量名|必填|类型|示例值|描述
 :--|:--|:--|:--|:--
-revicername|Y|String|foundationMaterialManager|节点物资管理合约的注册名
+reciverAddress|Y|String|foundationMaterialManager|节点物资管理合约的注册名
 varieties|Y|[]|[1,2]|各条物资对应的种类
 amounts|Y|[]|[3,4]|各条物资对应给的数量
 foundationName|Y|String|foundation|基金会的名称（传入的IP地址是固定的）

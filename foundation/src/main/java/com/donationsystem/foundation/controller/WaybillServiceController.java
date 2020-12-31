@@ -38,14 +38,5 @@ public class WaybillServiceController {
             @RequestParam(value = "number", required = true) String number) throws Exception {
 
         return waybillService.delivery(varieties, amounts, waybillManagerName, number);
-
-    }
-
-    @RequestMapping(value = "/requestCreateWaybill", method = RequestMethod.POST)
-    public String requestCreateWaybill(@RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
-            @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
-            @RequestParam(value = "hospitalMaterialManagerName", required = true) String hospitalMaterialManagerName,
-            @RequestParam(value = "logisticName", required = true) String logisticName) {
-        return waybillService.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerName, logisticName);
     }
 }

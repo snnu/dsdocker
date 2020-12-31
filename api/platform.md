@@ -4,7 +4,7 @@
 
 #### /allowRegistryAddress
 
-**说明：** 允许某一地址有注册自身的权限
+**说明：** 允许某一地址有注册自身的权限，此处由各App自行调用
 
 **RequestMethod：** POST
 

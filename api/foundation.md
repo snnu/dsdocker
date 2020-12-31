@@ -17,7 +17,7 @@ waybillManagerName|Y|String|waybillManager|WaybillManager的注册名
 
 #### /delivery
 
-**说明：** 传递某一物流订单所需的物资地址（logistic deployByAddress 调用）
+**说明：** 传递某一物流订单所需的物资地址（logistic deployByAddress 调用，此处不由前端直接调用）
 
 **RequestMethod：** POST
 
@@ -29,21 +29,6 @@ varieties|Y|[]|[1,2]|各条物资对应的种类
 amounts|Y|[]|[3,4]|各条物资对应给的数量
 waybillManagerName|Y|String|waybillManager|WaybillManager 的注册名
 number|Y|String|20201217081946|物流合约的编号
-
-#### /requestCreateWaybill
-
-**说明：** 请求创建发给某一医院的物流订单
-
-**RequestMethod：** POST
-
-**返回值/类型：** 物流单号/String
-
-变量名|必填|类型|示例值|描述
-:--|:--|:--|:--|:--
-hospitalMaterialManagerName|Y|String|hospitalMaterialManager|医院物资管理合约注册名
-logisticName|Y|String|logistic|物流服务商注册名（此处传入的IP固定）
-varieties|Y|[]|[1,2]|各条物资对应的种类
-amounts|Y|[]|[3,4]|各条物资对应给的数量
 
 ### v1/foundation/request
 
@@ -59,7 +44,7 @@ amounts|Y|[]|[3,4]|各条物资对应给的数量
 :--|:--|:--|:--|:--
 /|/|/|/|/
 
-#### /setState
+#### /setState（拼写错误，懒得改了）
 
 **说明：** 给获得的请求进行通过或拒绝，对应上一个获得的请求
 
@@ -137,7 +122,7 @@ varieties|Y|[]|[1,2]|需要查询的种类的列表
 
 #### /allowHospital
 
-**说明：** 允许某一医院节点有请求的权限
+**说明：** 允许某一医院节点有请求的权限，此处由HospitalApp自行调用
 
 **RequestMethod：** POST
 
