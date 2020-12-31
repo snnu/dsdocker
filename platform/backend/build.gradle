@@ -1,0 +1,105 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	// id 'com.bmuschko.docker-spring-boot-application' version '6.6.1'
+	id 'com.bmuschko.docker-remote-api' version '6.6.1'
+}
+
+import com.bmuschko.gradle.docker.tasks.image.*
+
+group = 'com.donationsystem'
+version = 15
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+repositories {
+	maven { url "https://maven.aliyun.com/nexus/content/groups/public/" }
+ 	maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+ 	maven { url "https://dl.bintray.com/ethereum/maven/" }
+  	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+	maven { url "https://repo.spring.io/libs-snapshot" }
+	maven { url "https://repo.spring.io/libs-milestone" }
+  	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	implementation 'com.h2database:h2'
+	implementation 'io.netty:netty-all:4.1.50.Final'
+	implementation('org.fisco-bcos:web3sdk:2.6.1') {
+		exclude group: 'io.netty', module: 'netty-all'
+	}
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.codehaus.groovy:groovy-all:2.5.6'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+configurations {
+	all {
+		exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+ext {
+	set('username', 'shiki92')
+}
+
+task mkdirDockerDir(type: Sync) {
+	dependsOn build
+	from 'build/libs'
+	from ('build/resources/main') {
+		include "run.sh"
+	}
+	into 'build/docker'
+}
+
+task removeDockerImage(type: DockerRemoveImage) {
+	targetImageId("${username}/ds_${rootProject.name}:latest")
+	targetImageId("${username}/ds_${rootProject.name}:${version - 1}")
+	onError {
+	}
+}
+
+task createDockerfile(type: Dockerfile) {
+	dependsOn mkdirDockerDir
+	from("shiki92/ds_base:latest")
+	label(["maintainer": "shiki92"])
+	workingDir("/app")
+	copyFile("${rootProject.name}-${version}.jar", "app.jar")
+	copyFile("run.sh", "run.sh")
+	runCommand('cd /app && chmod +x run.sh')
+	entryPoint('./run.sh')
+}
+
+task buildImage(type: DockerBuildImage) {
+	dependsOn createDockerfile, removeDockerImage
+	images.add("${username}/ds_${rootProject.name}:${version}")
+	images.add("${username}/ds_${rootProject.name}:latest")
+}
+
+task updateDockerfile(type: Dockerfile) {
+	dependsOn mkdirDockerDir
+	from("${username}/ds_${rootProject.name}:latest")
+	copyFile("${rootProject.name}-${version}.jar", "app.jar")
+	copyFile("run.sh", "run.sh")
+}
+
+task updateImage(type: DockerBuildImage) {
+	dependsOn updateDockerfile
+	images.add("${username}/ds_${rootProject.name}:${version}")
+	images.add("${username}/ds_${rootProject.name}:latest")
+}
