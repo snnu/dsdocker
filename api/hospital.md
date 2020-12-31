@@ -39,7 +39,7 @@ requestManagerName|Y|String|requestManager|requestManager的注册名
 
 **RequestMethod：** POST
 
-**返回值/类型：** 当前的状态/int（0：未处理 1：拒绝 2：同意待发送物资 3：已发送物资）
+**返回值/类型：** 当前的状态/int（0：未处理 1：同意待发送物资 2：拒绝 3：已发送物资）
 
 变量名|必填|类型|示例值|描述
 :--|:--|:--|:--|:--
