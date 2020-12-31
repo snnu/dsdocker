@@ -48,7 +48,7 @@ requestManagerName|Y|String|requestManager|requestManager的注册名
 
 #### /getWaybillNum
 
-**说明：** 获取某一请求的状态
+**说明：** 获取某一已发送物资的请求的物流单号
 
 **RequestMethod：** POST
 
