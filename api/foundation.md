@@ -66,7 +66,7 @@ state|Y|int|1|2为拒绝，1为同意
 
 变量名|必填|类型|示例值|描述
 :--|:--|:--|:--|:--
-/|/|/|/|/
+logisticName|Y|String|logistic|物流公司的注册名
 
 ### v1/foundation/material
 
