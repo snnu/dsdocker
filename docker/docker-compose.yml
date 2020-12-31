@@ -68,43 +68,43 @@ services:
         limits:
           memory: 250M
 
-  # foundationApp:
-  #   image: shiki92/ds_foundation:latest
-  #   volumes: 
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/foundation/jar/db:/app/db"
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/foundation:/app/logs/"
-  #   ports: 
-  #     - "8081:8080"
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.6
-  #   depends_on: 
-  #       - platformApp
-  #       - logisticApp
+  foundationApp:
+    image: shiki92/ds_foundation:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/foundation/jar/db:/app/db"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/foundation:/app/logs/"
+    ports: 
+      - "8081:8080"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.6
+    depends_on: 
+        - platformApp
+        - logisticApp
 
-  # logisticApp:
-  #   image: shiki92/ds_logistic:latest
-  #   volumes: 
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/logistic/jar/db:/app/db"
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/logistic:/app/logs/"
-  #   ports: 
-  #     - "8082:8080"
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.7
-  #   depends_on: 
-  #       - platformApp
+  logisticApp:
+    image: shiki92/ds_logistic:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/logistic/jar/db:/app/db"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/logistic:/app/logs/"
+    ports: 
+      - "8082:8080"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.7
+    depends_on: 
+        - platformApp
 
-  # hospitalApp:
-  #   image: shiki92/ds_hospital:latest
-  #   volumes: 
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/hospital/jar/db:/app/db"
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/hospital:/app/logs/"
-  #   ports: 
-  #     - "8083:8080"
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.8
+  hospitalApp:
+    image: shiki92/ds_hospital:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/hospital/jar/db:/app/db"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/hospital:/app/logs/"
+    ports: 
+      - "8083:8080"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.8
 
   platformApp:
     image: shiki92/ds_platform:latest

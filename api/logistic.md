@@ -2,9 +2,9 @@
 
 ### /v1/logistic/waybill
 
-#### /deployByMaterial(可用)
+#### /deployByMaterial
 
-**说明：** 通过物资类型和数量创建物流合约
+**说明：** 通过物资类型和数量创建物流合约，由捐赠者发起捐赠时调用
 
 **RequestMethod：** POST
 
@@ -18,7 +18,7 @@ amounts|Y|[]|[3,4]|各条物资对应给的数量
 
 #### /deployByAddress
 
-**说明：** 通过已经存在的物资合约创建物流合约
+**说明：** 通过已经存在的物资合约创建物流合约，由foundation发起物流时调用
 
 **RequestMethod：** POST
 

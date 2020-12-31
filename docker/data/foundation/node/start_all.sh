@@ -7,6 +7,6 @@ do
     if [[ -f "${SHELL_FOLDER}/${directory}/config.ini" && -f "${SHELL_FOLDER}/${directory}/start.sh" ]];then  
         echo "try to start ${directory}"
         bash ${SHELL_FOLDER}/${directory}/start.sh &
-    fi  
+    fi
 done  
 wait
