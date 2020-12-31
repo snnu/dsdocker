@@ -12,7 +12,7 @@
 
 变量名|必填|类型|示例值|描述
 :--|:--|:--|:--|:--
-recivername|Y|String|foundationMaterialManager|节点物资管理合约的注册名
+reciverName|Y|String|foundationMaterialManager|节点物资管理合约的注册名
 varieties|Y|[]|[1,2]|各条物资对应的种类
 amounts|Y|[]|[3,4]|各条物资对应给的数量
 
