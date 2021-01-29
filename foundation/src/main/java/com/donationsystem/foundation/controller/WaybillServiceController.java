@@ -25,10 +25,10 @@ public class WaybillServiceController {
 
     @RequestMapping(value = "/recive", method = RequestMethod.POST)
     public boolean reciveWayBill(@RequestParam(value = "number", required = true) String number,
-            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) throws Exception {
+            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName,
+            @RequestParam(value = "reciver", required = true) String reciver) throws Exception {
 
-        return waybillService.reciveWayBill(number, waybillManagerName);
-
+        return waybillService.reciveWayBill(number, waybillManagerName, reciver);
     }
 
     @RequestMapping(value = "/delivery", method = RequestMethod.POST)

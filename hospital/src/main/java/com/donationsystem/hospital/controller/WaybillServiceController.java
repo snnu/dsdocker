@@ -21,9 +21,10 @@ public class WaybillServiceController {
 
     @RequestMapping(value = "/recive", method = RequestMethod.POST)
     public Boolean reciveMaterial(@RequestParam(value = "number", required = true) String number,
-            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) {
+            @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName,
+            @RequestParam(value = "reciver", required = true) String reciver) {
         try {
-            return waybillService.reciveMaterial(number, waybillManagerName);
+            return waybillService.reciveMaterial(number, waybillManagerName, reciver);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

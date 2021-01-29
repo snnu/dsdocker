@@ -34,14 +34,14 @@ public class WaybillService {
     private HospitalMaterialManager hospitalMaterialManager;
 
 
-    public Boolean reciveMaterial(String number, String waybillManagerName) throws Exception {
+    public Boolean reciveMaterial(String number, String waybillManagerName, String reciver) throws Exception {
         WaybillManager waybillManager = managerService.getWaybillManager(waybillManagerName);
         String address = waybillManager.getWallbillAddress(number).send();
         if (address.equals("0x0000000000000000000000000000000000000000")) {
             logger.error("no such address");
             return false;
         }
-        TransactionReceipt receipt = hospitalMaterialManager.setMaterials(address).send();
+        TransactionReceipt receipt = hospitalMaterialManager.setMaterials(address, reciver).send();
         if(receipt.isStatusOK()) {
             return true;
         }

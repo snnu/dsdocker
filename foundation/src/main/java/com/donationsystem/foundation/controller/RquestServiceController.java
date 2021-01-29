@@ -43,12 +43,12 @@ public class RquestServiceController {
     }
 
     @RequestMapping(value = "/sendMaterial", method = RequestMethod.POST)
-    public String sendMaterial(@RequestParam(value = "logisticName", required = true) String logisticName)
-            throws Exception {
+    public String sendMaterial(@RequestParam(value = "logisticName", required = true) String logisticName,
+            @RequestParam(value = "deliveryman", required = true) String deliveryman) throws Exception {
         RequestPOJO requestPOJO = requestService.getNextAgreedRequest();
         logger.debug("request num: " + requestPOJO.getNum().toString());
         String waybillNumber = waybillService.RequestCreateWaybill(requestPOJO.getVarieties(), requestPOJO.getAmounts(),
-                requestPOJO.getReciver(), logisticName);
+                requestPOJO.getReciver(), logisticName, deliveryman);
         requestService.setWaybillNumber(requestPOJO.getNum(), waybillNumber);
         return waybillNumber;
     }

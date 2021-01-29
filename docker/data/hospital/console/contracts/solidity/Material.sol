@@ -3,13 +3,18 @@ pragma solidity >=0.4.24 < 0.5.2;
 import "./Authentication.sol";
 
 contract Material is Authentication {
-    // string private name;
-    // string private amount;
+    struct Node {
+        uint time;
+        string reciver;
+        address holder;
+        uint num;
+    }
+
     uint private variety;
     uint private amount;
     bool private used;
     // uint private unit; //在固定类别的情况下，无需在合约中指定单位，可在后端系统中指定
-    address private curHolder;// Waybill不唯一，为了标识logistic需要添加该标识 
+    Node[] private timeline;
 
     constructor (uint _variety, uint _amount) public {
         variety = _variety;
@@ -42,10 +47,18 @@ contract Material is Authentication {
     }
 
     function getCurHolder() public view returns(address) {
-        return curHolder;
+        return timeline[timeline.length - 1].holder;
+    }
+
+    function getTimelineLength() public view returns(uint) {
+        return timeline.length;
+    }
+
+    function getTimeline(uint i) public view returns(address holder, string memory reciver, uint time, uint num) {
+        return (timeline[i].holder, timeline[i].reciver, timeline[i].time, timeline[i].num);
     }
     
-    function setCurHolder(address _curHolder) public onlyOwner {
-        curHolder = _curHolder;
+    function setCurHolder(address _curHolder, string memory _reciver) public onlyOwner {
+        timeline.push(Node(block.timestamp, _reciver, _curHolder, block.number));
     }
 }

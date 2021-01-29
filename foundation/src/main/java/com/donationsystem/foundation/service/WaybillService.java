@@ -40,7 +40,7 @@ public class WaybillService {
     @Autowired
     private Credentials credentials;
 
-    public Boolean reciveWayBill(String number, String waybillManagerName) throws Exception {
+    public Boolean reciveWayBill(String number, String waybillManagerName, String reciver) throws Exception {
         logger.debug("number: " + number);
         WaybillManager waybillManager = managerService.getWaybillManager(waybillManagerName);
         String address = waybillManager.getWallbillAddress(number).send();
@@ -49,7 +49,7 @@ public class WaybillService {
             return false;
         }
         logger.debug("waybillAddress: " + address);
-        TransactionReceipt receipt = foundationMaterialManager.setMaterials(address).send();
+        TransactionReceipt receipt = foundationMaterialManager.setMaterials(address, reciver).send();
         if (receipt.isStatusOK()) {
             return true;
         }
@@ -84,9 +84,9 @@ public class WaybillService {
     }
 
     public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts,
-            String hospitalMaterialManagerAddress, String logisticName) {
+            String hospitalMaterialManagerAddress, String logisticName, String deliveryman) {
         // 该IP应该由查询得来，此处写死
         return foundationRestTemplate.RequestCreateWaybill(varieties, amounts, hospitalMaterialManagerAddress,
-                "172.100.0.7");
+                "172.100.0.7", deliveryman);
     }
 }

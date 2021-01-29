@@ -40,11 +40,11 @@ public class ManagerConfig {
         if(locationManagerEntity == null) {
             managerAddress = locationManagerAddress;
             Manager manager = new Manager(managerAddress, "locationManager");
-            logger.debug("manager address: " + manager.getManagerAddress());
             managerRepo.save(manager);
         } else {
             managerAddress = locationManagerEntity.getManagerAddress();
         }
+        logger.debug("locationManager address: " + managerAddress);
         LocationManager locationManager = LocationManager.load(managerAddress, web3j, credentials, new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT));
         return locationManager;
     }

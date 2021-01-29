@@ -16,6 +16,7 @@
 :--|:--|:--|:--|:--
 number|Y|String|20201217081946|物流合约的编号
 waybillManagerName|Y|String|waybillManager|WaybillManager的注册名
+reciver|Y|String|路人甲|签收人名称
 
 ### v1/hospital/request
 

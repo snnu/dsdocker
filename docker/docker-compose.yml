@@ -58,8 +58,10 @@ services:
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/console/contracts:/fisco/console/contracts"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/node:/fisco/node/node"
       - "/home/gongyueyang/BlockChain/DonationSystem/docker/shell/platform:/fisco/shell"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/platform/webase_front:/fisco/webase/log"
     ports: 
       - "20204:20200"
+      - "8889:5002"
     networks: 
       fisco_net:
         ipv4_address: 172.100.0.5
@@ -73,6 +75,8 @@ services:
   #   volumes: 
   #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/foundation/jar/db:/app/db"
   #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/foundation:/app/logs/"
+  #   environment: 
+  #     JVM_OPS: "-Dmanager.location-manager-address=0x5dee14e3c60701eb644912cd35fb843930381ab3"
   #   ports: 
   #     - "8081:8080"
   #   networks: 
@@ -87,6 +91,8 @@ services:
   #   volumes: 
   #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/logistic/jar/db:/app/db"
   #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/logistic:/app/logs/"
+  #   environment: 
+  #     JVM_OPS: "-Dmanager.location-manager-address=0x5dee14e3c60701eb644912cd35fb843930381ab3"
   #   ports: 
   #     - "8082:8080"
   #   networks: 
@@ -100,23 +106,43 @@ services:
   #   volumes: 
   #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/hospital/jar/db:/app/db"
   #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/hospital:/app/logs/"
+  #   environment: 
+  #     JVM_OPS: "-Dmanager.location-manager-address=0x5dee14e3c60701eb644912cd35fb843930381ab3"
   #   ports: 
   #     - "8083:8080"
   #   networks: 
   #     fisco_net:
   #       ipv4_address: 172.100.0.8
 
-  # platformApp:
-  #   image: shiki92/ds_platform:latest
-  #   volumes: 
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/jar/db:/app/db"
-  #     - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/platform:/app/logs/"
-  #   ports: 
-  #     - "8084:8080"
-  #   networks: 
-  #     fisco_net:
-  #       ipv4_address: 172.100.0.9
-  
+  platformApp:
+    image: shiki92/ds_platform:latest
+    volumes: 
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/jar/db:/app/db"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/jar/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/platform:/app/logs/"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/platform/web:/logs"
+      - "/home/gongyueyang/BlockChain/DonationSystem/docker/logs/platform/nodeManager:/app/webase/nodeManager/log"
+    ports: 
+      - "8084:8080"
+      - "8888:5000"
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.9
+
+  platformMysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    volumes: 
+    - "/home/gongyueyang/BlockChain/DonationSystem/docker/data/platform/jar/mysql:/var/lib/mysql"
+    # - "/home/gongyueyang/BlockChain/DonationSystem/docker/dockerfiles/paltform_jar/nodeManager/script:/script"
+    ports: 
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: 654321
+    networks: 
+      fisco_net:
+        ipv4_address: 172.100.0.10
+
 networks: 
   fisco_net:
     driver: bridge

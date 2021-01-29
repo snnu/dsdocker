@@ -26,12 +26,13 @@ public class FoundationRestTemplate {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String hospitalMaterialManagerAddress, String logisticIP) {
+    public String RequestCreateWaybill(List<BigInteger> varieties, List<BigInteger> amounts, String hospitalMaterialManagerAddress, String logisticIP, String deliveryman) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
         params.add("reciverAddress", hospitalMaterialManagerAddress);
         params.add("varieties", varieties.stream().map(Object::toString).collect(Collectors.joining(",")));
         params.add("amounts", amounts.stream().map(Object::toString).collect(Collectors.joining(",")));
         params.add("foundationName", "foundation");
+        params.add("deliveryman", deliveryman);
         String url = String.format("http://%s:8080/v1/logistic/waybill/deployByAddress", logisticIP);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);

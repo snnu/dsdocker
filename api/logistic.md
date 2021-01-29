@@ -15,6 +15,7 @@
 reciverName|Y|String|foundationMaterialManager|节点物资管理合约的注册名
 varieties|Y|[]|[1,2]|各条物资对应的种类
 amounts|Y|[]|[3,4]|各条物资对应给的数量
+deliveryman|Y|String|路人甲|收件快递员名称
 
 #### /deployByAddress
 
@@ -30,6 +31,7 @@ reciverAddress|Y|String|foundationMaterialManager|节点物资管理合约的注
 varieties|Y|[]|[1,2]|各条物资对应的种类
 amounts|Y|[]|[3,4]|各条物资对应给的数量
 foundationName|Y|String|foundation|基金会的名称（传入的IP地址是固定的）
+deliveryman|Y|String|路人甲|收件快递员名称
 
 ### v1/logistic/address
 

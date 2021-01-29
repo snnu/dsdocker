@@ -14,6 +14,7 @@
 :--|:--|:--|:--|:--
 number|Y|String|20201217081946|物流合约的编号
 waybillManagerName|Y|String|waybillManager|WaybillManager的注册名
+reciver|Y|String|路人甲|签收人名称
 
 #### /delivery
 
@@ -67,6 +68,7 @@ state|Y|int|1|2为拒绝，1为同意
 变量名|必填|类型|示例值|描述
 :--|:--|:--|:--|:--
 logisticName|Y|String|logistic|物流公司的注册名
+deliveryman|Y|String|路人甲|收件快递员名称
 
 ### v1/foundation/material
 

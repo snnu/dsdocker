@@ -30,10 +30,11 @@ public class WaybillServiceController {
     @RequestMapping(value = "/deployByMaterial", method = RequestMethod.POST)
     public String deployWayBillByMaterial(@RequestParam(value = "reciverName", required = true) String reciverName,
             @RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
-            @RequestParam(value = "amounts", required = true) List<BigInteger> amounts) {
+            @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
+            @RequestParam(value = "deliveryman", required = true) String deliveryman) {
         String reciverAddress;
         try {
-            return waybillService.deployWayBillByMaterial(reciverName, varieties, amounts);
+            return waybillService.deployWayBillByMaterial(reciverName, varieties, amounts, deliveryman);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,9 +45,10 @@ public class WaybillServiceController {
     public String deployWayBillByAddress(@RequestParam(value = "reciverAddress", required = true) String reciverAddress,
             @RequestParam(value = "varieties", required = true) List<BigInteger> varieties,
             @RequestParam(value = "amounts", required = true) List<BigInteger> amounts,
-            @RequestParam(value = "foundationName", required = true) String foundationName) {
+            @RequestParam(value = "foundationName", required = true) String foundationName,
+            @RequestParam(value = "deliveryman", required = true) String deliveryman) {
         try {
-            return waybillService.deployWayBillByAddress(reciverAddress, varieties, amounts, foundationName);
+            return waybillService.deployWayBillByAddress(reciverAddress, varieties, amounts, foundationName, deliveryman);
         } catch (Exception e) {
             e.printStackTrace();
         }

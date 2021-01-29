@@ -146,31 +146,31 @@ build chain ca succussful!
 [2020-08-03 18:42:04,452][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-03 18:42:04,453][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-03 18:42:04,453][INFO][mgroup][parser] | group_id is 1
-[2020-08-03 18:42:04,453][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3']
+[2020-08-03 18:42:04,453][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3']
 [2020-08-03 18:42:04,453][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300']
 [2020-08-03 18:42:04,453][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-03 18:42:04,454][INFO][group][create_group_genesis] | create_group_genesis start
 [2020-08-03 18:42:04,454][WARNING][group][create_group_genesis] |  ./.group not existed!
 [2020-08-03 18:42:04,459][DEBUG][utils][getstatusoutput] |  cmd is echo $(date +%s"000"), status is 0, output is 1596451324000
 
-[2020-08-03 18:42:04,459][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt
-[2020-08-03 18:42:04,464][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
+[2020-08-03 18:42:04,459][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt
+[2020-08-03 18:42:04,464][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
 " " " | sed "s/ //g" | cut -c 3-130, status is 0, output is 5eba734b6edefef4a27fb3e37a363305d92c20fa8acac7986e3c097fa2dabe5a4b69e8bc04e7b91bd6aa9b59fa0b5ea613c3fc72ca2e0fb6dd5a879539888ee8
 
 [2020-08-03 18:42:04,464][INFO][config][get_nodeid_str] |  create nodeid success! status is 0, output is 5eba734b6edefef4a27fb3e37a363305d92c20fa8acac7986e3c097fa2dabe5a4b69e8bc04e7b91bd6aa9b59fa0b5ea613c3fc72ca2e0fb6dd5a879539888ee8
-, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt.
-[2020-08-03 18:42:04,464][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt
-[2020-08-03 18:42:04,464][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt
+, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt.
+[2020-08-03 18:42:04,464][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt
+[2020-08-03 18:42:04,464][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt
 [2020-08-03 18:42:04,464][INFO][group][create_group_genesis] | nodeid -> 5eba734b6edefef4a27fb3e37a363305d92c20fa8acac7986e3c097fa2dabe5a4b69e8bc04e7b91bd6aa9b59fa0b5ea613c3fc72ca2e0fb6dd5a879539888ee8
 
-[2020-08-03 18:42:04,464][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt
-[2020-08-03 18:42:04,467][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
+[2020-08-03 18:42:04,464][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt
+[2020-08-03 18:42:04,467][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
 " " " | sed "s/ //g" | cut -c 3-130, status is 0, output is 8ef09e86cafbe046a05166556a258eafc839716ed6db3cb5bb57dc774e88bb5aa4c8d8f36671f566468a27601829c38a825cd046008dd89771470fdd98067c27
 
 [2020-08-03 18:42:04,467][INFO][config][get_nodeid_str] |  create nodeid success! status is 0, output is 8ef09e86cafbe046a05166556a258eafc839716ed6db3cb5bb57dc774e88bb5aa4c8d8f36671f566468a27601829c38a825cd046008dd89771470fdd98067c27
-, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt.
-[2020-08-03 18:42:04,467][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt
-[2020-08-03 18:42:04,467][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt
+, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt.
+[2020-08-03 18:42:04,467][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt
+[2020-08-03 18:42:04,467][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt
 [2020-08-03 18:42:04,467][INFO][group][create_group_genesis] | nodeid -> 8ef09e86cafbe046a05166556a258eafc839716ed6db3cb5bb57dc774e88bb5aa4c8d8f36671f566468a27601829c38a825cd046008dd89771470fdd98067c27
 
 [2020-08-03 18:42:04,467][INFO][group][create_group_genesis] | create_group_genesis end
@@ -188,7 +188,7 @@ build chain ca succussful!
 [2020-08-05 16:53:22,633][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-05 16:53:22,633][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-05 16:53:22,634][INFO][mgroup][parser] | group_id is 1
-[2020-08-05 16:53:22,634][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3']
+[2020-08-05 16:53:22,634][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3']
 [2020-08-05 16:53:22,634][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300']
 [2020-08-05 16:53:22,634][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-05 16:53:22,647][DEBUG][utils][getstatusoutput] |  cmd is ./cts.sh gen_chain_cert /home/gongyueyang/BlockChain/DonationSystem/generator/.dir_chain_ca, status is 0, output is /home/gongyueyang/BlockChain/DonationSystem/generator/.dir_chain_ca --- .dir_chain_ca
@@ -212,7 +212,7 @@ build chain ca succussful!
 [2020-08-05 16:53:22,806][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-05 16:53:22,806][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-05 16:53:22,806][INFO][mgroup][parser] | group_id is 1
-[2020-08-05 16:53:22,806][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3']
+[2020-08-05 16:53:22,806][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3']
 [2020-08-05 16:53:22,806][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300']
 [2020-08-05 16:53:22,806][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-05 16:53:22,820][DEBUG][utils][getstatusoutput] |  cmd is ./cts.sh gen_agency_cert /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click/agencyA/agency_cert, status is 0, output is build agency_cert agency cert successful!
@@ -232,7 +232,7 @@ build chain ca succussful!
 [2020-08-05 16:53:22,902][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-05 16:53:22,902][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-05 16:53:22,902][INFO][mgroup][parser] | group_id is 1
-[2020-08-05 16:53:22,902][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3']
+[2020-08-05 16:53:22,902][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3']
 [2020-08-05 16:53:22,902][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300']
 [2020-08-05 16:53:22,902][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-05 16:53:22,918][DEBUG][utils][getstatusoutput] |  cmd is ./cts.sh gen_agency_cert /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click/agencyB/agency_cert, status is 0, output is build agency_cert agency cert successful!
@@ -252,7 +252,7 @@ build chain ca succussful!
 [2020-08-05 16:53:23,000][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-05 16:53:23,000][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-05 16:53:23,000][INFO][mgroup][parser] | group_id is 1
-[2020-08-05 16:53:23,000][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3']
+[2020-08-05 16:53:23,000][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3']
 [2020-08-05 16:53:23,000][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300']
 [2020-08-05 16:53:23,000][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-05 16:53:23,013][DEBUG][utils][getstatusoutput] |  cmd is ./cts.sh gen_agency_cert /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click/agencyC/agency_cert, status is 0, output is build agency_cert agency cert successful!
@@ -272,7 +272,7 @@ build chain ca succussful!
 [2020-08-05 16:53:23,090][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-05 16:53:23,090][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-05 16:53:23,090][INFO][mgroup][parser] | group_id is 1
-[2020-08-05 16:53:23,090][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3']
+[2020-08-05 16:53:23,090][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3']
 [2020-08-05 16:53:23,090][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300']
 [2020-08-05 16:53:23,090][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-05 16:53:23,103][DEBUG][utils][getstatusoutput] |  cmd is ./cts.sh gen_agency_cert /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click /home/gongyueyang/BlockChain/DonationSystem/generator/tmp_one_click/agencyD/agency_cert, status is 0, output is build agency_cert agency cert successful!
@@ -292,51 +292,51 @@ build chain ca succussful!
 [2020-08-05 16:53:23,559][INFO][mconf][parser] | node_installation.ini end, result is MchainConf => FISCO BCOS Generator
 [2020-08-05 16:53:23,559][INFO][mgroup][parser] | group_genesis.ini is /home/gongyueyang/BlockChain/DonationSystem/generator/conf/group_genesis.ini
 [2020-08-05 16:53:23,559][INFO][mgroup][parser] | group_id is 1
-[2020-08-05 16:53:23,560][INFO][mgroup][parser] | p2p_ip is ['172.17.0.2', '172.17.0.3', '172.17.0.4', '172.17.0.5']
+[2020-08-05 16:53:23,560][INFO][mgroup][parser] | p2p_ip is ['172.100.0.2', '172.100.0.3', '172.100.0.4', '172.100.0.5']
 [2020-08-05 16:53:23,560][INFO][mgroup][parser] | p2p_listen_port is ['30300', '30300', '30300', '30300']
 [2020-08-05 16:53:23,560][INFO][mgroup][parser] | group_genesis.ini end, result is MchainConf => FISCO BCOS group
 [2020-08-05 16:53:23,560][INFO][group][create_group_genesis] | create_group_genesis start
 [2020-08-05 16:53:23,560][WARNING][group][create_group_genesis] |  ./.group not existed!
 [2020-08-05 16:53:23,562][DEBUG][utils][getstatusoutput] |  cmd is echo $(date +%s"000"), status is 0, output is 1596617603000
 
-[2020-08-05 16:53:23,562][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt
-[2020-08-05 16:53:23,565][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
+[2020-08-05 16:53:23,562][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt
+[2020-08-05 16:53:23,565][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
 " " " | sed "s/ //g" | cut -c 3-130, status is 0, output is ba27c08d9702fa870f8fabf5a0a72dff6936ce9e2d92501b56c570dfcdf5d13f36ed5fd5ed692822b80d9b55529fc2c90bdf1f4e7915a4160b0fc67438f4134b
 
 [2020-08-05 16:53:23,565][INFO][config][get_nodeid_str] |  create nodeid success! status is 0, output is ba27c08d9702fa870f8fabf5a0a72dff6936ce9e2d92501b56c570dfcdf5d13f36ed5fd5ed692822b80d9b55529fc2c90bdf1f4e7915a4160b0fc67438f4134b
-, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt.
-[2020-08-05 16:53:23,565][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt
-[2020-08-05 16:53:23,565][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.2_30300.crt
+, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt.
+[2020-08-05 16:53:23,565][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt
+[2020-08-05 16:53:23,565][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.2_30300.crt
 [2020-08-05 16:53:23,565][INFO][group][create_group_genesis] | nodeid -> ba27c08d9702fa870f8fabf5a0a72dff6936ce9e2d92501b56c570dfcdf5d13f36ed5fd5ed692822b80d9b55529fc2c90bdf1f4e7915a4160b0fc67438f4134b
 
-[2020-08-05 16:53:23,565][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt
-[2020-08-05 16:53:23,570][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
+[2020-08-05 16:53:23,565][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt
+[2020-08-05 16:53:23,570][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
 " " " | sed "s/ //g" | cut -c 3-130, status is 0, output is 144185adbc542712cd3f8e3da8d97d72529670b244b937068ccea3ea9a7329b7497094e964848af0619be174918d95a26956b45f08a26d252d9f151689b9eb90
 
 [2020-08-05 16:53:23,570][INFO][config][get_nodeid_str] |  create nodeid success! status is 0, output is 144185adbc542712cd3f8e3da8d97d72529670b244b937068ccea3ea9a7329b7497094e964848af0619be174918d95a26956b45f08a26d252d9f151689b9eb90
-, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt.
-[2020-08-05 16:53:23,570][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt
-[2020-08-05 16:53:23,570][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.3_30300.crt
+, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt.
+[2020-08-05 16:53:23,570][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt
+[2020-08-05 16:53:23,570][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.3_30300.crt
 [2020-08-05 16:53:23,570][INFO][group][create_group_genesis] | nodeid -> 144185adbc542712cd3f8e3da8d97d72529670b244b937068ccea3ea9a7329b7497094e964848af0619be174918d95a26956b45f08a26d252d9f151689b9eb90
 
-[2020-08-05 16:53:23,570][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.4_30300.crt
-[2020-08-05 16:53:23,576][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.4_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
+[2020-08-05 16:53:23,570][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.4_30300.crt
+[2020-08-05 16:53:23,576][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.4_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
 " " " | sed "s/ //g" | cut -c 3-130, status is 0, output is 8f2532ff64714e941ec39496a7d0b654992c176573a0807866a9d30b192a9c1d0e273807a31474a1e8917e7f00f912a72c8d9109b3c24ca43fc64087f6f16bd7
 
 [2020-08-05 16:53:23,576][INFO][config][get_nodeid_str] |  create nodeid success! status is 0, output is 8f2532ff64714e941ec39496a7d0b654992c176573a0807866a9d30b192a9c1d0e273807a31474a1e8917e7f00f912a72c8d9109b3c24ca43fc64087f6f16bd7
-, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.4_30300.crt.
-[2020-08-05 16:53:23,576][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.4_30300.crt
-[2020-08-05 16:53:23,576][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.4_30300.crt
+, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.4_30300.crt.
+[2020-08-05 16:53:23,576][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.4_30300.crt
+[2020-08-05 16:53:23,576][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.4_30300.crt
 [2020-08-05 16:53:23,576][INFO][group][create_group_genesis] | nodeid -> 8f2532ff64714e941ec39496a7d0b654992c176573a0807866a9d30b192a9c1d0e273807a31474a1e8917e7f00f912a72c8d9109b3c24ca43fc64087f6f16bd7
 
-[2020-08-05 16:53:23,576][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.5_30300.crt
-[2020-08-05 16:53:23,579][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.5_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
+[2020-08-05 16:53:23,576][INFO][config][get_nodeid_str] | get_nodeid start! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.5_30300.crt
+[2020-08-05 16:53:23,579][DEBUG][utils][getstatusoutput] |  cmd is openssl x509  -text -in /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.5_30300.crt | sed -n "15,20p" |  sed "s/://g" | sed "s/pub//g" | tr "
 " " " | sed "s/ //g" | cut -c 3-130, status is 0, output is bd299ad49b97c5b8681a41c0de6d0072508cdab12c6a5f14393105609fc4c924946f4da56ed7325a0ad10ddcbeb93f17917c96012a9c9e7430bb0045e6229396
 
 [2020-08-05 16:53:23,579][INFO][config][get_nodeid_str] |  create nodeid success! status is 0, output is bd299ad49b97c5b8681a41c0de6d0072508cdab12c6a5f14393105609fc4c924946f4da56ed7325a0ad10ddcbeb93f17917c96012a9c9e7430bb0045e6229396
-, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.5_30300.crt.
-[2020-08-05 16:53:23,579][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.5_30300.crt
-[2020-08-05 16:53:23,579][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.17.0.5_30300.crt
+, dir is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.5_30300.crt.
+[2020-08-05 16:53:23,579][INFO][config][get_nodeid_str] | get_nodeid success! get path is /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.5_30300.crt
+[2020-08-05 16:53:23,579][INFO][group][create_group_genesis] | resolve /home/gongyueyang/BlockChain/DonationSystem/generator/meta/cert_172.100.0.5_30300.crt
 [2020-08-05 16:53:23,579][INFO][group][create_group_genesis] | nodeid -> bd299ad49b97c5b8681a41c0de6d0072508cdab12c6a5f14393105609fc4c924946f4da56ed7325a0ad10ddcbeb93f17917c96012a9c9e7430bb0045e6229396
 
 [2020-08-05 16:53:23,579][INFO][group][create_group_genesis] | create_group_genesis end

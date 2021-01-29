@@ -43,7 +43,7 @@ public class WaybillService {
     @Autowired
     private WaybillRestTemplate waybillRestTemplate;
 
-    public String deployWayBillByMaterial(String reciverName, List<BigInteger> varieties, List<BigInteger> amounts)
+    public String deployWayBillByMaterial(String reciverName, List<BigInteger> varieties, List<BigInteger> amounts, String deliveryman)
             throws Exception {
         TransactionReceipt res;
         String number = simpleDateFormat.format(new Date());
@@ -51,7 +51,7 @@ public class WaybillService {
         logger.debug("reciverAddress: " + reciverAddress);
         Waybill wayBill = Waybill.deploy(web3j, credentials,
                 new StaticGasProvider(GasConstants.GAS_PRICE, GasConstants.GAS_LIMIT), reciverAddress, number).send();
-        res = wayBill.setMaterial(varieties, amounts).send();
+        res = wayBill.setMaterial(varieties, amounts, deliveryman).send();
         if (res.isStatusOK()) {
             res = waybillManager.setWallbillAddress(number, wayBill.getContractAddress()).send();
         }
@@ -63,7 +63,7 @@ public class WaybillService {
     }
 
     public String deployWayBillByAddress(String reciverAddress, List<BigInteger> varieties, List<BigInteger> amounts,
-            String foundationName) throws Exception {
+            String foundationName, String deliveryman) throws Exception {
         TransactionReceipt receipt;
         String number = simpleDateFormat.format(new Date());
         Waybill wayBill = Waybill.deploy(web3j, credentials,
@@ -73,7 +73,7 @@ public class WaybillService {
             // 该IP应该是由节点名查询得来，此处写死
             List<String> materialAdresses = waybillRestTemplate.requestMaterial(varieties, amounts, number,
                     "172.100.0.6");
-            receipt = wayBill.setMaterialArr(materialAdresses).send();
+            receipt = wayBill.setMaterialArr(materialAdresses, deliveryman).send();
             if (receipt.isStatusOK()) {
                 return number;
             }

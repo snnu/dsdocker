@@ -1,11 +1,11 @@
 package com.donationsystem.platform.controller;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.donationsystem.platform.model.TimelineNode;
 import com.donationsystem.platform.service.WaybillService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,8 @@ public class WaybillServiceController {
 
     @RequestMapping(value = "/getStatusByNumber", method = RequestMethod.POST)
     @ResponseBody
-    public Map<BigInteger, List<String[]>> getStatusByNumber(@RequestParam(value = "waybillNumber", required = true) String waybillNumber,
+    public Map<BigInteger, Map<String, List<TimelineNode>>> getStatusByNumber(
+            @RequestParam(value = "waybillNumber", required = true) String waybillNumber,
             @RequestParam(value = "waybillManagerName", required = true) String waybillManagerName) {
         try {
             return waybillService.getStatusByNumber(waybillNumber, waybillManagerName);

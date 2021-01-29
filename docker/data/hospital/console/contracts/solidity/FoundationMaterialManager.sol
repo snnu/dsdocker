@@ -40,12 +40,10 @@ contract FoundationMaterialManager is Authentication {
     }
     
     //从 WayBill 中获取入库
-    function setMaterials(address waybill) public onlyOwner {
-        Waybill(waybill).setReciverConfirm();
-        Waybill(waybill).setMaterialsOwner();
+    function setMaterials(address waybill, string memory _reciver) public onlyOwner {
+        Waybill(waybill).setReciverConfirm(getOwner(), _reciver);
         address[] memory _materials = Waybill(waybill).getMaterialArr();
         for(uint i = 0; i < _materials.length; i++) {
-            Material(_materials[i]).setCurHolder(getOwner());
             varietyAmount[Material(_materials[i]).getVariety()].push(_materials[i]);
         }
     }

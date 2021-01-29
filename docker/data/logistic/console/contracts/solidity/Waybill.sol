@@ -31,23 +31,23 @@ contract Waybill is Authentication {
     event setMaterialsOwnerEvent();
 
     // 是没有登记在区块链上的物资，通过物资类别和数量为每一条创建对应物资合约
-    function setMaterial(uint[] memory _varietyArr, uint[] memory _amountArr) public onlyOwner {
+    function setMaterial(uint[] memory _varietyArr, uint[] memory _amountArr, string memory _reciver) public onlyOwner {
         require(_varietyArr.length == _amountArr.length, "There are something wrong with materialArr");
         for(uint i = 0; i < _varietyArr.length; i++) {
             for(uint j = 0; j < _amountArr[i]; j++) {
                 materialArr.push(address(new Material(_varietyArr[i], 1)));
-                Material(materialArr[materialArr.length - 1]).setCurHolder(getOwner());
+                Material(materialArr[materialArr.length - 1]).setCurHolder(getOwner(), _reciver);
             }
         }
         emit setMaterialEvent();
     }
     
     // 在区块链上登记了的物资，直接传入物资合约地址
-    function setMaterialArr(address[] memory _materialArr) public onlyOwner {
+    function setMaterialArr(address[] memory _materialArr, string memory _reciver) public onlyOwner {
         for(uint i = 0; i < _materialArr.length; i++) {
             materialArr.push(_materialArr[i]);
             // 在获取 _materialArr 的时候owner已经变更为该合约地址
-            Material(materialArr[i]).setCurHolder(getOwner());
+            Material(materialArr[i]).setCurHolder(getOwner(), _reciver);
         }
         emit setMaterialArrEvent();
     }
@@ -65,16 +65,14 @@ contract Waybill is Authentication {
     }
 
     // 收货节点确认，传入收货节点的管理合约地址
-    function setReciverConfirm() public onlyReciver {
+    function setReciverConfirm(address _holder, string memory _reciver) public onlyReciver {
         require(reciverConfirm == false, "Already confirmed");
         reciverConfirm = true;
-        emit setReciverConfirmEvent();
-    }
-
-    function setMaterialsOwner() public onlyReciver {
         for(uint i = 0; i < materialArr.length; i++) {
+            Material(materialArr[i]).setCurHolder(_holder, _reciver);
             Material(materialArr[i]).setOwner(reciver);
         }
         emit setMaterialsOwnerEvent();
+        emit setReciverConfirmEvent();
     }
 }

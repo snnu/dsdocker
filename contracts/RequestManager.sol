@@ -14,19 +14,17 @@ contract RequestManager is Authentication {
         string waybillNum;
     }
 
-    mapping(uint => Req) private reqMap;
+    Req[] private reqMap;
     mapping(uint => uint) private lockedMaterials;
     string private name;
     uint[] private agreedReq;
     uint private lastNum;
-    uint private num;
     uint private agreedLastNum;
     address private materialManager;
 
     constructor (address _materialManager, string memory _name) public {
         materialManager = _materialManager;
         name = _name;
-        num = 0;
         lastNum = 0;
         agreedLastNum = 0;
     }
@@ -38,18 +36,23 @@ contract RequestManager is Authentication {
     // 判断应该交由处理时，不然有限的物资可能对应着多个请求。返回请求编号
     function createReq(uint[] memory _varieties, uint[] memory _amounts) public onlyAuth returns(uint) {
         require(_varieties.length == _amounts.length, "Length not equal");
-        reqMap[num].reciver = msg.sender;
-        reqMap[num].varieties = _varieties;
-        reqMap[num].amounts = _amounts;
-        reqMap[num].state = 0;
+        reqMap.push(Req(_varieties, _amounts, msg.sender, 0, ""));
+        // reqMap[num].reciver = msg.sender;
+        // reqMap[num].varieties = _varieties;
+        // reqMap[num].amounts = _amounts;
+        // reqMap[num].state = 0;
         emit createReqEvent(msg.sender);
-        num++;
-        return num - 1;
+        // num++;
+        return reqMap.length - 1;
     }
     
     //获取累积处理的请求数量
-    function getNum() public onlyOwner view returns(uint) {
+    function getNum() public view returns(uint) {
         return lastNum;
+    }
+
+    function getTotal() public view returns(uint) {
+        return reqMap.length;
     }
 
     // 获取某一请求的状态
@@ -70,7 +73,7 @@ contract RequestManager is Authentication {
 
     // 获取某一请求的物流单号
     function getWayBillNum(uint _num) public view returns(string memory) {
-        require(_num < num, "there is no such reqeust");
+        require(_num < reqMap.length, "there is no such reqeust");
         require(_num < lastNum, "this request hasn't been handled");
         require(reqMap[_num].state == 3, "there is no waybill for this req");
         return reqMap[_num].waybillNum;
@@ -78,7 +81,7 @@ contract RequestManager is Authentication {
     
     //因为不支持多重数组所以只能一个一个请求处理
     function getReq() public view onlyOwner returns(uint, uint[] memory, uint[] memory, address reciver) {
-        require(lastNum < num, "there is no request needs to be handled");
+        require(lastNum < reqMap.length, "there is no request needs to be handled");
         return (lastNum, reqMap[lastNum].varieties, reqMap[lastNum].amounts, reqMap[lastNum].reciver);
     }
 
@@ -102,7 +105,7 @@ contract RequestManager is Authentication {
 
     //获取列表头的请求，即getReq所获得的内容。请求应该按照时间顺序处理
     function handleReq(uint state) public onlyOwner returns(bool){
-        require(lastNum < num, "there is no request needs to be handled");
+        require(lastNum < reqMap.length, "there is no request needs to be handled");
         if(state == 2) {
             emit handledReqEvent(lastNum);
             return false;
