@@ -1064,3 +1064,37 @@ info|2021-01-29 09:32:42.310784|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach 
 info|2021-01-29 09:32:43.311525|[g:1][CONSENSUS]addRawPrepare,height=101,reqIdx=0,hash=e5140215...,time=0
 info|2021-01-29 09:32:43.311874|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=128,toView=129,nodeIdx=3,changeCycle=1,myNode=bd299ad4...,timecost=0.272
 info|2021-01-29 09:32:43.313028|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=128,cur_changeCycle=1,to_view=129
+info|2021-01-29 09:32:43.945343|[P2P][Service] heartBeat,connected count=3
+info|2021-01-29 09:32:44.314463|[g:1][CONSENSUS]addRawPrepare,height=101,reqIdx=1,hash=1a8d2ca7...,time=0
+info|2021-01-29 09:32:44.314912|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=129,toView=130,nodeIdx=3,changeCycle=1,myNode=bd299ad4...,timecost=0.367
+info|2021-01-29 09:32:44.315596|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=129,cur_changeCycle=1,to_view=130
+info|2021-01-29 09:32:45.317336|[g:1][CONSENSUS]addRawPrepare,height=101,reqIdx=2,hash=3785719e...,time=0
+info|2021-01-29 09:32:45.317721|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=130,toView=131,nodeIdx=3,changeCycle=1,myNode=bd299ad4...,timecost=0.296
+info|2021-01-29 09:32:45.320204|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=130,cur_changeCycle=1,to_view=131
+info|2021-01-29 09:32:46.008628|[RPC][getPbftView]request,groupID=1
+info|2021-01-29 09:32:46.009717|[RPC][getPendingTxSize]request,groupID=1
+info|2021-01-29 09:32:46.320647|[g:1][CONSENSUS][SEALER]++++++++++++++++ Generating seal on,blkNum=101,tx=0,nodeIdx=3,hash=8d7ed7fb...
+info|2021-01-29 09:32:46.321076|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=131,toView=132,nodeIdx=3,changeCycle=1,myNode=bd299ad4...,timecost=0.209
+info|2021-01-29 09:32:46.323393|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=131,cur_changeCycle=1,to_view=132
+info|2021-01-29 09:32:47.323604|[g:1][CONSENSUS]addRawPrepare,height=101,reqIdx=0,hash=6ada0b4d...,time=0
+info|2021-01-29 09:32:47.323929|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=132,toView=133,nodeIdx=3,changeCycle=1,myNode=bd299ad4...,timecost=0.249
+info|2021-01-29 09:32:47.324789|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=132,cur_changeCycle=1,to_view=133
+info|2021-01-29 09:32:48.326897|[g:1][CONSENSUS]addRawPrepare,height=101,reqIdx=1,hash=1c2e8e98...,time=0
+info|2021-01-29 09:32:48.327178|[g:1][CONSENSUS][PBFT]checkTimeout Succ,view=133,toView=134,nodeIdx=3,changeCycle=1,myNode=bd299ad4...,timecost=0.223
+info|2021-01-29 09:32:48.327907|[g:1][CONSENSUS][PBFT]checkAndChangeView: Reach consensus,org_view=133,cur_changeCycle=1,to_view=134
+warning|2021-01-29 09:32:48.971617|[NETWORK][Session]doRead error,endpoint=172.100.0.4:47332,message=short read
+info|2021-01-29 09:32:48.973432|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.100.0.4:47332
+warning|2021-01-29 09:32:48.973494|[NETWORK][Session][drop] closing remote 172.100.0.4:47332,reason=Low-level TCP communication error.,endpoint=172.100.0.4:47332
+warning|2021-01-29 09:32:48.973720|[P2P][Service] disconnect error P2PSession,nodeID=8f2532ff...,endpoint=172.100.0.4:47332,errorCode=3,what=Disconnect
+warning|2021-01-29 09:32:48.973743|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2021-01-29 09:32:48.973663|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
+warning|2021-01-29 09:32:48.973938|[NETWORK][Session]doRead error,endpoint=172.100.0.3:49224,message=short read
+info|2021-01-29 09:32:48.973950|[NETWORK][Session]drop, call and erase all callbackFunc in this session!,endpoint=172.100.0.3:49224
+warning|2021-01-29 09:32:48.974051|[P2P][Service] disconnect error P2PSession,nodeID=144185ad...,endpoint=172.100.0.3:49224,errorCode=3,what=Disconnect
+warning|2021-01-29 09:32:48.974063|[P2P][Service] onDisconnect,errorCode=3,what=Dynamic exception type: dev::network::NetworkException
+std::exception::what: Disconnect
+
+warning|2021-01-29 09:32:48.974036|[NETWORK][Session][drop] closing remote 172.100.0.3:49224,reason=Low-level TCP communication error.,endpoint=172.100.0.3:49224
+warning|2021-01-29 09:32:48.974151|[NETWORK][Session][drop] shutdown failed ,errorValue=9,message=Bad file descriptor
