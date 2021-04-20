@@ -196,3 +196,35 @@
 
 2021-04-17 06:47:22.033 [sdkThreadPool-40] INFO  Service() - Receive block notify: {"blockNumber":35,"groupID":1}
 
+2021-04-17 06:56:35.647 [main] INFO  Service() -  #jdk.disabled.namedCurves. 
+2021-04-17 06:56:35.820 [main] INFO  ChannelConnections() -  all connections: [ConnectionInfo{host='172.100.0.5', port=20200}]
+2021-04-17 06:56:35.890 [main] INFO  ChannelConnections() -  ca certificate: ca.crt, sdk certificate: node.crt, sdk key: node.key
+2021-04-17 06:56:36.761 [nioEventLoopGroup-2-1] INFO  ChannelHandler() -  handshake success, host: 172.100.0.5, port: 20200, ctx: 944888783
+2021-04-17 06:56:36.762 [nioEventLoopGroup-2-1] INFO  ConnectionCallback() -  connect 172.100.0.5:20200 success, ctx: 944888783
+2021-04-17 06:56:36.964 [nioEventLoopGroup-2-1] INFO  ConnectionCallback() -  query node version host: 172.100.0.5:20200, seq: d108a8c9ed974edf96eb35c4f187df8a, content: {"jsonrpc":"2.0","method":"getClientVersion","params":[],"id":0}
+2021-04-17 06:56:37.139 [sdkThreadPool-1] INFO  ConnectionCallback() -  node: Version [buildTime=20200814 08:45:06, buildType=Linux/clang/Release, chainID=1, version=2.6.0, gitBranch=HEAD, gitCommit=e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0, supportedVersion=2.5.0], content: {"id":0,"jsonrpc":"2.0","result":{"Build Time":"20200814 08:45:06","Build Type":"Linux/clang/Release","Chain Id":"1","FISCO-BCOS Version":"2.6.0","Git Branch":"HEAD","Git Commit Hash":"e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0","Supported Version":"2.5.0"}}
+
+2021-04-17 06:56:37.142 [sdkThreadPool-1] INFO  ConnectionCallback() -  support channel handshake node: Version [buildTime=20200814 08:45:06, buildType=Linux/clang/Release, chainID=1, version=2.6.0, gitBranch=HEAD, gitCommit=e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0, supportedVersion=2.5.0], content: {"id":0,"jsonrpc":"2.0","result":{"Build Time":"20200814 08:45:06","Build Type":"Linux/clang/Release","Chain Id":"1","FISCO-BCOS Version":"2.6.0","Git Branch":"HEAD","Git Commit Hash":"e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0","Supported Version":"2.5.0"}}
+
+2021-04-17 06:56:37.184 [sdkThreadPool-2] INFO  ConnectionCallback() -  channel protocol handshake success, set socket channel protocol, host: 172.100.0.5:20200, channel protocol: ChannelProtocol [protocol=3, nodeVersion=2.5.0, EnumProtocol=VERSION_3]
+2021-04-17 06:56:37.204 [main] INFO  Service() -  Connect to  nodes: [172.100.0.5:20200] ,groupId: 2147483647 ,caCert: null ,sslKey: null ,sslCert: null ,java version: 11.0.8 ,java vendor: Oracle Corporation
+2021-04-17 06:56:37.247 [sdkThreadPool-2] INFO  ConnectionCallback() -  send update topic message request, seq: f266f04ef75e4895b4e1bf25e1fe8c02, content: ["_block_notify_2147483647"]
+2021-04-17 06:56:37.259 [sdkThreadPool-2] INFO  ConnectionCallback() -  query block number host: 172.100.0.5:20200, seq: d39e449dd3de4fb5a957d6729ea0c71b, content: {"jsonrpc":"2.0","method":"getBlockNumber","params":[2147483647],"id":2}
+2021-04-17 06:56:37.282 [sdkThreadPool-5] INFO  ConnectionCallback() -  query blocknumer, host:172.100.0.5:20200, blockNumber: 0 
+2021-04-17 06:56:38.853 [main] INFO  Service() -  #jdk.disabled.namedCurves. 
+2021-04-17 06:56:38.882 [main] INFO  ChannelConnections() -  all connections: [ConnectionInfo{host='172.100.0.5', port=20200}]
+2021-04-17 06:56:38.902 [main] INFO  ChannelConnections() -  ca certificate: ca.crt, sdk certificate: node.crt, sdk key: node.key
+2021-04-17 06:56:39.084 [nioEventLoopGroup-3-1] INFO  ChannelHandler() -  handshake success, host: 172.100.0.5, port: 20200, ctx: 1611014792
+2021-04-17 06:56:39.084 [nioEventLoopGroup-3-1] INFO  ConnectionCallback() -  connect 172.100.0.5:20200 success, ctx: 1611014792
+2021-04-17 06:56:39.085 [nioEventLoopGroup-3-1] INFO  ConnectionCallback() -  query node version host: 172.100.0.5:20200, seq: 404b7f2dbd6e4c669d98722cc5c6810d, content: {"jsonrpc":"2.0","method":"getClientVersion","params":[],"id":4}
+2021-04-17 06:56:39.097 [sdkThreadPool-7] INFO  ConnectionCallback() -  node: Version [buildTime=20200814 08:45:06, buildType=Linux/clang/Release, chainID=1, version=2.6.0, gitBranch=HEAD, gitCommit=e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0, supportedVersion=2.5.0], content: {"id":4,"jsonrpc":"2.0","result":{"Build Time":"20200814 08:45:06","Build Type":"Linux/clang/Release","Chain Id":"1","FISCO-BCOS Version":"2.6.0","Git Branch":"HEAD","Git Commit Hash":"e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0","Supported Version":"2.5.0"}}
+
+2021-04-17 06:56:39.104 [sdkThreadPool-7] INFO  ConnectionCallback() -  support channel handshake node: Version [buildTime=20200814 08:45:06, buildType=Linux/clang/Release, chainID=1, version=2.6.0, gitBranch=HEAD, gitCommit=e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0, supportedVersion=2.5.0], content: {"id":4,"jsonrpc":"2.0","result":{"Build Time":"20200814 08:45:06","Build Type":"Linux/clang/Release","Chain Id":"1","FISCO-BCOS Version":"2.6.0","Git Branch":"HEAD","Git Commit Hash":"e4a5ef2ef64d1943fccc4ebc61467a91779fb1c0","Supported Version":"2.5.0"}}
+
+2021-04-17 06:56:39.108 [sdkThreadPool-8] INFO  ConnectionCallback() -  channel protocol handshake success, set socket channel protocol, host: 172.100.0.5:20200, channel protocol: ChannelProtocol [protocol=3, nodeVersion=2.5.0, EnumProtocol=VERSION_3]
+2021-04-17 06:56:39.109 [sdkThreadPool-8] INFO  ConnectionCallback() -  send update topic message request, seq: f35e13c17b0c4633be8babceb0b7b1df, content: ["_block_notify_1"]
+2021-04-17 06:56:39.110 [sdkThreadPool-8] INFO  ConnectionCallback() -  query block number host: 172.100.0.5:20200, seq: 6b065ee3672b4f6a9fd6bba0572e6d14, content: {"jsonrpc":"2.0","method":"getBlockNumber","params":[1],"id":5}
+2021-04-17 06:56:39.114 [main] INFO  Service() -  Connect to  nodes: [172.100.0.5:20200] ,groupId: 1 ,caCert: null ,sslKey: null ,sslCert: null ,java version: 11.0.8 ,java vendor: Oracle Corporation
+2021-04-17 06:56:39.114 [sdkThreadPool-9] INFO  ConnectionCallback() -  query blocknumer, host:172.100.0.5:20200, blockNumber: 35 
+2021-04-17 06:56:39.188 [main] INFO  Async() -  default set setExeutor , pool size is 50
+2021-04-17 06:56:39.188 [main] INFO  Async() -  set setExeutor because executor null, executor is java.util.concurrent.ThreadPoolExecutor@42018e32[Running, pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0]
