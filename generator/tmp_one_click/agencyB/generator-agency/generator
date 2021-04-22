@@ -1,0 +1,212 @@
+#!/usr/bin/python3
+# coding:utf-8
+"""[main.py]
+
+Returns:
+    [cmd] -- [cmd description]
+"""
+import argparse
+import os
+import sys
+from pys import path
+# init path
+GEN_DIR = os.path.split(os.path.realpath(__file__))[0]
+sys.path.append('{}/pys'.format(GEN_DIR))
+path.set_path(GEN_DIR)
+# init end
+
+from pys.build import config
+from pys.conf import mconf, mgroup
+from pys.tool import ca, utils
+from pys import version
+from pys.log import CONSOLER
+from pys.log import console_error
+from pys.opr import opr_cert
+from pys.opr import create_group
+from pys.opr import build
+from pys.log import LOGGER
+
+
+def init():
+    """[init function]
+    """
+
+    # init pwd dir
+    LOGGER.info('main init ,GEN_DIR is %s', GEN_DIR)
+
+    # parser mchain.conf for project initialize
+    mconf.parser('{}/conf/node_deployment.ini'.format(GEN_DIR))
+    mgroup.parser('{}/conf/group_genesis.ini'.format(GEN_DIR))
+
+
+def usage():
+    """cmd usage
+    """
+
+    parser = argparse.ArgumentParser(
+        description=' Build install pkg for multi chain'
+        ' and manage the chain  package with ansible. ')
+
+    parser.add_argument('-v', '--version',
+                        action='store_true', help='show generator\'s version. ') 
+                            
+    pkg_group = parser.add_argument_group(
+        ' Build, Expand, Export, List Chain Package Options ')
+
+    pkg_group.add_argument('-b', '--build_install_package', nargs=2, metavar=('peers', 'data'),
+                           help=' build chain packages with node_deployment.ini')
+    pkg_group.add_argument('--build_package_only', nargs=2, metavar=('data', 'peers',),
+                           help=' build chain packages with node_deployment.ini, without any certificates')
+    pkg_group.add_argument('-c', '--create_group_genesis', nargs=1, metavar=('data_dir'),
+                           help='create group genesis with group_genesis.ini.')
+    pkg_group.add_argument('--create_group_genesis_with_nodeid', nargs=1, metavar=('data_dir'),
+                           help='create group genesis with group_genesis.ini using node.nodeid.')
+
+    tools_group = parser.add_argument_group(
+        ' Other Tools Options ')
+    tools_group.add_argument('--generate_chain_certificate', nargs=1, metavar=('chain_dir'),
+                             help='generate root cert')
+    tools_group.add_argument('--generate_agency_certificate', nargs=3, metavar=('agency_dir',
+                                                                                'chain_dir',
+                                                                                'agency_name'),
+                             help='generate agency cert')
+    tools_group.add_argument('--generate_node_certificate', nargs=3, metavar=('node_dir',
+                                                                              'agency_dir',
+                                                                              'node_name'),
+                             help='generate node cert')
+    tools_group.add_argument('--generate_sdk_certificate', nargs=2, metavar=('sdk_dir',
+                                                                             'agency_dir'),
+                             help='generate sdk cert')
+    tools_group.add_argument('-g', '--use_guomi', action='store_true',
+                             help='follow gm operation.')
+    tools_group.add_argument('--cdn', action='store_true',
+                             help='use cdn to download binary.')
+    tools_group.add_argument('--generate_all_certificates', nargs=1, metavar=('cert_dir'),
+                             help='create cert by node_deployment.ini')
+    tools_group.add_argument('-d', '--deploy_private_key', nargs=2, metavar=('cert_dir', 'pkg_dir'),
+                             help='deploy node.key from cert_dir to pkg_dircert')
+    tools_group.add_argument('-m', '--merge_config', nargs=2, metavar=('config.ini', 'config.ini'),
+                             help='concatenate two config.ini')
+    tools_group.add_argument('-p', '--add_peers', nargs=2, metavar=('peers', 'config.ini'),
+                             help='add peers to config.ini')
+    tools_group.add_argument('-a', '--add_group', nargs=2, metavar=('group genesis', 'config.ini'),
+                             help='add peers to config.ini')
+    tools_group.add_argument('--download_fisco', nargs=1, metavar=('data_dir'),
+                             help='download fisco-bcos')
+    tools_group.add_argument('--download_console', nargs=1, metavar=('data_dir'),
+                             help='download console')
+    tools_group.add_argument('--get_sdk_file', nargs=1, metavar=('data_dir'),
+                             help='get sdk file')
+    args = parser.parse_args()
+    if args.use_guomi:
+        CONSOLER.info('======= BUILD_GM ============= ON =======')
+        if not os.path.isfile('{}/.fisco/tassl'.format(os.environ['HOME'])):
+            LOGGER.info('download gm tassl...')
+            build.download_tassl()
+        utils.set_gm()
+    if args.cdn:
+        CONSOLER.info('======= USE_CDN ============= ON =======')
+        utils.set_cdn()
+    if args.version:
+        version.version()
+    elif args.build_install_package:
+        CONSOLER.info(' Build operation begin.')
+        build.build(
+            args.build_install_package[0], args.build_install_package[1])
+        CONSOLER.info(' Build operation end.')
+    elif args.build_package_only:
+        CONSOLER.info(' Build operation begin.')
+        build.package(
+            args.build_package_only[0], args.build_package_only[1])
+        CONSOLER.info(' Build operation end.')
+    elif args.create_group_genesis:
+        CONSOLER.info(' Build operation begin.')
+        create_group.create_group(args.create_group_genesis[0])
+        CONSOLER.info(' Build operation end.')
+    elif args.create_group_genesis_with_nodeid:
+        CONSOLER.info(' Build operation begin.')
+        create_group.create_group_with_nodeid(args.create_group_genesis_with_nodeid[0])
+        CONSOLER.info(' Build operation end.')
+    elif args.generate_chain_certificate:
+        CONSOLER.info(' Chain cert begin.')
+        chain_dir = args.generate_chain_certificate[0]
+        ca.generate_root_ca(chain_dir)
+        CONSOLER.info(' Chain cert end.')
+    elif args.generate_agency_certificate:
+        CONSOLER.info(' Agency cert begin.')
+        agency_dir = args.generate_agency_certificate[0]
+        chain_dir = args.generate_agency_certificate[1]
+        agency_name = args.generate_agency_certificate[2]
+        ca.generator_agent_ca(agency_dir, chain_dir, agency_name)
+        CONSOLER.info(' Agency cert end.')
+    elif args.generate_node_certificate:
+        CONSOLER.info(' Node cert begin.')
+        node_dir = args.generate_node_certificate[0]
+        agency_dir = args.generate_node_certificate[1]
+        node_name = args.generate_node_certificate[2]
+        ca.generator_node_ca(node_dir, agency_dir, node_name)
+        CONSOLER.info(' Node cert end.')
+    elif args.generate_sdk_certificate:
+        CONSOLER.info(' SDK cert begin.')
+        sdk_dir = args.generate_sdk_certificate[0]
+        agency_dir = args.generate_sdk_certificate[1]
+        ca.generator_sdk_ca(sdk_dir, agency_dir)
+        CONSOLER.info(' SDK cert end.')
+    elif args.generate_all_certificates:
+        cert_dir = args.generate_all_certificates[0]
+        CONSOLER.info(' Generate cert to %s by node_deployment.ini.', cert_dir)
+        opr_cert.gen_build_cert(cert_dir)
+        CONSOLER.info(' Generate cert by node_deployment.ini end.')
+    elif args.deploy_private_key:
+        get_path = args.deploy_private_key[0]
+        send_path = args.deploy_private_key[1]
+        CONSOLER.info(' Get cert from %s to %s', get_path, send_path)
+        opr_cert.deploy_key(get_path, send_path)
+        CONSOLER.info(' Deploy cert end.')
+    elif args.merge_config:
+        get_path = args.merge_config[0]
+        send_path = args.merge_config[1]
+        CONSOLER.info(' Combine config.ini from %s to %s', get_path, send_path)
+        config.concatenate_cfg(get_path, send_path)
+        CONSOLER.info(' Combine config.ini end.')
+    elif args.add_peers:
+        get_path = args.add_peers[0]
+        send_path = args.add_peers[1]
+        CONSOLER.info(' Combine config.ini from %s to %s', get_path, send_path)
+        config.add_peers2cfg(get_path, send_path)
+        CONSOLER.info(' Combine config.ini end.')
+    elif args.add_group:
+        get_path = args.add_group[0]
+        send_path = args.add_group[1]
+        CONSOLER.info(' add group from %s to %s', get_path, send_path)
+        config.add_group(get_path, send_path)
+        CONSOLER.info(' add group end.')
+    elif args.download_fisco:
+        utils.download_fisco(args.download_fisco[0])
+    elif args.download_console:
+        build.build_console(args.download_console[0])
+    elif args.get_sdk_file:
+        build.get_sdk(args.get_sdk_file[0])
+    else:
+        console_error(
+            ' Invalid operation,  \"generator -h\" can be used to show detailed usage. ')
+        os.system('./generator -h')
+    return 0
+
+
+def main():
+    """[main]
+    """
+    try:
+        init()
+    except Exception as main_exp:
+        console_error(' Generator init fault , %s' % main_exp)
+    else:
+        try:
+            usage()
+        except Exception as usage_exp:
+            console_error('%s' % usage_exp)
+
+
+if __name__ == '__main__':
+    main()
